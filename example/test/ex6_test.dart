@@ -4,7 +4,7 @@
 //
 //part 'ex6_test.g.dart';
 //
-////WITH A CUSTOM GETTER
+////CURRENTLY NOT ALLOWING CUSTOM GETTERS (CAN JUST USE A FUNCTION)
 //
 //@ValueT2()
 //abstract class $A {
@@ -20,7 +20,7 @@
 //
 //  const $B();
 //}
-//
+
 //main() {
 //  test("1", () {
 //    var a = Pet(type: "cat");

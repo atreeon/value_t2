@@ -25,10 +25,11 @@ abstract class $C {
 main() {
   test("1", () {
     var c = C(z: "Z");
-    var b = B<C, int>(x: c, y: C(z: "Z"), z: "null", p: 5);
+    var b = B<C, int>(x: 5, y: C(z: "Z"), z: "null", p: 7);
 
-
-
-//    expect(a.type, "cat");
+    expect(b.x, 5);
+    expect(b.y.z, "Z");
+    expect(b.z, "null");
+    expect(b.p, 7);
   });
 }

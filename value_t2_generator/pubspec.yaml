@@ -16,6 +16,8 @@ dependencies:
   dartz: ^0.8.3
   basic_utils: ^2.4.8
   analyzer: '>=0.35.4 <0.40.0'
+  copy_with_e_generator: ^1.0.2
+
 #  adi_helpers:
 #    path: ../../../dart/adi_helpers/
 

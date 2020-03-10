@@ -2,7 +2,7 @@ import 'package:meta/meta.dart';
 import 'package:test/test.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
 
-part 'ex3_test.t2.dart';
+part 'ex3_test.g.dart';
 
 //INTERFACES ARE AUTO IMPLEMENTED
 

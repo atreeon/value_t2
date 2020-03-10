@@ -72,7 +72,7 @@ assert(age != null);
         [NameType("T", null)],
       );
 
-      var expected = """abstract class A<T> extends \$A {
+      var expected = """abstract class A<T> extends \$A<T> {
 T get x;
 }""";
 
@@ -99,8 +99,8 @@ T get x;
         ],
       );
 
-      var expected = """class B<T extends C, T3> extends \$B implements A<int>, C {
-final T x;
+      var expected = """class B<T extends C, T3> extends \$B<T, T3> implements A<int>, C {
+final int x;
 final T3 p;
 final T y;
 final String z;

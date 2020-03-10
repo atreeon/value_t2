@@ -3,29 +3,34 @@ import 'package:value_t2_generator/src/helpers.dart';
 
 String createValueT2(
   bool isAbstract,
-  List<NameType> allFields,
+  List<NameTypeClass> allFields,
   String className,
   List<Interface> interfaces,
   List<NameType> classGenerics,
 ) {
+  var classNameTrim = className.replaceAll("\$", "");
+  var allFieldsDistinct = getDistinctFields(allFields, interfaces, classNameTrim);
+//  var allFieldsDistinct = allFields.map((e) => NameType(e.name, e.type)).toList();
+
   var sb = StringBuffer();
   sb.write(getClassDefinition(isAbstract, className));
   if (classGenerics.isNotEmpty) //
     sb.write(getClassGenerics(classGenerics));
   sb.write(" extends ${className}");
+  if (classGenerics.isNotEmpty) //
+    sb.write(getExtendsGenerics(classGenerics));
   if (interfaces.isNotEmpty) //
     sb.write(getImplements(interfaces));
   sb.writeln(" {");
 
   if (isAbstract) {
-    sb.writeln(getPropertiesAbstract(allFields));
+    sb.writeln(getPropertiesAbstract(allFieldsDistinct));
   } else {
-    var classNameTrim = className.replaceAll("\$", "");
-    sb.writeln(getProperties(allFields));
+    sb.writeln(getProperties(allFieldsDistinct));
     sb.writeln("${classNameTrim}({");
-    sb.writeln(getConstructorRows(allFields));
+    sb.writeln(getConstructorRows(allFieldsDistinct));
     sb.writeln("}):");
-    sb.writeln(getNullAsserts(allFields));
+    sb.writeln(getNullAsserts(allFieldsDistinct));
   }
 
   sb.writeln("}");

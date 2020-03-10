@@ -1,6 +1,39 @@
 import 'package:dartx/dartx.dart';
 import 'package:value_t2_generator/src/classes.dart';
 
+List<NameType> getDistinctFields(
+  List<NameTypeClass> fields,
+  List<Interface> interfaces,
+  String className,
+) {
+
+  var interfaces2 = interfaces.map((interface) {
+    var result = List<NameType>();
+
+    for (var i = 0; i < interface.typeParams.length; i++) {
+      result.add(NameType(interface.typeArgs[i], interface.typeParams[i]));
+    }
+
+    return Interface2(interface.type, result);
+  }).toList();
+
+  var sortedFields = fields.sortedBy((element) => element.class_).toList();
+  var distinctFields = sortedFields.distinctBy((element) => element.name).toList();
+
+  var adjustedFields = distinctFields.map((f) {
+    var i = interfaces2.firstWhere((i) => i.type == f.class_, orElse: () => null);
+    if (i != null) {
+      var paramNameType = i.paramNameType.firstWhere((p) => p.type == f.type, orElse: () => null);
+      if (paramNameType != null) //
+        return NameType(f.name, paramNameType.name);
+    }
+
+    return NameType(f.name, f.type);
+  }).toList();
+
+  return adjustedFields;
+}
+
 String getClassDefinition(bool isAbstract, String className) {
   var _className = className.replaceAll("\$", "");
   var abstract = isAbstract ? "abstract " : "";
@@ -9,7 +42,7 @@ String getClassDefinition(bool isAbstract, String className) {
 }
 
 String getClassGenerics(List<NameType> generics) {
-  if(generics.isEmpty) //
+  if (generics.isEmpty) //
     return "";
 
   var _generics = generics.map((e) {
@@ -22,15 +55,26 @@ String getClassGenerics(List<NameType> generics) {
   return "<$_generics>";
 }
 
+String getExtendsGenerics(List<NameType> generics) {
+  if (generics.isEmpty) //
+    return "";
+
+  var _generics = generics //
+      .map((e) => e.name)
+      .joinToString(separator: ", ");
+
+  return "<$_generics>";
+}
+
 String getImplements(List<Interface> interfaces) {
   if (interfaces.length == 0) //
     return "";
 
   var types = interfaces.map((e) {
-    if (e.typeParams.isEmpty) //
+    if (e.typeArgs.isEmpty) //
       return e.type;
 
-    return "${e.type}<${e.typeParams.joinToString(separator: ", ")}>";
+    return "${e.type}<${e.typeArgs.joinToString(separator: ", ")}>";
   }).joinToString(separator: ", ");
 
   return " implements $types";

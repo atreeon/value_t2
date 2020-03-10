@@ -1,4 +1,14 @@
-import 'package:dartx/dartx.dart';
+class NameTypeClass {
+  final String type;
+  final String name;
+  final String class_;
+
+  NameTypeClass(this.name, String type, String class_) //
+      : type = type == null ? null : type.replaceAll("\$", ""),
+        class_ = class_ == null ? null : class_.replaceAll("\$", "");
+
+  toString() => "${this.name}:${this.type}:${this.class_}";
+}
 
 class NameType {
   final String type;
@@ -7,7 +17,7 @@ class NameType {
   NameType(this.name, String type) //
       : type = type == null ? null : type.replaceAll("\$", "");
 
-  toString() => "${this.name}|${this.type}";
+  toString() => "${this.name}:${this.type}";
 }
 
 class ClassDef {
@@ -28,13 +38,25 @@ class GenericType {
 
 class Interface {
   final String type;
+  final List<String> typeArgs;
   final List<String> typeParams;
 
-  Interface(String type, List typeParams)
+  Interface(String type, List<String> typeArgs, this.typeParams)
       : type = type.replaceAll("\$", ""),
-        typeParams = typeParams.map((e) => e.toString().replaceAll("\$", "")).toList();
+        typeArgs = typeArgs.map((e) => e.toString().replaceAll("\$", "")).toList() {
+    assert(this.typeArgs.length == this.typeParams.length, "typeArgs must have same length as typeParams");
+  }
 
-  toString() => "${this.type}|${this.typeParams}";
+  toString() => "${this.type}|${this.typeArgs}|${this.typeParams}";
+}
+
+class Interface2 {
+  final String type;
+  final List<NameType> paramNameType;
+
+  Interface2(this.type, this.paramNameType);
+
+  toString() => "${this.type}|${this.paramNameType}";
 }
 
 /*
