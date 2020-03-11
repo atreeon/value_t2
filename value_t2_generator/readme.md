@@ -1,8 +1,10 @@
 # value_t2
 
-Reasoning: specifying clases with copywith, equals, toString, required constructor fields is actually a fair amount of work resulting in verbose code which makes it difficult to maintain and difficult to read.
+### Reasoning: 
+specifying clases with copywith, equals, toString, required constructor fields and other standard features is actually a fair amount of work resulting in verbose code which makes it difficult to maintain and difficult to read.
+typeclasses (ish), value types (ish)
 
-Solution: use value_t2
+### Solution: use value_t2
 
 ## Basic features
 
@@ -50,7 +52,28 @@ var bob = Person(age: 5, name: null);
 ## More examples
 For more examples look at the Examples project in the github repository
 
+## Installation
+  * Import value_t2_annotation, value_t2_generator, quiver_hashcode and build_runner
+  
+```
+dependencies:
+  value_t2_annotation:
+  quiver_hashcode:
+
+dev_dependencies:
+  build_runner:
+  value_t2_generator
+```
+
 ## Usage
+  * Add three imports at top of each file
+  ```
+import 'package:meta/meta.dart';
+import 'package:quiver_hashcode/hashcode.dart';
+import 'package:value_t2_annotation/value_t2_annotation.dart';
+```
+  
+  
   * Place a @ValueT2() annotation on every class
   * Prepend a dollar on the classname or two dollars for abstract classes when defining a class
   * Declare all classes as abstract
