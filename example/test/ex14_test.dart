@@ -2,7 +2,6 @@ import 'package:meta/meta.dart';
 import 'package:quiver_hashcode/hashcode.dart';
 import 'package:test/test.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
-import 'package:quiver_hashcode/hashcode.dart';
 
 part 'ex14_test.g.dart';
 
