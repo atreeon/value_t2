@@ -4,7 +4,6 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer_models/analyzer_models.dart';
 import 'package:build/src/builder/build_step.dart';
-import 'package:copy_with_e_generator/src/classes.dart' as cwClasses;
 import 'package:copy_with_e_generator/src/createCopyWith.dart';
 import 'package:dartx/dartx.dart';
 import 'package:source_gen/source_gen.dart';
@@ -85,13 +84,19 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
           .toList();
       var distinctFields = getDistinctFields(getAllFields(x.allSupertypes, x), interfaces);
 
-      return cwClasses.ClassDef(
+      return ClassDef(
         x.name.startsWith("\$\$"),
         x.name.replaceAll("\$", ""),
-        distinctFields.map((e) => cwClasses.NameType(e.name, e.type)).toList(),
+        distinctFields,
+//        x.typeParameters.isEmpty ? [] : x.typeParameters.where((x) => x.name != null).toList(),
         x.typeParameters.isEmpty ? [] : x.typeParameters.where((x) => x.name != null).map((x) => //
-            cwClasses.GenericType(x.name, x.bound == null ? null : x.bound.toString())).toList(),
-        [...x.interfaces.where((e) => e.element.name != "Object").map((e) => e.element.name.replaceAll("\$", "")), x.supertype.element.name],
+            GenericType(x.name, x.bound == null ? null : x.bound.toString())).toList(),
+        [
+          ...x.interfaces
+              .where((e) => e.element.name != "Object") //
+              .map((e) => e.element.name.replaceAll("\$", "")),
+          x.supertype.element.name
+        ],
       );
     }).toList();
 
@@ -113,12 +118,12 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
       classGenerics,
     ));
 
-    var classDef = cwClasses.ClassDef(
+    var classDef = ClassDef(
       isAbstract,
       ce.name.replaceAll("\$", ""),
-      allFieldsDistinct.map((e) => cwClasses.NameType(e.name, e.type)).toList(),
+      allFieldsDistinct,
       ce.typeParameters.isEmpty ? [] : ce.typeParameters.where((x) => x.name != null).map((x) => //
-          cwClasses.GenericType(x.name, x.bound == null ? null : x.bound.toString())).toList(),
+          GenericType(x.name, x.bound == null ? null : x.bound.toString())).toList(),
       [...ce.interfaces.map((e) => e.element.name), ce.supertype.element.name],
     );
 
