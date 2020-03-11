@@ -90,6 +90,35 @@ String getConstructorRows(List<NameType> fields) => //
 String getNullAsserts(List<NameType> fields) => //
     fields.map((e) => "assert(${e.name} != null)").joinToString(separator: ",\n") + ";";
 
+String getToString(List<NameType> fields) {
+  if (fields.isEmpty) //
+    return "";
+
+  var items = fields.map((e) => "${e.name}:\$${e.name}").joinToString(separator: "|");
+  return """String toString() => "$items";""";
+}
+
+String getHashCode(List<NameType> fields) {
+  if (fields.isEmpty) //
+    return "";
+
+  var items = fields.map((e) => "${e.name}.hashCode").joinToString(separator: ", ");
+  return """int get hashCode => hashObjects([$items]);""";
+}
+
+String getEquals(List<NameType> fields, String className) {
+  var sb = StringBuffer();
+
+  sb.write("bool operator ==(Object other) => identical(this, other) || other is $className && runtimeType == other.runtimeType");
+
+  sb.writeln(fields.isEmpty ? "" : " &&");
+
+  sb.write(fields.map((e) => "${e.name} == other.${e.name}").joinToString(separator: " && "));
+
+  sb.write(";");
+
+  return sb.toString();
+}
 //
 //
 //String getConstructorParams(

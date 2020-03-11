@@ -151,6 +151,67 @@ void main() {
     });
   });
 
+  group("getToString", () {
+    test("1", () {
+      var result = getToString([]);
+
+      expect(result.toString(), "");
+    });
+
+    test("2", () {
+      var result = getToString([
+        NameType("a", "int"),
+        NameType("b", "String"),
+        NameType("c", "String"),
+      ]);
+
+      expect(result.toString(), """String toString() => "a:\$a|b:\$b|c:\$c";""");
+    });
+  });
+
+  group("getHashCode", () {
+    test("1", () {
+      var result = getHashCode([]);
+
+      expect(result.toString(), "");
+    });
+
+    test("2", () {
+      var result = getHashCode([
+        NameType("a", "int"),
+        NameType("b", "String"),
+        NameType("c", "String"),
+      ]);
+
+      expect(result.toString(), //
+          """int get hashCode => hashObjects([a.hashCode, b.hashCode, c.hashCode]);""");
+    });
+  });
+
+  group("getEquals", () {
+    test("1", () {
+      var result = getEquals([], "A");
+
+      var expected = """bool operator ==(Object other) => identical(this, other) || other is A && runtimeType == other.runtimeType
+;""";
+
+      expect(result, expected);
+    });
+
+    test("2", () {
+      var result = getEquals([
+        NameType("a", "int"),
+        NameType("b", "String"),
+        NameType("c", "String"),
+      ], "C");
+
+      var expected = """bool operator ==(Object other) => identical(this, other) || other is C && runtimeType == other.runtimeType &&
+a == other.a && b == other.b && c == other.c;""";
+
+      expect(result, expected);
+    });
+  });
+
   group("getPropertiesAbstract", () {
     test("1 - no properties", () {
       var result = getPropertiesAbstract([]);

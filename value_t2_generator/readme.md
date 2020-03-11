@@ -1,97 +1,152 @@
 ###value_t2
 
-For more examples look at the github repository
+Reasoning: specifying clases with copywith, equals, toString, required constructor fields is actually a fair amount of work resulting in verbose code which makes it difficult to maintain and difficult to read.
 
-Simple, just put the ValueT2 annotation on the class
+Solution: use value_t2
+
+##Basic features
+
+
+* Equality
+
+```
+var bob1 = Person(age: 5, name: "bob");
+var bob2 = Person(age: 5, name: "bob");
+
+bob1 == bob2; //true
+```
+
+* CopyWith (works on subclasses in same file)
+
+```
+var bob = Employee(age: 5, name: "bob", id: "123);
+var bobby = bob.cwPerson(age: 6, name: "bobby");
+var robert = bob.cwEmployee(age: 25, name: "robert", id: "123);
+
+bobby is Employee; //true
+robert is Employee; //true
+```
+
+* ToString
+
 ```
 var bob = Person(age: 5, name: "bob");
-var result = bob.cwPerson(age: 6, name: "bobby");
+bob.toString() //age:5|name:"bob"
+```
+
+* All fields are required, non nullable (through assert pattern) and final by default
+
+```
+var bob = Person(age: 5, name: "bob");
+bob.age = 6; //error
+
+//warning on missing parameter values
+var bob = Person(age: 5);
+
+//assert error if parameter is null
+var bob = Person(age: 5, name: null);
+```
+
+##More examples
+For more examples look at the Examples project in the github repository
+
+##Usage
+  * Place a @ValueT2() annotation on every class
+  * Prepend a dollar on the classname or two dollars for abstract classes when defining a class
+  * Declare all classes as abstract
+ ```
+ abstract class $$MyAbstract class {
+
+ abstract class $MyClass class {
+```
+  * when using the class don't use the dollar sign
+```
+ MyClass(a: "value")
+```
+ 
+  * never use extends, only interfaces
+  
+```
+@ValueT2()
+abstract class $B implements $A {
+```
+
+##More features
+
+* Shorter and more simple syntax
+```
+@ValueT2()
+abstract class $A {
+  String get aValue;
+}
+
+//vs
+
+class A {
+  final String aValue;
+
+  A({
+    @required this.aValue,
+  }) : assert(aValue != null);
+
+  //toString, hasCode, ==
+}
+```
+
+
+* The properties of interfaces are implemented automatically (no need to specify them, just use implements)
+
+```
+@ValueT2()
+abstract class $A {
+  String get aValue;
+}
 
 @ValueT2()
-class Person {
-  final int age;
-  final String name;
-
-  Person({this.age, this.name});
-
-  String toString() => "${age.toString()}, ${name.toString()}";
+abstract class $B implements $A {
+  String get bValue;
 }
+
+var b = B(aValue: "A", bValue: "B");
 ```
-It works on superclasses automatically
+
+* Can override a property of a subclass
 ```
-var bob = Person(age: 5, name: "bob");
-var rob = Employee(age: 9, name: "rob");
-var hasAges = <HasAge>[bob, rob];
-var result = hasAges.map((x) => x.cwHasAge(age: 3).age).toList();
-
-@ValueT2([Person, Employee])
-abstract class HasAge {
-  int get age;
+@ValueT2()
+abstract class $A {
+  Person get a;
 }
 
-class Person implements HasAge {
-  final int age;
-  final String name;
-
-  Person({this.age, this.name});
-}
-```
-One concrete class has two interfaces both
-  of which have copyWith extension methods.  It works! and that is why we name our copyWith cw[ClassName]
-```
-var ages = hasAges.map((x) => x.cwHasAge(age: 3).age).toList();
-
-@ValueT2([Person, Employee])
-abstract class HasAge {
-  int get age;
-}
-
-@ValueT2([Person, Employee])
-abstract class HasName {
-  String get name;
-}
-
-class Person implements HasAge, HasName {
-  final int age;
-  final String name;
-
-  Person({this.age, this.name});
-}
-
-class Employee implements Person {
-  final int age;
-  final String name;
-
-  Employee({this.age, this.name});
+@ValueT2()
+abstract class $B implements $A {
+  Employee get a;
 }
 ```
 
-Automatically gets subtypes if they exist in the same file 
- also, it gets from the types parameter
+* Can specify generics
 ```
-    var bob = Person(age: 5, name: "bob");
-    var rob = Employee(age: 9, name: "rob");
-    var hasAges = <HasAge2>[bob, rob];
-    var result = hasAges.map((x) => x.cwHasAge2(age: 3).age).toList();
-
-@ValueT2([Stuff, Employee]) //[Person, Employee])
-abstract class HasAge2 {
-  int get age;
+@ValueT2()
+abstract class $$A<T1, T2> {
+  T1 get x;
+  T2 get y;
 }
 
-class Person implements HasAge2 {
-  final int age;
-  final String name;
-
-  Person({this.age, this.name});
-}
-
-class Employee implements Person {
-  final int age;
-  final String name;
-
-  Employee({this.age, this.name});
+@ValueT2()
+abstract class $B implements $$A<int, String> {
+  String get z;
 }
 ```
 
-For more examples look at the Examples project in the github repository
+##Limitations
+* Custom getters are not supported
+  * use functions instead
+* Methods on a class are not supported (use functions instead)
+* 'go to definition' takes you to the generated class
+  * workaround1 - to get class info hover over the class
+  * workaround2 - go to definition, then go to definition a second time to go to the dollar version of class
+  * possible update in the future
+
+##Coming (if others want and are interested)
+See github issues
+
+

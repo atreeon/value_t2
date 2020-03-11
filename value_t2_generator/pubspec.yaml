@@ -1,6 +1,6 @@
 name: value_t2_generator
 description: Creates copyWith extension methods for each annotated class and works with abstract too.
-version: 1.0.2
+version: 1.0.3
 homepage: https://github.com/atreeon/ValueT2
  
 environment:  
