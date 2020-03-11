@@ -4,7 +4,7 @@ Reasoning: specifying clases with copywith, equals, toString, required construct
 
 Solution: use value_t2
 
-##Basic features
+## Basic features
 
 
 * Equality
@@ -47,10 +47,10 @@ var bob = Person(age: 5);
 var bob = Person(age: 5, name: null);
 ```
 
-##More examples
+## More examples
 For more examples look at the Examples project in the github repository
 
-##Usage
+## Usage
   * Place a @ValueT2() annotation on every class
   * Prepend a dollar on the classname or two dollars for abstract classes when defining a class
   * Declare all classes as abstract
@@ -71,7 +71,7 @@ For more examples look at the Examples project in the github repository
 abstract class $B implements $A {
 ```
 
-##More features
+## More features
 
 * Shorter and more simple syntax
 ```
@@ -137,7 +137,7 @@ abstract class $B implements $$A<int, String> {
 }
 ```
 
-##Limitations
+## Limitations
 * Custom getters are not supported
   * use functions instead
 * Methods on a class are not supported (use functions instead)
@@ -146,7 +146,7 @@ abstract class $B implements $$A<int, String> {
   * workaround2 - go to definition, then go to definition a second time to go to the dollar version of class
   * possible update in the future
 
-##Coming (if others want and are interested)
+## Coming (if others want and are interested)
 See github issues
 
 
