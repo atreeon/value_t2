@@ -15,7 +15,7 @@ void main() {
         Interface("\$A", ["int", "String"], ["T1", "T2"]),
       ];
 
-      var result = getDistinctFields(fields, interfaces, "A");
+      var result = getDistinctFields(fields, interfaces);
 
       var expected = [
         "x:int",
@@ -37,7 +37,7 @@ void main() {
         Interface("\$A", ["Ta", "Tb"], ["T1", "T2"]),
       ];
 
-      var result = getDistinctFields(fields, interfaces, "A");
+      var result = getDistinctFields(fields, interfaces);
 
       var expected = [
         "x:Ta",
@@ -57,7 +57,7 @@ void main() {
     });
 
     test("2", () {
-      var result = getClassDefinition(true, "\$Pet");
+      var result = getClassDefinition(true, "\$\$Pet");
 
       expect(result, "abstract class Pet");
     });
@@ -72,7 +72,7 @@ void main() {
 
     test("1", () {
       var result = getClassGenerics([
-        NameType("T", "\$C"),
+        NameType("T", "\$\$C"),
         NameType("T2", "MyBase"),
         NameType("T3", null),
       ]);
@@ -83,7 +83,7 @@ void main() {
 
   group("getExtendsGenerics", () {
     test("1", () {
-      var result = getExtendsGenerics([NameType("T", "\$C")]);
+      var result = getExtendsGenerics([NameType("T", "\$\$C")]);
 
       expect(result, "<T>");
     });
@@ -115,7 +115,7 @@ void main() {
     test("3", () {
       var result = getImplements([
         Interface("\$B", ["int"], ["T1"]),
-        Interface("\$C", [], ["T1"]),
+        Interface("\$C", [], []),
       ]);
 
       expect(result, " implements B<int>, C");

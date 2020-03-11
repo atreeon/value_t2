@@ -4,9 +4,7 @@ import 'package:value_t2_generator/src/classes.dart';
 List<NameType> getDistinctFields(
   List<NameTypeClass> fields,
   List<Interface> interfaces,
-  String className,
 ) {
-
   var interfaces2 = interfaces.map((interface) {
     var result = List<NameType>();
 

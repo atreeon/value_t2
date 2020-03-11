@@ -7,10 +7,10 @@ void main() {
     test("1a", () {
       var result = createValueT2(
         true,
-        <NameType>[NameType("type", "String")],
+        [NameType("type", "String")],
         "\$PetBase",
-        <Interface>[],
-        <NameType>[],
+        [],
+        [],
       );
 
       var expected = """abstract class PetBase extends \$PetBase {
@@ -23,10 +23,10 @@ String get type;
     test("1b", () {
       var result = createValueT2(
         false,
-        <NameType>[NameType("type", "String")],
+        [NameType("type", "String")],
         "\$Pet",
-        <Interface>[],
-        <NameType>[],
+        [],
+        [],
       );
 
       var expected = """class Pet extends \$Pet {
@@ -43,10 +43,13 @@ assert(type != null);
     test("1c", () {
       var result = createValueT2(
         false,
-        [NameType("type", "String"), NameType("age", "int")],
+        [
+          NameType("type", "String"),
+          NameType("age", "int"),
+        ],
         "\$Pet",
-        <Interface>[],
-        <NameType>[],
+        [],
+        [],
       );
 
       var expected = """class Pet extends \$Pet {
@@ -90,8 +93,8 @@ T get x;
         ],
         "\$B",
         [
-          Interface("\$A", ["int"]),
-          Interface("\$C", [])
+          Interface("\$A", ["int"], ["T"]),
+          Interface("\$C", [], [])
         ],
         [
           NameType("T", "\$C"),

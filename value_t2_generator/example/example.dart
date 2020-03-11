@@ -1,13 +1,12 @@
+//see example project in github for more examples
+import 'package:meta/meta.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
 
-//see example project in github
+part 'example.g.dart';
+
+//THE SIMPLEST OF EXAMPLES
 
 @ValueT2()
-class Person {
-  final int age;
-  final String name;
-
-  Person({this.age, this.name});
-
-  String toString() => "${age.toString()}, ${name.toString()}";
+abstract class $Pet {
+  String get type;
 }

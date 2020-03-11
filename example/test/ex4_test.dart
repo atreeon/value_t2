@@ -6,30 +6,24 @@ part 'ex4_test.g.dart';
 
 //ONLY USE IMPLEMENTS, EXTENDS IS NOT ALLOWED
 
-@ValueT2(true)
-abstract class $Z {
+@ValueT2()
+abstract class $$Z {
   String get zValue;
-
-  const $Z();
 }
 
 @ValueT2()
-abstract class $A implements $Z {
+abstract class $A implements $$Z {
   String get aValue;
-
-  const $A();
 }
 
 @ValueT2()
 abstract class $B implements $A {
   String get bValue;
-  const $B();
 }
 
 @ValueT2()
 abstract class $C implements $B {
   String get cValue;
-  const $C();
 }
 
 main() {

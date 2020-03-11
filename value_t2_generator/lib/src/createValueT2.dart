@@ -3,15 +3,11 @@ import 'package:value_t2_generator/src/helpers.dart';
 
 String createValueT2(
   bool isAbstract,
-  List<NameTypeClass> allFields,
+  List<NameType> allFields,
   String className,
   List<Interface> interfaces,
   List<NameType> classGenerics,
 ) {
-  var classNameTrim = className.replaceAll("\$", "");
-  var allFieldsDistinct = getDistinctFields(allFields, interfaces, classNameTrim);
-//  var allFieldsDistinct = allFields.map((e) => NameType(e.name, e.type)).toList();
-
   var sb = StringBuffer();
   sb.write(getClassDefinition(isAbstract, className));
   if (classGenerics.isNotEmpty) //
@@ -24,13 +20,14 @@ String createValueT2(
   sb.writeln(" {");
 
   if (isAbstract) {
-    sb.writeln(getPropertiesAbstract(allFieldsDistinct));
+    sb.writeln(getPropertiesAbstract(allFields));
   } else {
-    sb.writeln(getProperties(allFieldsDistinct));
+    var classNameTrim = className.replaceAll("\$", "");
+    sb.writeln(getProperties(allFields));
     sb.writeln("${classNameTrim}({");
-    sb.writeln(getConstructorRows(allFieldsDistinct));
+    sb.writeln(getConstructorRows(allFields));
     sb.writeln("}):");
-    sb.writeln(getNullAsserts(allFieldsDistinct));
+    sb.writeln(getNullAsserts(allFields));
   }
 
   sb.writeln("}");

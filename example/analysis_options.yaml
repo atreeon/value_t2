@@ -1,5 +1,5 @@
-analyzer:
-  enable-experiment:
+#analyzer:
+#  enable-experiment:
 #    - non-nullable
 #    - nonfunction-type-aliases
 

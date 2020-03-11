@@ -24,7 +24,6 @@ abstract class $C {
 
 main() {
   test("1", () {
-    var c = C(z: "Z");
     var b = B<C, int>(x: 5, y: C(z: "Z"), z: "null", p: 7);
 
     expect(b.x, 5);
