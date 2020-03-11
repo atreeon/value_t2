@@ -1,5 +1,5 @@
+import 'package:analyzer_models/analyzer_models.dart';
 import 'package:dartx/dartx.dart';
-import 'package:value_t2_generator/src/classes.dart';
 
 List<NameType> getDistinctFields(
   List<NameTypeClass> fields,

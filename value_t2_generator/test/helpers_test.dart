@@ -1,5 +1,5 @@
+import 'package:analyzer_models/analyzer_models.dart';
 import 'package:test/test.dart';
-import 'package:value_t2_generator/src/classes.dart';
 import 'package:value_t2_generator/src/helpers.dart';
 
 void main() {
