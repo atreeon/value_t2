@@ -1,6 +1,6 @@
 name: value_t2_annotation
-description: Creates a copyWith extension method for the object the attribute is specified on and the objects in the list
-version: 1.0.2
+description: annotation for value_t2_generator which provides a short syntax, value type (ish) way of creating classes
+version: 1.0.4
 
 environment:  
   sdk: ">=2.6.1 <3.0.0"
@@ -10,4 +10,4 @@ dependencies:
 dev_dependencies:  
   test: 1.3.4
 
-homepage: https://github.com/atreeon/ValueT2
+homepage: https://github.com/atreeon/value_t2
