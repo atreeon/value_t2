@@ -103,7 +103,7 @@ T get x;
       );
 
       var expected = """class B<T extends C, T3> extends \$B<T, T3> implements A<int>, C {
-final int x;
+final T x;
 final T3 p;
 final T y;
 final String z;
