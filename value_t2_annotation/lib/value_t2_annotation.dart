@@ -1,5 +1,5 @@
+///append class with a dollar, two dollars for abstract classes
+/// $myClass / $$myAbstractClass
 class ValueT2 {
-  final bool isAbstract;
-
-  const ValueT2([this.isAbstract = false]);
+  const ValueT2();
 }

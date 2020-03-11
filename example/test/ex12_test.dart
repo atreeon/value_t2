@@ -6,14 +6,14 @@ part 'ex12_test.g.dart';
 
 //GENERIC SPECIFIED OF IMPLEMENTED CLASS, WITH ANOTHER GENERIC
 
-@ValueT2(true)
-abstract class $A<T1, T2> {
+@ValueT2()
+abstract class $$A<T1, T2> {
   T1 get x;
   T2 get y;
 }
 
 @ValueT2()
-abstract class $B<Ta, Tb> implements $A<Ta, Tb> {
+abstract class $B<Ta, Tb> implements $$A<Ta, Tb> {
   String get z;
 }
 
