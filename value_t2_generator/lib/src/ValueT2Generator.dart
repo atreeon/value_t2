@@ -100,15 +100,15 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
       );
     }).toList();
 
-    sb.writeln("//allClasses:${allClasses.map((e) => e.name)}");
-    sb.writeln("//other:${otherClasses.map((e) => e.name)}");
-    sb.writeln("//af:${allFields.toString()}");
-    sb.writeln("//cn:$className");
-    sb.writeln("//i:${interfaces.toString()}");
-    sb.writeln("//i2:${interfaces2.toString()}");
-    sb.writeln("//cg:${classGenerics}");
-
-    sb.writeln("//afd:${allFieldsDistinct.toString()}");
+//    sb.writeln("//allClasses:${allClasses.map((e) => e.name)}");
+//    sb.writeln("//other:${otherClasses.map((e) => e.name)}");
+//    sb.writeln("//af:${allFields.toString()}");
+//    sb.writeln("//cn:$className");
+//    sb.writeln("//i:${interfaces.toString()}");
+//    sb.writeln("//i2:${interfaces2.toString()}");
+//    sb.writeln("//cg:${classGenerics}");
+//
+//    sb.writeln("//afd:${allFieldsDistinct.toString()}");
 
     sb.writeln(createValueT2(
       isAbstract,

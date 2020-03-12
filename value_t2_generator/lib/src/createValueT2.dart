@@ -10,13 +10,16 @@ String createValueT2(
 ) {
   var sb = StringBuffer();
   sb.write(getClassDefinition(isAbstract, className));
-  if (classGenerics.isNotEmpty) //
+  if (classGenerics.isNotEmpty) {
     sb.write(getClassGenerics(classGenerics));
+  }
   sb.write(" extends ${className}");
-  if (classGenerics.isNotEmpty) //
+  if (classGenerics.isNotEmpty) {
     sb.write(getExtendsGenerics(classGenerics));
-  if (interfaces.isNotEmpty) //
+  }
+  if (interfaces.isNotEmpty) {
     sb.write(getImplements(interfaces));
+  }
   sb.writeln(" {");
 
   if (isAbstract) {

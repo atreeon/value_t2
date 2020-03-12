@@ -4,7 +4,7 @@ name: example
 #  sdk: ">=2.6.1 <3.0.0"
 
 dependencies:
-  value_t2_annotation: ^1.0.3
+  value_t2_annotation: ^1.0.4
   quiver_hashcode: ^2.0.0
 
 dev_dependencies:
