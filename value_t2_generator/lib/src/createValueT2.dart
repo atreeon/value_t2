@@ -21,11 +21,15 @@ String createValueT2(
     sb.write(getImplements(interfaces));
   }
   sb.writeln(" {");
+  var classNameTrim = className.replaceAll("\$", "");
 
   if (isAbstract) {
     sb.writeln(getPropertiesAbstract(allFields));
+  } else if (allFields.isEmpty) {
+    sb.writeln("${classNameTrim}();");
+    sb.writeln(getHashCode(allFields));
+    sb.writeln(getEquals(allFields, classNameTrim));
   } else {
-    var classNameTrim = className.replaceAll("\$", "");
     sb.writeln(getProperties(allFields));
     sb.writeln("${classNameTrim}({");
     sb.writeln(getConstructorRows(allFields));
