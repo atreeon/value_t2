@@ -22,8 +22,9 @@ List<NameType> getDistinctFields(
     var i = interfaces2.firstWhere((i) => i.type == f.class_, orElse: () => null);
     if (i != null) {
       var paramNameType = i.paramNameType.firstWhere((p) => p.type == f.type, orElse: () => null);
-      if (paramNameType != null) //
+      if (paramNameType != null) {
         return NameType(f.name, paramNameType.name);
+      }
     }
 
     return NameType(f.name, f.type);
@@ -40,12 +41,14 @@ String getClassDefinition(bool isAbstract, String className) {
 }
 
 String getClassGenerics(List<NameType> generics) {
-  if (generics.isEmpty) //
+  if (generics.isEmpty) {
     return "";
+  }
 
   var _generics = generics.map((e) {
-    if (e.type == null) //
+    if (e.type == null) {
       return e.name;
+    }
 
     return "${e.name} extends ${e.type}";
   }).joinToString(separator: ", ");
@@ -54,8 +57,9 @@ String getClassGenerics(List<NameType> generics) {
 }
 
 String getExtendsGenerics(List<NameType> generics) {
-  if (generics.isEmpty) //
+  if (generics.isEmpty) {
     return "";
+  }
 
   var _generics = generics //
       .map((e) => e.name)
@@ -65,12 +69,14 @@ String getExtendsGenerics(List<NameType> generics) {
 }
 
 String getImplements(List<Interface> interfaces) {
-  if (interfaces.length == 0) //
+  if (interfaces.isEmpty) {
     return "";
+  }
 
   var types = interfaces.map((e) {
-    if (e.typeArgs.isEmpty) //
+    if (e.typeArgs.isEmpty) {
       return e.type;
+    }
 
     return "${e.type}<${e.typeArgs.joinToString(separator: ", ")}>";
   }).joinToString(separator: ", ");
@@ -91,16 +97,18 @@ String getNullAsserts(List<NameType> fields) => //
     fields.map((e) => "assert(${e.name} != null)").joinToString(separator: ",\n") + ";";
 
 String getToString(List<NameType> fields) {
-  if (fields.isEmpty) //
+  if (fields.isEmpty) {
     return "";
+  }
 
   var items = fields.map((e) => "${e.name}:\$${e.name}").joinToString(separator: "|");
   return """String toString() => "$items";""";
 }
 
 String getHashCode(List<NameType> fields) {
-  if (fields.isEmpty) //
+  if (fields.isEmpty) {
     return "";
+  }
 
   var items = fields.map((e) => "${e.name}.hashCode").joinToString(separator: ", ");
   return """int get hashCode => hashObjects([$items]);""";
@@ -119,80 +127,3 @@ String getEquals(List<NameType> fields, String className) {
 
   return sb.toString();
 }
-//
-//
-//String getConstructorParams(
-//  List<NameType> fields,
-//  List<GenericType> generics,
-//) {
-//  return fields.map((e) => "@required this.${e.name}").joinToString(separator: ", ");
-//}
-
-//String getConstructorParams(
-//  List<NameType> fields,
-//  List<GenericType> generics,
-//) {
-//  var result = fields.where((x) {
-//    var matchingGeneric = generics.firstWhere(
-//        (g) => //
-//            x.type == g.name || x.type.contains("<${g.name}>"),
-//        orElse: () => null);
-//
-//    if (matchingGeneric == null || matchingGeneric.baseType.isNotNullOrEmpty()) {
-//      return true;
-//    }
-//
-//    return false;
-//  }).toList();
-//
-//  var result2 = result.map((x) {
-//    var matchingGeneric = generics.firstWhere(
-//        (g) => //
-//            x.type == g.name || x.type.contains("<${g.name}>"),
-//        orElse: () => null);
-//
-//    if (matchingGeneric == null) {
-//      return "${x.type} ${x.name}";
-//    }
-//
-//    var type = x.type.replaceFirst(matchingGeneric.name, matchingGeneric.baseType);
-//
-//    return "${type} ${x.name}";
-//  }) //
-//      .joinToString(separator: ", ");
-//
-//  return result2.toString();
-//}
-//
-//String getCopyWithSignature(
-//  String className,
-//  List<NameType> fields,
-//  List<GenericType> generics,
-//) {
-//  var paramList = getCopyWithParamList(fields, generics);
-//
-//  var result = "$className cw$className({$paramList})";
-//
-//  return result;
-//}
-//
-//String getPropertySetThis(String className, String fieldName) => //
-//    "$fieldName: (this as $className).$fieldName";
-//
-//String getPropertySet(String name) => //
-//    "$name: $name == null ? this.$name : $name";
-//
-//String getConstructorLines(ClassDef extType, ClassDef typeType) {
-//  var result = typeType.fields.map((field) {
-//    if (extType.fields.any((x) => field.name == x.name)) {
-//      return getPropertySet(field.name);
-//    } else {
-//      return getPropertySetThis(typeType.name, field.name);
-//    }
-//  }).joinToString(separator: ",\n");
-//
-//  return result;
-//}
-//
-//String getExtensionDef(String className) => //
-//    "extension ${className}Ext_ValueT2 on ${className}";

@@ -61,10 +61,6 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
               e.element.typeParameters.map((x) => x.name).toList(),
             )) //
         .toList();
-    var interfaces2 = ce.interfaces
-        .map((e) => //
-            e.element.typeParameters.map((x) => x.name + "|" + x.runtimeType.toString())) //
-        .toList();
     var classGenerics = ce.typeParameters
         .map((e) => NameType(e.name, e.bound == null ? null : e.bound.toString())) //
         .toList();
@@ -100,15 +96,20 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
       );
     }).toList();
 
-    sb.writeln("//allClasses:${allClasses.map((e) => e.name)}");
-    sb.writeln("//other:${otherClasses.map((e) => e.name)}");
-    sb.writeln("//af:${allFields.toString()}");
-    sb.writeln("//cn:$className");
-    sb.writeln("//i:${interfaces.toString()}");
-    sb.writeln("//i2:${interfaces2.toString()}");
-    sb.writeln("//cg:${classGenerics}");
+//    var interfaces2 = ce.interfaces
+//        .map((e) => //
+//    e.element.typeParameters.map((x) => x.name + "|" + x.runtimeType.toString())) //
+//        .toList();
 
-    sb.writeln("//afd:${allFieldsDistinct.toString()}");
+//    sb.writeln("//allClasses:${allClasses.map((e) => e.name)}");
+//    sb.writeln("//other:${otherClasses.map((e) => e.name)}");
+//    sb.writeln("//af:${allFields.toString()}");
+//    sb.writeln("//cn:$className");
+//    sb.writeln("//i:${interfaces.toString()}");
+//    sb.writeln("//i2:${interfaces2.toString()}");
+//    sb.writeln("//cg:${classGenerics}");
+//
+//    sb.writeln("//afd:${allFieldsDistinct.toString()}");
 
     sb.writeln(createValueT2(
       isAbstract,
