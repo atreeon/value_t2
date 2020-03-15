@@ -120,6 +120,14 @@ void main() {
 
       expect(result, " implements B<int>, C");
     });
+
+    test("4", () {
+      var result = getImplements([
+        Interface("\$B", ["\$A"], ["T1"]),
+      ]);
+
+      expect(result, " implements B<\$A>");
+    });
   });
 
   //where type and name are the same in the field list

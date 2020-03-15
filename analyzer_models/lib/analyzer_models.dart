@@ -48,9 +48,8 @@ class Interface {
   final List<String> typeArgs;
   final List<String> typeParams;
 
-  Interface(String type, List<String> typeArgs, this.typeParams)
-      : type = type.replaceAll("\$", ""),
-        typeArgs = typeArgs.map((e) => e.toString().replaceAll("\$", "")).toList() {
+  Interface(String type, this.typeArgs, this.typeParams)
+      : type = type.replaceAll("\$", "") {
     assert(this.typeArgs.length == this.typeParams.length, "typeArgs must have same length as typeParams");
   }
 
