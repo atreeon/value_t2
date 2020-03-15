@@ -67,17 +67,17 @@ void main() {
     test("1", () {
       var result = getClassGenerics([NameType("T", "\$C")]);
 
-      expect(result, "<T extends C>");
+      expect(result, "<T extends \$C>");
     });
 
-    test("1", () {
+    test("2", () {
       var result = getClassGenerics([
         NameType("T", "\$\$C"),
         NameType("T2", "MyBase"),
         NameType("T3", null),
       ]);
 
-      expect(result, "<T extends C, T2 extends MyBase, T3>");
+      expect(result, "<T extends \$\$C, T2 extends MyBase, T3>");
     });
   });
 
@@ -88,7 +88,7 @@ void main() {
       expect(result, "<T>");
     });
 
-    test("1", () {
+    test("2", () {
       var result = getExtendsGenerics([
         NameType("T", "\$C"),
         NameType("T2", "MyBase"),

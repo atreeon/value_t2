@@ -14,8 +14,7 @@ class NameType {
   final String type;
   final String name;
 
-  NameType(this.name, String type) //
-      : type = type == null ? null : type.replaceAll("\$", "");
+  NameType(this.name, this.type);
 
   toString() => "${this.name}:${this.type}";
 }
@@ -48,7 +47,7 @@ class Interface {
   final List<String> typeArgs;
   final List<String> typeParams;
 
-  Interface(String type, this.typeArgs, this.typeParams)
+  Interface(String type, this.typeArgs, this.typeParams) //
       : type = type.replaceAll("\$", "") {
     assert(this.typeArgs.length == this.typeParams.length, "typeArgs must have same length as typeParams");
   }
