@@ -9,7 +9,7 @@ part 'ex1_test.g.dart';
 
 @ValueT2()
 abstract class $Pet {
-  String get type;
+  String type;
 }
 
 main() {

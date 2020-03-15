@@ -87,6 +87,30 @@ import 'package:value_t2_annotation/value_t2_annotation.dart';
  MyClass(a: "value")
 ```
  
+   * simple definition
+   
+ ```
+@ValueT2()
+abstract class $Pet {
+  String get type;
+}
+ ```
+ 
+* simple definition with implements
+    
+```
+ @ValueT2()
+ abstract class $Person {
+   String get name;
+ }
+
+ @ValueT2()
+ abstract class $Employe implements $Person {
+   String get id;
+ }
+  ```
+
+ 
   * never use extends, only interfaces
   
 ```
