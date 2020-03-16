@@ -3,9 +3,7 @@ class NameTypeClass {
   final String name;
   final String class_;
 
-  NameTypeClass(this.name, String type, String class_) //
-      : type = type == null ? null : type.replaceAll("\$", ""),
-        class_ = class_ == null ? null : class_.replaceAll("\$", "");
+  NameTypeClass(this.name, this.type, this.class_);
 
   toString() => "${this.name}:${this.type}:${this.class_}";
 }
@@ -44,22 +42,13 @@ class GenericType {
 
 class Interface {
   final String type;
-  final List<String> typeArgs;
-  final List<String> typeParams;
+  final List<String> typeArgsTypes;
+  final List<String> typeParamsNames;
 
-  Interface(String type, this.typeArgs, this.typeParams) //
-      : type = type.replaceAll("\$", "") {
-    assert(this.typeArgs.length == this.typeParams.length, "typeArgs must have same length as typeParams");
+  Interface(this.type, this.typeArgsTypes, this.typeParamsNames) {
+    assert(this.typeArgsTypes.length == this.typeParamsNames.length, "typeArgs must have same length as typeParams");
   }
 
-  toString() => "${this.type}|${this.typeArgs}|${this.typeParams}";
+  toString() => "${this.type}|${this.typeArgsTypes}|${this.typeParamsNames}";
 }
 
-class Interface2 {
-  final String type;
-  final List<NameType> paramNameType;
-
-  Interface2(this.type, this.paramNameType);
-
-  toString() => "${this.type}|${this.paramNameType}";
-}

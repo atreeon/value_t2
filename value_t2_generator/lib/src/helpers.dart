@@ -1,18 +1,24 @@
 import 'package:analyzer_models/analyzer_models.dart';
 import 'package:dartx/dartx.dart';
 
+String removeDollarsFromPropertyType(String propertyType) {
+  return propertyType.replaceAll(RegExp(r"(?<!<)(?<!<\$)\$\$?"), "");
+}
+
 List<NameType> getDistinctFields(
-  List<NameTypeClass> fields,
+  List<NameTypeClass> fieldsRaw,
   List<Interface> interfaces,
 ) {
+  var fields = fieldsRaw.map((f) => NameTypeClass(f.name, f.type, f.class_.replaceAll("\$", "")));
+
   var interfaces2 = interfaces.map((interface) {
     var result = List<NameType>();
 
-    for (var i = 0; i < interface.typeParams.length; i++) {
-      result.add(NameType(interface.typeArgs[i], interface.typeParams[i]));
+    for (var i = 0; i < interface.typeParamsNames.length; i++) {
+      result.add(NameType(interface.typeArgsTypes[i], interface.typeParamsNames[i]));
     }
 
-    return Interface2(interface.type, result);
+    return Interface2(interface.type.replaceAll("\$", ""), result);
   }).toList();
 
   var sortedFields = fields.sortedBy((element) => element.class_).toList();
@@ -23,11 +29,13 @@ List<NameType> getDistinctFields(
     if (i != null) {
       var paramNameType = i.paramNameType.firstWhere((p) => p.type == f.type, orElse: () => null);
       if (paramNameType != null) {
-        return NameType(f.name, paramNameType.name);
+        var name = removeDollarsFromPropertyType(paramNameType.name);
+        return NameType(f.name, name);
       }
     }
 
-    return NameType(f.name, f.type);
+    var type = removeDollarsFromPropertyType(f.type);
+    return NameType(f.name, type);
   }).toList();
 
   return adjustedFields;
@@ -74,11 +82,13 @@ String getImplements(List<Interface> interfaces) {
   }
 
   var types = interfaces.map((e) {
-    if (e.typeArgs.isEmpty) {
-      return e.type;
+    var type = e.type.replaceAll("\$", "");
+
+    if (e.typeArgsTypes.isEmpty) {
+      return type;
     }
 
-    return "${e.type}<${e.typeArgs.joinToString(separator: ", ")}>";
+    return "${type}<${e.typeArgsTypes.joinToString(separator: ", ")}>";
   }).joinToString(separator: ", ");
 
   return " implements $types";
@@ -126,4 +136,13 @@ String getEquals(List<NameType> fields, String className) {
   sb.write(";");
 
   return sb.toString();
+}
+
+class Interface2 {
+  final String type;
+  final List<NameType> paramNameType;
+
+  Interface2(this.type, this.paramNameType);
+
+  toString() => "${this.type}|${this.paramNameType}";
 }

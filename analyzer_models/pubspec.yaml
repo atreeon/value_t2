@@ -1,6 +1,6 @@
 name: analyzer_models
 description: A number of DTOs to help simplify analyzer models and make testing easier - valueT2, copywithe, createfrome
-version: 1.0.5
+version: 1.0.8
 
 environment:  
   sdk: ">=2.6.1 <3.0.0"

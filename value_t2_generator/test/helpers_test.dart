@@ -26,7 +26,7 @@ void main() {
       expect(result.map((e) => e.toString()).toList(), expected);
     });
 
-    test("1", () {
+    test("2", () {
       var fields = [
         NameTypeClass("x", "T1", "A"),
         NameTypeClass("y", "T2", "A"),
@@ -42,6 +42,60 @@ void main() {
       var expected = [
         "x:Ta",
         "y:Tb",
+        "z:String",
+      ];
+
+      expect(result.map((e) => e.toString()).toList(), expected);
+    });
+
+    test("3", () {
+      var fields = [
+        NameTypeClass("batch", "\$BS<\$BI>", "\$BQR"),
+      ];
+
+      var interfaces = <Interface>[];
+
+      var result = getDistinctFields(fields, interfaces);
+
+      var expected = [
+        "batch:BS<\$BI>",
+      ];
+
+      expect(result.map((e) => e.toString()).toList(), expected);
+    });
+
+    test("4", () {
+      var fields = [
+        NameTypeClass("batch", "\$\$BS<\$\$BI>", "\$BQR"),
+      ];
+
+      var interfaces = <Interface>[];
+
+      var result = getDistinctFields(fields, interfaces);
+
+      var expected = [
+        "batch:BS<\$\$BI>",
+      ];
+
+      expect(result.map((e) => e.toString()).toList(), expected);
+    });
+
+    test("5 ex11 - B", () {
+      var fields = [
+        NameTypeClass("x", "T1", "\$\$A"),
+        NameTypeClass("y", "T2", "\$\$A"),
+        NameTypeClass("z", "String", "\$B"),
+      ];
+
+      var interfaces = [
+        Interface("\$\$A", ["int", "String"], ["T1", "T2"]),
+      ];
+
+      var result = getDistinctFields(fields, interfaces);
+
+      var expected = [
+        "x:int",
+        "y:String",
         "z:String",
       ];
 
@@ -149,13 +203,20 @@ void main() {
       expect(result.toString(), "final int age;\nfinal String name;");
     });
 
-    test("3 property from generic", () {
+    test("3", () {
       var result = getProperties([
-        NameType("age", "int"),
-        NameType("name", "String"),
+        NameType("a", "\$BS"),
       ]);
 
-      expect(result.toString(), "final int age;\nfinal String name;");
+      expect(result.toString(), "final \$BS a;");
+    });
+
+    test("4", () {
+      var result = getProperties([
+        NameType("a", "List<\$BS>"),
+      ]);
+
+      expect(result.toString(), "final List<\$BS> a;");
     });
   });
 
@@ -256,6 +317,22 @@ a == other.a && b == other.b && c == other.c;""";
       ]);
 
       expect(result.toString(), "assert(age != null),\nassert(name != null);");
+    });
+  });
+
+  group("removeDollarsFromPropertyType", () {
+    test("1", () {
+      var input = r"batch:$BS<$BI>";
+      var result = removeDollarsFromPropertyType(input);
+
+      expect(result, r"batch:BS<$BI>");
+    });
+
+    test("2", () {
+      var input = r"batch:$$BS<$$BI>";
+      var result = removeDollarsFromPropertyType(input);
+
+      expect(result, r"batch:BS<$$BI>");
     });
   });
 }
