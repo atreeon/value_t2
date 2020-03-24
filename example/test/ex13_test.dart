@@ -6,6 +6,7 @@ import 'package:test/test.dart';
 part 'ex13_test.g.dart';
 
 //COPY WITH
+//COPY FROM
 
 @ValueT2()
 abstract class $A {
@@ -54,4 +55,28 @@ main() {
     expect(c3.b, 3);
     expect(c3.c, false);
   });
+//
+//  test("2", () {
+//    var a = A(a: "A");
+//    var b = B(a: "A", b: 1);
+//    var c = C(a: "A", b: 1, c: true);
+//
+//    var a_aTob = a.ctB(b: 1);
+//    var a_aToc = a.ctC(b: 1, c: true);
+//
+//    var b_bToa = b.ctA();
+//    var b_bToc = b.ctC(c: true);
+//
+//    var c_cToa = c.ctA();
+//    var c_cTob = c.ctB();
+//
+//    expect(a_aTob.toString(), "Aa1");
+//    expect(a_aToc.toString(), "Aa1");
+//
+//    expect(b_bToa.toString(), "Aa1");
+//    expect(b_bToc.toString(), "Aa1");
+//
+//    expect(c_cToa.toString(), "Aa1");
+//    expect(c_cTob.toString(), "Aa1");
+//  });
 }

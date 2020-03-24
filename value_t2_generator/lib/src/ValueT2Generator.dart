@@ -110,7 +110,7 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
 //    sb.writeln("//cg:${classGenerics}");
 //
 //    sb.writeln("//afd:${allFieldsDistinct.toString()}");
-
+    
     sb.writeln(createValueT2(
       isAbstract,
       allFieldsDistinct,
