@@ -25,11 +25,10 @@ abstract class $SelectedId implements $$Selected {
   int get id;
 }
 
-
 main() {
   test("1", () {
-    var a = Pet(type: "cat");
+    var result = PairGroup();
 
-    expect(a.type, "cat");
+    expect(result.selected is SelectedNone, true);
   });
 }

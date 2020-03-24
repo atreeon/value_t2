@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer_models/analyzer_models.dart';
@@ -35,7 +36,7 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
     ConstantReader annotation,
     BuildStep buildStep,
     List<ClassElement> allClasses,
-  ) {
+  ) async {
     var sb = StringBuffer();
 
 //    sb.writeln("//RULES: you must use implements, not extends");
@@ -101,6 +102,26 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
 //    e.element.typeParameters.map((x) => x.name + "|" + x.runtimeType.toString())) //
 //        .toList();
 
+    //if is const make main const too
+    sb.writeln("//isConst:" + ce.constructors.first.isConst.toString());
+    sb.writeln("//" + ce.fields.map((f) => f.source).toList().toString());
+    sb.writeln("//" + ce.fields.map((f) => f.declaration.toString()).toList().toString());
+    sb.writeln("//" + ce.fields.map((f) => f.getDisplayString(withNullability: true)).toList().toString());
+    sb.writeln("//" + ce.fields.map((f) => f.initializer.toString()).toList().toString());
+//    sb.writeln("//" + ce.fields.map((f) => f.initializer.returnType).toList().toString());
+    sb.writeln("//" + ce.fields.map((f) => f.declaration.toString()).toList().toString());
+    sb.writeln("//" + ce.fields.map((f) => f.librarySource).toList().toString());
+//    sb.writeln("//" + ce.fields.map((f) => f.).toList().toString());
+    sb.writeln("//" + ce.accessors.length.toString());
+    await ce.accessors.where((x) => x.isGetter).forEach((x) async {
+      var unit = await getUnit(x);
+      sb.writeln("//unit:" + unit.toString());
+    });
+//    sb.writeln("//" + ce.fields.map((f) => f.visitChildren(visitor)).toList().toString());
+//    sb.writeln("//" + ce.fields.map((f) => f.location.).toList().toString());
+
+    //
+
 //    sb.writeln("//allClasses:${allClasses.map((e) => e.name)}");
 //    sb.writeln("//other:${otherClasses.map((e) => e.name)}");
 //    sb.writeln("//af:${allFields.toString()}");
@@ -110,7 +131,7 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
 //    sb.writeln("//cg:${classGenerics}");
 //
 //    sb.writeln("//afd:${allFieldsDistinct.toString()}");
-    
+
     sb.writeln(createValueT2(
       isAbstract,
       allFieldsDistinct,
@@ -131,7 +152,24 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
     sb.writeln(createCopyWith(classDef, otherClasses));
 
     return element.session.getResolvedLibraryByElement(element.library).then((resolvedLibrary) {
+//      if (element is ClassElement) {
+//        var accessors = element.accessors;
+//        if (accessors != null && accessors.length > 0) {
+//          var declaration = resolvedLibrary.getElementDeclaration(accessors[0]);
+//          sb.writeln("//dec:" + declaration
+//            ..toString());
+//        }
+//      }
+
       return sb.toString();
     });
   }
 }
+
+Future<CompilationUnit> getUnit(Element accessor) => //
+    accessor.session.getResolvedLibraryByElement(accessor.library) //
+        .then((resolvedLibrary) {
+      var declaration = resolvedLibrary.getElementDeclaration(accessor);
+      if (declaration == null) return null;
+      return declaration.resolvedUnit.unit;
+    });
