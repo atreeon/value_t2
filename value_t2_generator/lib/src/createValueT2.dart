@@ -22,16 +22,16 @@ String createValueT2(
   }
   sb.writeln(" {");
   var classNameTrim = className.replaceAll("\$", "");
-
+  var constructorName = getConstructorName(classNameTrim);
   if (isAbstract) {
     sb.writeln(getPropertiesAbstract(allFields));
   } else if (allFields.isEmpty) {
-    sb.writeln("${classNameTrim}();");
+    sb.writeln("${constructorName}();");
     sb.writeln(getHashCode(allFields));
     sb.writeln(getEquals(allFields, classNameTrim));
   } else {
     sb.writeln(getProperties(allFields));
-    sb.writeln("${classNameTrim}({");
+    sb.writeln("${constructorName}({");
     sb.writeln(getConstructorRows(allFields));
     sb.writeln("}):");
     sb.writeln(getNullAsserts(allFields));
