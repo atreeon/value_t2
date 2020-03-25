@@ -3,7 +3,7 @@ description: annotation for value_t2_generator which provides a short syntax, va
 version: 1.0.4
 
 environment:  
-  sdk: ">=2.6.1 <3.0.0"
+  sdk: ">=2.7.2 <3.0.0"
 
 dependencies:
 
