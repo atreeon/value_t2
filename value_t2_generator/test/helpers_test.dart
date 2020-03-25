@@ -335,4 +335,17 @@ a == other.a && b == other.b && c == other.c;""";
       expect(result, r"batch:BS<$$BI>");
     });
   });
+
+  group("getConstructorName", () {
+    test("1 normalc", () {
+      var result = getConstructorName("MyClass");
+      expect(result, "MyClass");
+    });
+
+    test("2 privatec", () {
+      var result = getConstructorName("MyClass_");
+
+      expect(result, "MyClass_._");
+    });
+  });
 }

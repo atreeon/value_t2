@@ -146,3 +146,8 @@ class Interface2 {
 
   toString() => "${this.type}|${this.paramNameType}";
 }
+
+String getConstructorName(String trimmedClassName) {
+  return trimmedClassName[trimmedClassName.length - 1] == "_" ? "$trimmedClassName._" : trimmedClassName;
+}
+

@@ -133,5 +133,29 @@ x == other.x && p == other.p && y == other.y && z == other.z;
 
       expect(result.trim(), expected.trim());
     });
+
+    test("x", () {
+      var result = createValueT2(
+        false,
+        [NameType("type", "String")],
+        "\$Pet_",
+        [],
+        [],
+      );
+
+      var expected = """class Pet_ extends \$Pet_ {
+final String type;
+Pet_._({
+@required this.type,
+}):
+assert(type != null);
+String toString() => "type:\$type";
+int get hashCode => hashObjects([type.hashCode]);
+bool operator ==(Object other) => identical(this, other) || other is Pet_ && runtimeType == other.runtimeType &&
+type == other.type;
+}""";
+
+      expect(result.trim(), expected.trim());
+    });
   });
 }
