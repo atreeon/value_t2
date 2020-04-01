@@ -222,9 +222,9 @@ void main() {
 
   group("getToString", () {
     test("1", () {
-      var result = getToString([]);
+      var result = getToString([], "MyClass");
 
-      expect(result.toString(), "");
+      expect(result.toString(), """String toString() => "(MyClass-)""");
     });
 
     test("2", () {
@@ -232,9 +232,9 @@ void main() {
         NameType("a", "int"),
         NameType("b", "String"),
         NameType("c", "String"),
-      ]);
+      ], "MyClass");
 
-      expect(result.toString(), """String toString() => "a:\$a|b:\$b|c:\$c";""");
+      expect(result.toString(), """String toString() => "(MyClass-a:\$a|b:\$b|c:\$c)";""");
     });
   });
 

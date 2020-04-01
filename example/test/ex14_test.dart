@@ -28,8 +28,8 @@ main() {
     var b = B(a: "A", b: 1);
     var c = C(a: "A", b: 1, c: true);
 
-    expect(a.toString(), "a:A");
-    expect(b.toString(), "a:A|b:1");
-    expect(c.toString(), "a:A|b:1|c:true");
+    expect(a.toString(), "(A-a:A)");
+    expect(b.toString(), "(B-a:A|b:1)");
+    expect(c.toString(), "(C-a:A|b:1|c:true)");
   });
 }

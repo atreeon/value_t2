@@ -35,7 +35,7 @@ Pet({
 @required this.type,
 }):
 assert(type != null);
-String toString() => "type:\$type";
+String toString() => "(Pet-type:\$type)";
 int get hashCode => hashObjects([type.hashCode]);
 bool operator ==(Object other) => identical(this, other) || other is Pet && runtimeType == other.runtimeType &&
 type == other.type;
@@ -65,7 +65,7 @@ Pet({
 }):
 assert(type != null),
 assert(age != null);
-String toString() => "type:\$type|age:\$age";
+String toString() => "(Pet-type:\$type|age:\$age)";
 int get hashCode => hashObjects([type.hashCode, age.hashCode]);
 bool operator ==(Object other) => identical(this, other) || other is Pet && runtimeType == other.runtimeType &&
 type == other.type && age == other.age;
@@ -125,7 +125,7 @@ assert(x != null),
 assert(p != null),
 assert(y != null),
 assert(z != null);
-String toString() => "x:\$x|p:\$p|y:\$y|z:\$z";
+String toString() => "(B-x:\$x|p:\$p|y:\$y|z:\$z)";
 int get hashCode => hashObjects([x.hashCode, p.hashCode, y.hashCode, z.hashCode]);
 bool operator ==(Object other) => identical(this, other) || other is B && runtimeType == other.runtimeType &&
 x == other.x && p == other.p && y == other.y && z == other.z;
@@ -149,7 +149,7 @@ Pet_._({
 @required this.type,
 }):
 assert(type != null);
-String toString() => "type:\$type";
+String toString() => "(Pet_-type:\$type)";
 int get hashCode => hashObjects([type.hashCode]);
 bool operator ==(Object other) => identical(this, other) || other is Pet_ && runtimeType == other.runtimeType &&
 type == other.type;

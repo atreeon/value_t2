@@ -106,13 +106,13 @@ String getConstructorRows(List<NameType> fields) => //
 String getNullAsserts(List<NameType> fields) => //
     fields.map((e) => "assert(${e.name} != null)").joinToString(separator: ",\n") + ";";
 
-String getToString(List<NameType> fields) {
+String getToString(List<NameType> fields, String className) {
   if (fields.isEmpty) {
-    return "";
+    return """String toString() => "($className-)""";
   }
 
   var items = fields.map((e) => "${e.name}:\$${e.name}").joinToString(separator: "|");
-  return """String toString() => "$items";""";
+  return """String toString() => "($className-$items)";""";
 }
 
 String getHashCode(List<NameType> fields) {

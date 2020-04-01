@@ -35,7 +35,7 @@ String createValueT2(
     sb.writeln(getConstructorRows(allFields));
     sb.writeln("}):");
     sb.writeln(getNullAsserts(allFields));
-    sb.writeln(getToString(allFields));
+    sb.writeln(getToString(allFields, classNameTrim));
     sb.writeln(getHashCode(allFields));
     sb.writeln(getEquals(allFields, classNameTrim));
   }
