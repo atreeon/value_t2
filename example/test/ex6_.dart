@@ -5,6 +5,7 @@
 //part 'ex6_test.g.dart';
 //
 ////CURRENTLY NOT ALLOWING CUSTOM GETTERS (CAN JUST USE A FUNCTION)
+////  this is where mixins would have been a better approach
 //
 //@ValueT2()
 //abstract class $A {
@@ -20,10 +21,10 @@
 //
 //  const $B();
 //}
-
+//
 //main() {
 //  test("1", () {
-//    var a = Pet(type: "cat");
+//    var a = $B(type: "cat");
 //
 //    expect(a.type, "cat");
 //  });

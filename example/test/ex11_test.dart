@@ -3,7 +3,7 @@ import 'package:test/test.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
 import 'package:quiver_hashcode/hashcode.dart';
 
-part 'ex11x_test.g.dart';
+part 'ex11_test.g.dart';
 
 //GENERIC SPECIFIED OF IMPLEMENTED CLASS
 
