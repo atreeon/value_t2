@@ -1,6 +1,6 @@
 import 'package:value_t2_annotation/value_t2_annotation.dart';
 
-part 'ex17_.g.dart';
+part 'ex17x.g.dart';
 
 @ValueT2()
 abstract class $$Batch_Lesson {}

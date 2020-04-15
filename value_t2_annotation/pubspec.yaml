@@ -1,6 +1,6 @@
 name: value_t2_annotation
 description: annotation for value_t2_generator which provides a short syntax, value type (ish) way of creating classes
-version: 1.0.4
+version: 1.0.5
 
 environment:  
   sdk: ">=2.7.2 <3.0.0"
