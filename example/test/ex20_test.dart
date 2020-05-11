@@ -9,6 +9,8 @@ main() {
   test("1", () {
     var batch = BS_BI(batchItems: List<BI>());
     var blah = BQR(batch: batch);
+
+    expect(blah.batch.batchItems.length, 1);
   });
 }
 

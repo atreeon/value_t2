@@ -1,8 +1,8 @@
 import 'package:test/test.dart';
 
 main() {
-  var batch = BS_BI();
-  var blah = BQR(batch);
+//  var batch = BS_BI();
+//  var blah = BQR(batch);
 
   test("1", () {});
 }
