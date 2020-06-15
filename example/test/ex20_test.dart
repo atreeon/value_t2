@@ -7,7 +7,7 @@ part 'ex20_test.g.dart';
 
 main() {
   test("1", () {
-    var batch = BS_BI(batchItems: List<BI>());
+    var batch = BS_BI(batchItems: <BI>[BI(orderId: 456)]);
     var blah = BQR(batch: batch);
 
     expect(blah.batch.batchItems.length, 1);

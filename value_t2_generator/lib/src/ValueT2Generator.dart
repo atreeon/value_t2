@@ -130,8 +130,8 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
 
     sb.writeln(createCopyWith(classDef, otherClasses));
 
-    return element.session.getResolvedLibraryByElement(element.library).then((resolvedLibrary) {
-      return sb.toString();
-    });
+    return sb.toString();
+//    return element.session.getResolvedLibraryByElement(element.library).then((resolvedLibrary) {
+//    });
   }
 }
