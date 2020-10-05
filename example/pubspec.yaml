@@ -4,8 +4,8 @@ environment:
   sdk: ">=2.8.1 <3.0.0"
 
 dependencies:
-  value_t2_annotation: ^1.0.4
-#    path: ../value_t2_annotation/
+  value_t2_annotation: ^1.0.6
+#   path: ../value_t2_annotation/
   quiver_hashcode: ^2.0.0
   meta: any
 

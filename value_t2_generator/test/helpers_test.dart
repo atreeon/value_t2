@@ -300,23 +300,53 @@ a == other.a && b == other.b && c == other.c;""";
 
   group("getConstructorRows", () {
     test("2", () {
-      var result = getConstructorRows([
-        NameType("age", "int"),
-        NameType("name", "String"),
-      ]);
+      var result = getConstructorRows(
+        [
+          NameType("age", "int"),
+          NameType("name", "String"),
+        ],
+        [],
+      );
 
       expect(result.toString(), "@required this.age,\n@required this.name,");
+    });
+
+    test("3", () {
+      var result = getConstructorRows(
+        [
+          NameType("age", "int"),
+          NameType("name", "String"),
+        ],
+        ["name"],
+      );
+
+      expect(result.toString(), "@required this.age,\nthis.name,");
     });
   });
 
   group("getNullAsserts", () {
     test("2", () {
-      var result = getNullAsserts([
-        NameType("age", "int"),
-        NameType("name", "String"),
-      ]);
+      var result = getNullAsserts(
+        [
+          NameType("age", "int"),
+          NameType("name", "String"),
+        ],
+        [],
+      );
 
       expect(result.toString(), "assert(age != null),\nassert(name != null);");
+    });
+
+    test("3", () {
+      var result = getNullAsserts(
+        [
+          NameType("age", "int"),
+          NameType("name", "String"),
+        ],
+        ["name"],
+      );
+
+      expect(result.toString(), "assert(age != null);");
     });
   });
 

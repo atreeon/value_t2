@@ -7,6 +7,7 @@ String createValueT2(
   String className,
   List<Interface> interfaces,
   List<NameType> classGenerics,
+  List<String> nullableFields,
 ) {
   var sb = StringBuffer();
   sb.write(getClassDefinition(isAbstract, className));
@@ -32,9 +33,9 @@ String createValueT2(
   } else {
     sb.writeln(getProperties(allFields));
     sb.writeln("${constructorName}({");
-    sb.writeln(getConstructorRows(allFields));
+    sb.writeln(getConstructorRows(allFields, nullableFields));
     sb.writeln("}):");
-    sb.writeln(getNullAsserts(allFields));
+    sb.writeln(getNullAsserts(allFields, nullableFields));
     sb.writeln(getToString(allFields, classNameTrim));
     sb.writeln(getHashCode(allFields));
     sb.writeln(getEquals(allFields, classNameTrim));

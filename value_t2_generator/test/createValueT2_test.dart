@@ -11,6 +11,7 @@ void main() {
         "\$PetBase",
         [],
         [],
+        [],
       );
 
       var expected = """abstract class PetBase extends \$PetBase {
@@ -25,6 +26,7 @@ String get type;
         false,
         [NameType("type", "String")],
         "\$Pet",
+        [],
         [],
         [],
       );
@@ -54,6 +56,7 @@ type == other.type;
         "\$Pet",
         [],
         [],
+        [],
       );
 
       var expected = """class Pet extends \$Pet {
@@ -81,6 +84,7 @@ type == other.type && age == other.age;
         "\$A",
         [],
         [NameType("T", null)],
+        [],
       );
 
       var expected = """abstract class A<T> extends \$A<T> {
@@ -108,6 +112,7 @@ T get x;
           NameType("T", "\$C"),
           NameType("T3", null),
         ],
+        [],
       );
 
       var expected = """class B<T extends \$C, T3> extends \$B<T, T3> implements A<int>, C {
@@ -139,6 +144,7 @@ x == other.x && p == other.p && y == other.y && z == other.z;
         false,
         [NameType("type", "String")],
         "\$Pet_",
+        [],
         [],
         [],
       );

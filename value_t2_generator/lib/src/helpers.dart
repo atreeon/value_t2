@@ -100,11 +100,24 @@ String getProperties(List<NameType> fields) => //
 String getPropertiesAbstract(List<NameType> fields) => //
     fields.map((e) => "${e.type} get ${e.name};").join("\n");
 
-String getConstructorRows(List<NameType> fields) => //
-    fields.map((e) => "@required this.${e.name},").join("\n").trim();
+String getConstructorRows(List<NameType> fields, List<String> nullableFieldNames) => //
+    fields
+        .map((e) {
+          if (nullableFieldNames.indexOf(e.name) >= 0) {
+            return "this.${e.name},";
+          }
 
-String getNullAsserts(List<NameType> fields) => //
-    fields.map((e) => "assert(${e.name} != null)").joinToString(separator: ",\n") + ";";
+          return "@required this.${e.name},";
+        })
+        .join("\n")
+        .trim();
+
+String getNullAsserts(List<NameType> fields, List<String> nullableFieldNames) => //
+    fields //
+        .where((e) => nullableFieldNames.indexOf(e.name) == -1)
+        .map((e) => "assert(${e.name} != null)")
+        .joinToString(separator: ",\n") +
+    ";";
 
 String getToString(List<NameType> fields, String className) {
   if (fields.isEmpty) {
@@ -150,4 +163,3 @@ class Interface2 {
 String getConstructorName(String trimmedClassName) {
   return trimmedClassName[trimmedClassName.length - 1] == "_" ? "$trimmedClassName._" : trimmedClassName;
 }
-
