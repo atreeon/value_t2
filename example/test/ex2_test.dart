@@ -14,6 +14,7 @@ abstract class $$A<T> {
 
 @ValueT2()
 abstract class $B<T extends $C, T3> implements $$A<int>, $C {
+  ///Blah
   T get y;
   T3 get p;
 }

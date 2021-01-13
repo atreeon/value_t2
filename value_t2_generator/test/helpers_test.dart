@@ -1,14 +1,62 @@
 import 'package:analyzer_models/analyzer_models.dart';
 import 'package:test/test.dart';
+import 'package:value_t2_generator/src/classes.dart';
 import 'package:value_t2_generator/src/helpers.dart';
 
 void main() {
+  group("getClassComment", () {
+    test("1x", () {
+      var interfaces = [
+        InterfaceWithComment("\$A", ["int", "String"], ["T1", "T2"]),
+      ];
+
+      var result = getClassComment(interfaces, "///blah");
+
+      expect(result, """///blah
+
+///implements [\$A]
+""");
+    });
+
+    test("2x null class comment", () {
+      var interfaces = [
+        InterfaceWithComment("\$A", ["int", "String"], ["T1", "T2"]),
+      ];
+
+      var result = getClassComment(interfaces, "");
+
+      expect(result, """///implements [\$A]
+""");
+    });
+
+    test("3x with all comments", () {
+      var interfaces = [
+        InterfaceWithComment("\$A", ["int", "String"], ["T1", "T2"], comment: "///blah1"),
+        InterfaceWithComment("\$A", ["int", "String"], ["T1", "T2"]),
+        InterfaceWithComment("\$A", ["int", "String"], ["T1", "T2"], comment: "///blah2"),
+      ];
+
+      var result = getClassComment(interfaces, "///blah");
+
+      expect(result, """///blah
+
+///implements [\$A]
+///blah1
+
+///implements [\$A]
+
+///implements [\$A]
+///blah2
+""");
+    });
+  });
+
   group("getDistinctFields", () {
-    test("1", () {
+    test("1a", () {
       var fields = [
-        NameTypeClass("x", "T1", "A"),
-        NameTypeClass("y", "T2", "A"),
-        NameTypeClass("z", "String", "B"),
+        NameTypeClassWithComment("x", "T1", "A"),
+        NameTypeClassWithComment("y", "T2", "A"),
+        NameTypeClassWithComment("z", "String", "B"),
       ];
 
       var interfaces = [
@@ -26,11 +74,11 @@ void main() {
       expect(result.map((e) => e.toString()).toList(), expected);
     });
 
-    test("2", () {
+    test("2a", () {
       var fields = [
-        NameTypeClass("x", "T1", "A"),
-        NameTypeClass("y", "T2", "A"),
-        NameTypeClass("z", "String", "B"),
+        NameTypeClassWithComment("x", "T1", "A"),
+        NameTypeClassWithComment("y", "T2", "A"),
+        NameTypeClassWithComment("z", "String", "B"),
       ];
 
       var interfaces = [
@@ -48,9 +96,9 @@ void main() {
       expect(result.map((e) => e.toString()).toList(), expected);
     });
 
-    test("3", () {
+    test("3a", () {
       var fields = [
-        NameTypeClass("batch", "\$BS<\$BI>", "\$BQR"),
+        NameTypeClassWithComment("batch", "\$BS<\$BI>", "\$BQR"),
       ];
 
       var interfaces = <Interface>[];
@@ -64,9 +112,9 @@ void main() {
       expect(result.map((e) => e.toString()).toList(), expected);
     });
 
-    test("4", () {
+    test("4a", () {
       var fields = [
-        NameTypeClass("batch", "\$\$BS<\$\$BI>", "\$BQR"),
+        NameTypeClassWithComment("batch", "\$\$BS<\$\$BI>", "\$BQR"),
       ];
 
       var interfaces = <Interface>[];
@@ -82,9 +130,9 @@ void main() {
 
     test("5 ex11 - B", () {
       var fields = [
-        NameTypeClass("x", "T1", "\$\$A"),
-        NameTypeClass("y", "T2", "\$\$A"),
-        NameTypeClass("z", "String", "\$B"),
+        NameTypeClassWithComment("x", "T1", "\$\$A"),
+        NameTypeClassWithComment("y", "T2", "\$\$A"),
+        NameTypeClassWithComment("z", "String", "\$B"),
       ];
 
       var interfaces = [
@@ -104,13 +152,13 @@ void main() {
   });
 
   group("getClassDefinition", () {
-    test("1", () {
+    test("1b", () {
       var result = getClassDefinition(false, "\$Pet");
 
       expect(result, "class Pet");
     });
 
-    test("2", () {
+    test("2b", () {
       var result = getClassDefinition(true, "\$\$Pet");
 
       expect(result, "abstract class Pet");
@@ -118,17 +166,17 @@ void main() {
   });
 
   group("getClassGenerics", () {
-    test("1", () {
-      var result = getClassGenerics([NameType("T", "\$C")]);
+    test("1c", () {
+      var result = getClassGenerics([NameTypeWithComment("T", "\$C")]);
 
       expect(result, "<T extends \$C>");
     });
 
-    test("2", () {
+    test("2c", () {
       var result = getClassGenerics([
-        NameType("T", "\$\$C"),
-        NameType("T2", "MyBase"),
-        NameType("T3", null),
+        NameTypeWithComment("T", "\$\$C"),
+        NameTypeWithComment("T2", "MyBase"),
+        NameTypeWithComment("T3", null),
       ]);
 
       expect(result, "<T extends \$\$C, T2 extends MyBase, T3>");
@@ -136,17 +184,17 @@ void main() {
   });
 
   group("getExtendsGenerics", () {
-    test("1", () {
-      var result = getExtendsGenerics([NameType("T", "\$\$C")]);
+    test("1d", () {
+      var result = getExtendsGenerics([NameTypeWithComment("T", "\$\$C")]);
 
       expect(result, "<T>");
     });
 
-    test("2", () {
+    test("2d", () {
       var result = getExtendsGenerics([
-        NameType("T", "\$C"),
-        NameType("T2", "MyBase"),
-        NameType("T3", null),
+        NameTypeWithComment("T", "\$C"),
+        NameTypeWithComment("T2", "MyBase"),
+        NameTypeWithComment("T3", null),
       ]);
 
       expect(result, "<T, T2, T3>");
@@ -160,13 +208,13 @@ void main() {
       expect(result, "");
     });
 
-    test("2", () {
+    test("2e", () {
       var result = getImplements([Interface("\$A", [], [])]);
 
       expect(result, " implements A");
     });
 
-    test("3", () {
+    test("3e", () {
       var result = getImplements([
         Interface("\$B", ["int"], ["T1"]),
         Interface("\$C", [], []),
@@ -175,7 +223,7 @@ void main() {
       expect(result, " implements B<int>, C");
     });
 
-    test("4", () {
+    test("4e", () {
       var result = getImplements([
         Interface("\$B", ["\$A"], ["T1"]),
       ]);
@@ -188,50 +236,59 @@ void main() {
   //from class A
 
   group("getProperties", () {
-    test("1 - no properties", () {
+    test("1f - no properties", () {
       var result = getProperties([]);
 
       expect(result.toString(), "");
     });
 
-    test("2", () {
+    test("2f", () {
       var result = getProperties([
-        NameType("age", "int"),
-        NameType("name", "String"),
+        NameTypeWithComment("age", "int"),
+        NameTypeWithComment("name", "String"),
       ]);
 
       expect(result.toString(), "final int age;\nfinal String name;");
     });
 
-    test("3", () {
+    test("3f", () {
       var result = getProperties([
-        NameType("a", "\$BS"),
+        NameTypeWithComment("a", "\$BS"),
       ]);
 
       expect(result.toString(), "final \$BS a;");
     });
 
-    test("4", () {
+    test("4f", () {
       var result = getProperties([
-        NameType("a", "List<\$BS>"),
+        NameTypeWithComment("a", "List<\$BS>"),
       ]);
 
       expect(result.toString(), "final List<\$BS> a;");
     });
+
+    test("5f", () {
+      var result = getProperties([
+        NameTypeWithComment("age", "int"),
+        NameTypeWithComment("name", "String", comment: "///blah"),
+      ]);
+
+      expect(result.toString(), "final int age;\n///blah\nfinal String name;");
+    });
   });
 
   group("getToString", () {
-    test("1", () {
+    test("1g", () {
       var result = getToString([], "MyClass");
 
       expect(result.toString(), """String toString() => "(MyClass-)""");
     });
 
-    test("2", () {
+    test("2g", () {
       var result = getToString([
-        NameType("a", "int"),
-        NameType("b", "String"),
-        NameType("c", "String"),
+        NameTypeWithComment("a", "int"),
+        NameTypeWithComment("b", "String"),
+        NameTypeWithComment("c", "String"),
       ], "MyClass");
 
       expect(result.toString(), """String toString() => "(MyClass-a:\$a|b:\$b|c:\$c)";""");
@@ -239,17 +296,17 @@ void main() {
   });
 
   group("getHashCode", () {
-    test("1", () {
+    test("1h", () {
       var result = getHashCode([]);
 
       expect(result.toString(), "");
     });
 
-    test("2", () {
+    test("2h", () {
       var result = getHashCode([
-        NameType("a", "int"),
-        NameType("b", "String"),
-        NameType("c", "String"),
+        NameTypeWithComment("a", "int"),
+        NameTypeWithComment("b", "String"),
+        NameTypeWithComment("c", "String"),
       ]);
 
       expect(result.toString(), //
@@ -258,7 +315,7 @@ void main() {
   });
 
   group("getEquals", () {
-    test("1", () {
+    test("1i", () {
       var result = getEquals([], "A");
 
       var expected = """bool operator ==(Object other) => identical(this, other) || other is A && runtimeType == other.runtimeType
@@ -267,11 +324,11 @@ void main() {
       expect(result, expected);
     });
 
-    test("2", () {
+    test("2i", () {
       var result = getEquals([
-        NameType("a", "int"),
-        NameType("b", "String"),
-        NameType("c", "String"),
+        NameTypeWithComment("a", "int"),
+        NameTypeWithComment("b", "String"),
+        NameTypeWithComment("c", "String"),
       ], "C");
 
       var expected = """bool operator ==(Object other) => identical(this, other) || other is C && runtimeType == other.runtimeType &&
@@ -282,28 +339,37 @@ a == other.a && b == other.b && c == other.c;""";
   });
 
   group("getPropertiesAbstract", () {
-    test("1 - no properties", () {
+    test("1j - no properties", () {
       var result = getPropertiesAbstract([]);
 
       expect(result.toString(), "");
     });
 
-    test("2", () {
+    test("2j", () {
       var result = getPropertiesAbstract([
-        NameType("age", "int"),
-        NameType("name", "String"),
+        NameTypeWithComment("age", "int"),
+        NameTypeWithComment("name", "String"),
       ]);
 
       expect(result.toString(), "int get age;\nString get name;");
     });
+
+    test("3j", () {
+      var result = getPropertiesAbstract([
+        NameTypeWithComment("age", "int", comment: "///blah blah"),
+        NameTypeWithComment("name", "String"),
+      ]);
+
+      expect(result.toString(), "///blah blah\nint get age;\nString get name;");
+    });
   });
 
   group("getConstructorRows", () {
-    test("2", () {
+    test("2k", () {
       var result = getConstructorRows(
         [
-          NameType("age", "int"),
-          NameType("name", "String"),
+          NameTypeWithComment("age", "int"),
+          NameTypeWithComment("name", "String"),
         ],
         [],
       );
@@ -311,11 +377,11 @@ a == other.a && b == other.b && c == other.c;""";
       expect(result.toString(), "@required this.age,\n@required this.name,");
     });
 
-    test("3", () {
+    test("3k", () {
       var result = getConstructorRows(
         [
-          NameType("age", "int"),
-          NameType("name", "String"),
+          NameTypeWithComment("age", "int"),
+          NameTypeWithComment("name", "String"),
         ],
         ["name"],
       );
@@ -325,11 +391,11 @@ a == other.a && b == other.b && c == other.c;""";
   });
 
   group("getNullAsserts", () {
-    test("2", () {
+    test("2l", () {
       var result = getNullAsserts(
         [
-          NameType("age", "int"),
-          NameType("name", "String"),
+          NameTypeWithComment("age", "int"),
+          NameTypeWithComment("name", "String"),
         ],
         [],
       );
@@ -337,11 +403,11 @@ a == other.a && b == other.b && c == other.c;""";
       expect(result.toString(), "assert(age != null),\nassert(name != null);");
     });
 
-    test("3", () {
+    test("3l", () {
       var result = getNullAsserts(
         [
-          NameType("age", "int"),
-          NameType("name", "String"),
+          NameTypeWithComment("age", "int"),
+          NameTypeWithComment("name", "String"),
         ],
         ["name"],
       );
@@ -351,14 +417,14 @@ a == other.a && b == other.b && c == other.c;""";
   });
 
   group("removeDollarsFromPropertyType", () {
-    test("1", () {
+    test("1m", () {
       var input = r"batch:$BS<$BI>";
       var result = removeDollarsFromPropertyType(input);
 
       expect(result, r"batch:BS<$BI>");
     });
 
-    test("2", () {
+    test("2m", () {
       var input = r"batch:$$BS<$$BI>";
       var result = removeDollarsFromPropertyType(input);
 
@@ -367,12 +433,12 @@ a == other.a && b == other.b && c == other.c;""";
   });
 
   group("getConstructorName", () {
-    test("1 normalc", () {
+    test("1n normalc", () {
       var result = getConstructorName("MyClass");
       expect(result, "MyClass");
     });
 
-    test("2 privatec", () {
+    test("2n privatec", () {
       var result = getConstructorName("MyClass_");
 
       expect(result, "MyClass_._");

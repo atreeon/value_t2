@@ -1,15 +1,31 @@
 import 'package:analyzer_models/analyzer_models.dart';
 import 'package:dartx/dartx.dart';
+import 'package:value_t2_generator/src/classes.dart';
+
+String getClassComment(List<Interface> interfaces, String classComment) {
+  var a = interfaces.where((e) => e is InterfaceWithComment && e.comment != classComment) //
+      .map((e) {
+    var interfaceComment = e is InterfaceWithComment && e.comment != null //
+        ? "\n${e.comment}"
+        : "";
+    return "///implements [${e.type}]$interfaceComment\n";
+  }).toList();
+
+  if (classComment != null) //
+    a.insert(0, classComment + "\n");
+
+  return a.join("\n").trim() + "\n";
+}
 
 String removeDollarsFromPropertyType(String propertyType) {
   return propertyType.replaceAll(RegExp(r"(?<!<)(?<!<\$)\$\$?"), "");
 }
 
-List<NameType> getDistinctFields(
-  List<NameTypeClass> fieldsRaw,
+List<NameTypeWithComment> getDistinctFields(
+  List<NameTypeClassWithComment> fieldsRaw,
   List<Interface> interfaces,
 ) {
-  var fields = fieldsRaw.map((f) => NameTypeClass(f.name, f.type, f.class_.replaceAll("\$", "")));
+  var fields = fieldsRaw.map((f) => NameTypeClassWithComment(f.name, f.type, f.class_.replaceAll("\$", ""), comment: f.comment));
 
   var interfaces2 = interfaces.map((interface) {
     var result = List<NameType>();
@@ -30,12 +46,12 @@ List<NameType> getDistinctFields(
       var paramNameType = i.paramNameType.firstWhere((p) => p.type == f.type, orElse: () => null);
       if (paramNameType != null) {
         var name = removeDollarsFromPropertyType(paramNameType.name);
-        return NameType(f.name, name);
+        return NameTypeWithComment(f.name, name, comment: f.comment);
       }
     }
 
     var type = removeDollarsFromPropertyType(f.type);
-    return NameType(f.name, type);
+    return NameTypeWithComment(f.name, type, comment: f.comment);
   }).toList();
 
   return adjustedFields;
@@ -94,11 +110,23 @@ String getImplements(List<Interface> interfaces) {
   return " implements $types";
 }
 
-String getProperties(List<NameType> fields) => //
-    fields.map((e) => "final ${e.type} ${e.name};").join("\n");
+String getProperties(List<NameTypeWithComment> fields) => //
+    fields
+        .map((e) => //
+            e.comment == null
+                ? //
+                "final ${e.type} ${e.name};" //
+                : "${e.comment}\nfinal ${e.type} ${e.name};")
+        .join("\n");
 
-String getPropertiesAbstract(List<NameType> fields) => //
-    fields.map((e) => "${e.type} get ${e.name};").join("\n");
+String getPropertiesAbstract(List<NameTypeWithComment> fields) => //
+    fields
+        .map((e) => //
+            e.comment == null
+                ? //
+                "${e.type} get ${e.name};" //
+                : "${e.comment}\n${e.type} get ${e.name};")
+        .join("\n");
 
 String getConstructorRows(List<NameType> fields, List<String> nullableFieldNames) => //
     fields

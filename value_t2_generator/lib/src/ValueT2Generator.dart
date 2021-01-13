@@ -8,19 +8,20 @@ import 'package:copy_with_e_generator/src/createCopyWith.dart';
 import 'package:dartx/dartx.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
+import 'package:value_t2_generator/src/classes.dart';
 import 'package:value_t2_generator/src/createValueT2.dart';
 import 'package:value_t2_generator/src/helpers.dart';
 
 import 'GeneratorForAnnotationX.dart';
 
-List<NameTypeClass> getAllFields(List<InterfaceType> interfaceTypes, ClassElement element) {
+List<NameTypeClassWithComment> getAllFields(List<InterfaceType> interfaceTypes, ClassElement element) {
   var superTypeFields = interfaceTypes //
       .where((x) => x.element.name != "Object")
       .flatMap((st) => st.element.fields.map((f) => //
-          NameTypeClass(f.name, f.type.toString(), st.element.name)))
+          NameTypeClassWithComment(f.name, f.type.toString(), st.element.name, comment: f.getter.documentationComment)))
       .toList();
   var classFields = element.fields.map((f) => //
-      NameTypeClass(f.name, f.type.toString(), element.name)).toList();
+      NameTypeClassWithComment(f.name, f.type.toString(), element.name, comment: f.getter.documentationComment)).toList();
 
   //distinct, will keep classFields over superTypeFields
   return (classFields + superTypeFields).distinctBy((x) => x.name).toList();
@@ -59,19 +60,22 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
       throw Exception("you must use implements, not extends");
     }
 
+    var docComment = ce.documentationComment;
+
     var isAbstract = ce.name.startsWith("\$\$");
     var allFields = getAllFields(ce.allSupertypes, ce);
     var className = ce.name;
     var interfaces = ce.interfaces
         .map((e) => //
-            Interface(
+            InterfaceWithComment(
               e.element.name,
               e.typeArguments.map((e) => e.toString()).toList(),
               e.element.typeParameters.map((x) => x.name).toList(),
+              comment: e.element.documentationComment,
             )) //
         .toList();
     var classGenerics = ce.typeParameters
-        .map((e) => NameType(e.name, e.bound == null ? null : e.bound.toString())) //
+        .map((e) => NameTypeWithComment(e.name, e.bound == null ? null : e.bound.toString())) //
         .toList();
 
     var allFieldsDistinct = getDistinctFields(allFields, interfaces);
@@ -81,10 +85,11 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
         .map((x) {
       var interfaces = x.interfaces
           .map((e) => //
-              Interface(
+              InterfaceWithComment(
                 e.element.name,
                 e.typeArguments.map((e) => e.toString()).toList(),
                 e.element.typeParameters.map((x) => x.name).toList(),
+                comment: e.element.documentationComment,
               )) //
           .toList();
       var distinctFields = getDistinctFields(getAllFields(x.allSupertypes, x), interfaces);
@@ -109,6 +114,7 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
 //        .map((e) => //
 //    e.element.typeParameters.map((x) => x.name + "|" + x.runtimeType.toString())) //
 //        .toList();
+//    sb.writeln("//allClasses:${allClasses.map((e) => e.name)}");
 
 //    sb.writeln("//allClasses:${allClasses.map((e) => e.name)}");
 //    sb.writeln("//other:${otherClasses.map((e) => e.name)}");
@@ -120,10 +126,23 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
 //
 //    sb.writeln("//afd:${allFieldsDistinct.toString()}");
 
+//    if (allFields.count() > 0) //
+//      sb.writeln("//af:${allFields[0].comment}");
+//
+//    if (allFields.count() > 1) //
+//      sb.writeln("//af:${allFields[1].comment}");
+//
+//    if (allFieldsDistinct.count() > 0) //
+//      sb.writeln("//af:${allFieldsDistinct[0].comment}");
+//
+//    if (allFieldsDistinct.count() > 1) //
+//      sb.writeln("//af:${allFieldsDistinct[1].comment}");
+
     sb.writeln(createValueT2(
       isAbstract,
       allFieldsDistinct,
       className,
+      docComment,
       interfaces,
       classGenerics,
       nullFieldNames,

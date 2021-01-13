@@ -1,5 +1,6 @@
 import 'package:analyzer_models/analyzer_models.dart';
 import 'package:test/test.dart';
+import 'package:value_t2_generator/src/classes.dart';
 import 'package:value_t2_generator/src/createValueT2.dart';
 
 void main() {
@@ -7,14 +8,16 @@ void main() {
     test("1a", () {
       var result = createValueT2(
         true,
-        [NameType("type", "String")],
+        [NameTypeWithComment("type", "String", comment: "///a type")],
         "\$PetBase",
+        null,
         [],
         [],
         [],
       );
 
       var expected = """abstract class PetBase extends \$PetBase {
+///a type
 String get type;
 }""";
 
@@ -24,8 +27,9 @@ String get type;
     test("1b", () {
       var result = createValueT2(
         false,
-        [NameType("type", "String")],
+        [NameTypeWithComment("type", "String")],
         "\$Pet",
+        null,
         [],
         [],
         [],
@@ -33,6 +37,7 @@ String get type;
 
       var expected = """class Pet extends \$Pet {
 final String type;
+
 Pet({
 @required this.type,
 }):
@@ -50,10 +55,11 @@ type == other.type;
       var result = createValueT2(
         false,
         [
-          NameType("type", "String"),
-          NameType("age", "int"),
+          NameTypeWithComment("type", "String"),
+          NameTypeWithComment("age", "int"),
         ],
         "\$Pet",
+        null,
         [],
         [],
         [],
@@ -62,6 +68,7 @@ type == other.type;
       var expected = """class Pet extends \$Pet {
 final String type;
 final int age;
+
 Pet({
 @required this.type,
 @required this.age,
@@ -80,10 +87,11 @@ type == other.type && age == other.age;
     test("2a", () {
       var result = createValueT2(
         true,
-        [NameType("x", "T")],
+        [NameTypeWithComment("x", "T")],
         "\$A",
+        null,
         [],
-        [NameType("T", null)],
+        [NameTypeWithComment("T", null)],
         [],
       );
 
@@ -98,28 +106,38 @@ T get x;
       var result = createValueT2(
         false,
         [
-          NameType("x", "T"),
-          NameType("p", "T3"),
-          NameType("y", "T"),
-          NameType("z", "String"),
+          NameTypeWithComment("x", "T"),
+          NameTypeWithComment("p", "T3"),
+          NameTypeWithComment("y", "T"),
+          NameTypeWithComment("z", "String"),
         ],
         "\$B",
+        "///Blah",
         [
-          Interface("\$A", ["int"], ["T"]),
+          InterfaceWithComment("\$A", ["int"], ["T"], comment: "///blah2"),
           Interface("\$C", [], [])
         ],
         [
-          NameType("T", "\$C"),
-          NameType("T3", null),
+          NameTypeWithComment("T", "\$C"),
+          NameTypeWithComment("T3", null),
         ],
         [],
       );
 
-      var expected = """class B<T extends \$C, T3> extends \$B<T, T3> implements A<int>, C {
+      var expected = """
+///Blah
+
+///implements [\$A]
+///blah2
+class B<T extends \$C, T3> extends \$B<T, T3> implements A<int>, C {
 final T x;
 final T3 p;
 final T y;
 final String z;
+///Blah
+
+///implements [\$A]
+///blah2
 B({
 @required this.x,
 @required this.p,
@@ -142,8 +160,9 @@ x == other.x && p == other.p && y == other.y && z == other.z;
     test("x", () {
       var result = createValueT2(
         false,
-        [NameType("type", "String")],
+        [NameTypeWithComment("type", "String")],
         "\$Pet_",
+        null,
         [],
         [],
         [],
@@ -151,6 +170,7 @@ x == other.x && p == other.p && y == other.y && z == other.z;
 
       var expected = """class Pet_ extends \$Pet_ {
 final String type;
+
 Pet_._({
 @required this.type,
 }):

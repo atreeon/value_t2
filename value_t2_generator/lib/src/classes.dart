@@ -1,3 +1,37 @@
+import 'package:analyzer_models/analyzer_models.dart';
+
+class NameTypeWithComment extends NameType {
+  final String comment;
+
+  NameTypeWithComment(
+    String name,
+    String type, {
+    this.comment,
+  }) : super(name, type);
+}
+
+class NameTypeClassWithComment extends NameTypeClass {
+  final String comment;
+
+  NameTypeClassWithComment(
+    String name,
+    String type,
+    String _class, {
+    this.comment,
+  }) : super(name, type, _class);
+}
+
+class InterfaceWithComment extends Interface {
+  final String comment;
+
+  InterfaceWithComment(
+    String type,
+    List<String> typeArgsTypes,
+    List<String> typeParamsNames, {
+    this.comment,
+  }) : super(type, typeArgsTypes, typeParamsNames);
+}
+
 //class NameTypeClass {
 //  final String type;
 //  final String name;

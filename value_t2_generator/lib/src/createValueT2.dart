@@ -1,15 +1,18 @@
 import 'package:analyzer_models/analyzer_models.dart';
+import 'package:value_t2_generator/src/classes.dart';
 import 'package:value_t2_generator/src/helpers.dart';
 
 String createValueT2(
   bool isAbstract,
-  List<NameType> allFields,
+  List<NameTypeWithComment> allFields,
   String className,
+  String classComment,
   List<Interface> interfaces,
-  List<NameType> classGenerics,
+  List<NameTypeWithComment> classGenerics,
   List<String> nullableFields,
 ) {
   var sb = StringBuffer();
+  sb.write(getClassComment(interfaces, classComment));
   sb.write(getClassDefinition(isAbstract, className));
   if (classGenerics.isNotEmpty) {
     sb.write(getClassGenerics(classGenerics));
@@ -27,11 +30,13 @@ String createValueT2(
   if (isAbstract) {
     sb.writeln(getPropertiesAbstract(allFields));
   } else if (allFields.isEmpty) {
+    sb.write(getClassComment(interfaces, classComment));
     sb.writeln("${constructorName}();");
     sb.writeln(getHashCode(allFields));
     sb.writeln(getEquals(allFields, classNameTrim));
   } else {
     sb.writeln(getProperties(allFields));
+    sb.write(getClassComment(interfaces, classComment));
     sb.writeln("${constructorName}({");
     sb.writeln(getConstructorRows(allFields, nullableFields));
     sb.writeln("}):");
