@@ -8,11 +8,11 @@ String getClassComment(List<Interface> interfaces, String classComment) {
     var interfaceComment = e is InterfaceWithComment && e.comment != null //
         ? "\n${e.comment}"
         : "";
-    return "///implements [${e.type}]$interfaceComment\n";
+    return "///implements [${e.type}]\n///\n$interfaceComment\n///";
   }).toList();
 
   if (classComment != null) //
-    a.insert(0, classComment + "\n");
+    a.insert(0, classComment + "\n///");
 
   return a.join("\n").trim() + "\n";
 }

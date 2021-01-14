@@ -13,8 +13,11 @@ void main() {
       var result = getClassComment(interfaces, "///blah");
 
       expect(result, """///blah
-
+///
 ///implements [\$A]
+///
+
+///
 """);
     });
 
@@ -25,7 +28,11 @@ void main() {
 
       var result = getClassComment(interfaces, "");
 
-      expect(result, """///implements [\$A]
+      expect(result, """///
+///implements [\$A]
+///
+
+///
 """);
     });
 
@@ -39,14 +46,21 @@ void main() {
       var result = getClassComment(interfaces, "///blah");
 
       expect(result, """///blah
-
+///
 ///implements [\$A]
+///
+
 ///blah1
-
+///
 ///implements [\$A]
+///
 
+///
 ///implements [\$A]
+///
+
 ///blah2
+///
 """);
     });
   });

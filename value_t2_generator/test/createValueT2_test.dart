@@ -126,18 +126,24 @@ T get x;
 
       var expected = """
 ///Blah
-
+///
 ///implements [\$A]
+///
+
 ///blah2
+///
 class B<T extends \$C, T3> extends \$B<T, T3> implements A<int>, C {
 final T x;
 final T3 p;
 final T y;
 final String z;
 ///Blah
-
+///
 ///implements [\$A]
+///
+
 ///blah2
+///
 B({
 @required this.x,
 @required this.p,
