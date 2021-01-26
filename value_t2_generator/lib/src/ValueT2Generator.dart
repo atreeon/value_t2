@@ -163,6 +163,6 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
     //use to comment output
     //output = output.replaceAll("\n", "\n//");
 
-    return output;
+    return output.replaceAll("*", "");
   }
 }
