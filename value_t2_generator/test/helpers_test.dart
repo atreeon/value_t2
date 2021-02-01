@@ -385,48 +385,20 @@ a == other.a && b == other.b && c == other.c;""";
           NameTypeWithComment("age", "int"),
           NameTypeWithComment("name", "String"),
         ],
-        [],
       );
 
-      expect(result.toString(), "@required this.age,\n@required this.name,");
+      expect(result.toString(), "required this.age,\nrequired this.name,");
     });
 
-    test("3k", () {
+    test("3k with null list", () {
       var result = getConstructorRows(
         [
           NameTypeWithComment("age", "int"),
-          NameTypeWithComment("name", "String"),
+          NameTypeWithComment("name", "String?"),
         ],
-        ["name"],
       );
 
-      expect(result.toString(), "@required this.age,\nthis.name,");
-    });
-  });
-
-  group("getNullAsserts", () {
-    test("2l", () {
-      var result = getNullAsserts(
-        [
-          NameTypeWithComment("age", "int"),
-          NameTypeWithComment("name", "String"),
-        ],
-        [],
-      );
-
-      expect(result.toString(), "assert(age != null),\nassert(name != null);");
-    });
-
-    test("3l", () {
-      var result = getNullAsserts(
-        [
-          NameTypeWithComment("age", "int"),
-          NameTypeWithComment("name", "String"),
-        ],
-        ["name"],
-      );
-
-      expect(result.toString(), "assert(age != null);");
+      expect(result.toString(), "required this.age,\nthis.name,");
     });
   });
 

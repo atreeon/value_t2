@@ -1,3 +1,6 @@
+## 1.0.26-nullsafety
+- null safety
+
 ## 1.0.25
 - formatted comments better
 

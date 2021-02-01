@@ -39,14 +39,14 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
   ) {
     var sb = StringBuffer();
 
-    var nullFieldNames = List<String>();
-    if (!annotation.read('nullFieldNames').isNull) {
-      nullFieldNames = annotation
-          .read('nullFieldNames') //
-          .listValue
-          .map((e) => e.toStringValue())
-          .toList();
-    }
+//    var nullFieldNames = <String>[];
+//    if (!annotation.read('nullFieldNames').isNull) {
+//      nullFieldNames = annotation
+//          .read('nullFieldNames') //
+//          .listValue
+//          .map((e) => e.toStringValue())
+//          .toList();
+//    }
 
 //    sb.writeln("//RULES: you must use implements, not extends");
 
@@ -145,7 +145,6 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
       docComment,
       interfaces,
       classGenerics,
-      nullFieldNames,
     ));
 
     var classDef = ClassDef(

@@ -1,6 +1,6 @@
 # value_t2
 
-[value_t2_generator - go here for full details](value_t2_generator/readme.md)
+[value_t2_generator - go here for full details](value_t2_generator/README.md)
 
 Reasoning: specifying clases with copywith, equals, toString, required constructor fields is actually a fair amount of work resulting in verbose code which makes it difficult to maintain and difficult to read.
 

@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:test/test.dart';
 
 //CLASS B OVERRIDES A PROPERTY OF CLASS A
@@ -10,8 +9,8 @@ abstract class $A {
 class A extends $A {
   final Person a;
   A({
-    @required this.a,
-  }) : assert(a != null);
+    required this.a,
+  });
 }
 
 abstract class $B implements $A {
@@ -21,8 +20,8 @@ abstract class $B implements $A {
 class B extends $B implements A {
   final Employee a;
   B({
-    @required this.a,
-  }) : assert(a != null);
+    required this.a,
+  });
 }
 
 abstract class $C implements $B {
@@ -32,8 +31,8 @@ abstract class $C implements $B {
 class C extends $C implements B {
   final Manager a;
   C({
-    @required this.a,
-  }) : assert(a != null);
+    required this.a,
+  });
 }
 
 main() {

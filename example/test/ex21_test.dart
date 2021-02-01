@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:quiver_hashcode/hashcode.dart';
 import 'package:test/test.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
@@ -9,7 +8,7 @@ part 'ex21_test.g.dart';
 
 @ValueT2()
 abstract class $A_ {
-  String a;
+  String get a;
 }
 
 void main() {

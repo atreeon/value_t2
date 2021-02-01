@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:quiver_hashcode/hashcode.dart';
 import 'package:test/test.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
@@ -13,7 +12,7 @@ abstract class $Cat {
   ///Type is a thingy thing
   String get type;
 
-  String colour; //no comment
+  String get colour; //no comment
 }
 
 main() {

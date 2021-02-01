@@ -1,3 +1,9 @@
+## 1.0.7-nullsafety.2
+- null safety
+
+## 1.0.7-nullsafety.1
+- null safety
+
 ## 1.0.6
 - added list of null field names
 

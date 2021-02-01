@@ -1,4 +1,3 @@
-import 'package:meta/meta.dart';
 import 'package:quiver_hashcode/hashcode.dart';
 import 'package:test/test.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
@@ -16,20 +15,20 @@ main() {
 
 @ValueT2()
 abstract class $BI {
-  int orderId;
+  int get orderId;
 }
 
 @ValueT2()
 abstract class $BQR {
-  $BS<$BI> batch;
+  $BS<$BI> get batch;
 }
 
 @ValueT2()
 abstract class $BS<Tbi extends $BI> {
-  List<Tbi> batchItems;
+  List<Tbi> get batchItems;
 }
 
 @ValueT2()
 abstract class $BS_BI implements $BS<$BI> {
-  List<$BI> batchItems;
+  List<$BI> get batchItems;
 }

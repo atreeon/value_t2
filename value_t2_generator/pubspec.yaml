@@ -1,6 +1,6 @@
 name: value_t2_generator
 description: Provides a short syntax, value type (ish) way of creating classes - copywith, toString, equality
-version: 1.0.25
+version: 1.0.26-nullsafety
 homepage: https://github.com/atreeon/value_t2
  
 environment:  
@@ -9,16 +9,14 @@ environment:
 dependencies:  
   build: ^1.2.2
   source_gen: ^0.9.5
-  value_t2_annotation: ^1.0.6
+  value_t2_annotation: ^1.0.7-nullsafety.2
 #    path: ../value_t2_annotation/
   dartx: '>=0.3.0 <0.7.0'
   basic_utils: ^2.4.8
-  analyzer: '>=0.39.5 <0.40.0'
-  copy_with_e_generator: ^1.0.7
+  analyzer: '>=0.40.0 <0.42.0'
+  copy_with_e_generator: ^1.0.10-nullsafety5
   analyzer_models: ^1.0.8
 
 dev_dependencies:  
   build_runner: ^1.7.3
   test: ^1.11.1
-
-#  pub run build_runner build --delete-conflicting-outputs && for d in ../*/; { pub run test "$d"; } && say "done"

@@ -1,7 +1,6 @@
-import 'package:meta/meta.dart';
 import 'package:quiver_hashcode/hashcode.dart';
-import 'package:value_t2_annotation/value_t2_annotation.dart';
 import 'package:test/test.dart';
+import 'package:value_t2_annotation/value_t2_annotation.dart';
 
 part 'ex13_test.g.dart';
 
@@ -42,7 +41,7 @@ main() {
     var c1 = c.cwA(a: "Ac1");
     expect(c1.a, "Ac1");
     expect((c1 as C).b, 1);
-    expect((c1 as C).c, true);
+    expect((c1).c, true);
 
     var c2 = c.cwB(a: "Ac1", b: 3);
     expect(c2.a, "Ac1");

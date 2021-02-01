@@ -8,15 +8,15 @@ main() {
 }
 
 abstract class $BI {
-  int orderId;
+  int get orderId;
 }
 
 abstract class BI extends $BI {
-  int orderId;
+  int get orderId;
 }
 
 abstract class $BQR {
-  $BS<$BI> batch;
+  $BS<$BI> get batch;
 }
 
 class BQR extends $BQR {
@@ -25,21 +25,21 @@ class BQR extends $BQR {
 }
 
 abstract class $BS<Tbi extends $BI> {
-  List<Tbi> batchItems;
+  List<Tbi> get batchItems;
 }
 
 abstract class BS<Tbi extends $BI> extends $BS<Tbi> {
-  List<Tbi> batchItems;
+  List<Tbi> get batchItems;
 }
 
 abstract class $BS_BI implements $BS<$BI> {
-  List<$BI> batchItems;
+  List<$BI> get batchItems;
 }
 
 class BS_BI extends $BS_BI implements BS<$BI> {
   final List<BI> batchItems;
   BS_BI({
-    this.batchItems,
+    required this.batchItems,
   });
 }
 //****gen

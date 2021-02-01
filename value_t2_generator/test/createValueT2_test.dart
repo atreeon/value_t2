@@ -13,7 +13,6 @@ void main() {
         null,
         [],
         [],
-        [],
       );
 
       var expected = """abstract class PetBase extends \$PetBase {
@@ -32,16 +31,14 @@ String get type;
         null,
         [],
         [],
-        [],
       );
 
       var expected = """class Pet extends \$Pet {
 final String type;
 
 Pet({
-@required this.type,
-}):
-assert(type != null);
+required this.type,
+});
 String toString() => "(Pet-type:\$type)";
 int get hashCode => hashObjects([type.hashCode]);
 bool operator ==(Object other) => identical(this, other) || other is Pet && runtimeType == other.runtimeType &&
@@ -62,7 +59,6 @@ type == other.type;
         null,
         [],
         [],
-        [],
       );
 
       var expected = """class Pet extends \$Pet {
@@ -70,11 +66,9 @@ final String type;
 final int age;
 
 Pet({
-@required this.type,
-@required this.age,
-}):
-assert(type != null),
-assert(age != null);
+required this.type,
+required this.age,
+});
 String toString() => "(Pet-type:\$type|age:\$age)";
 int get hashCode => hashObjects([type.hashCode, age.hashCode]);
 bool operator ==(Object other) => identical(this, other) || other is Pet && runtimeType == other.runtimeType &&
@@ -92,7 +86,6 @@ type == other.type && age == other.age;
         null,
         [],
         [NameTypeWithComment("T", null)],
-        [],
       );
 
       var expected = """abstract class A<T> extends \$A<T> {
@@ -121,7 +114,6 @@ T get x;
           NameTypeWithComment("T", "\$C"),
           NameTypeWithComment("T3", null),
         ],
-        [],
       );
 
       var expected = """
@@ -145,15 +137,11 @@ final String z;
 ///blah2
 ///
 B({
-@required this.x,
-@required this.p,
-@required this.y,
-@required this.z,
-}):
-assert(x != null),
-assert(p != null),
-assert(y != null),
-assert(z != null);
+required this.x,
+required this.p,
+required this.y,
+required this.z,
+});
 String toString() => "(B-x:\$x|p:\$p|y:\$y|z:\$z)";
 int get hashCode => hashObjects([x.hashCode, p.hashCode, y.hashCode, z.hashCode]);
 bool operator ==(Object other) => identical(this, other) || other is B && runtimeType == other.runtimeType &&
@@ -171,16 +159,14 @@ x == other.x && p == other.p && y == other.y && z == other.z;
         null,
         [],
         [],
-        [],
       );
 
       var expected = """class Pet_ extends \$Pet_ {
 final String type;
 
 Pet_._({
-@required this.type,
-}):
-assert(type != null);
+required this.type,
+});
 String toString() => "(Pet_-type:\$type)";
 int get hashCode => hashObjects([type.hashCode]);
 bool operator ==(Object other) => identical(this, other) || other is Pet_ && runtimeType == other.runtimeType &&

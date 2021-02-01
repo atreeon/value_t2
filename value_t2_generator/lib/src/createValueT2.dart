@@ -9,7 +9,6 @@ String createValueT2(
   String classComment,
   List<Interface> interfaces,
   List<NameTypeWithComment> classGenerics,
-  List<String> nullableFields,
 ) {
   var sb = StringBuffer();
   sb.write(getClassComment(interfaces, classComment));
@@ -38,9 +37,8 @@ String createValueT2(
     sb.writeln(getProperties(allFields));
     sb.write(getClassComment(interfaces, classComment));
     sb.writeln("${constructorName}({");
-    sb.writeln(getConstructorRows(allFields, nullableFields));
-    sb.writeln("}):");
-    sb.writeln(getNullAsserts(allFields, nullableFields));
+    sb.writeln(getConstructorRows(allFields));
+    sb.writeln("});");
     sb.writeln(getToString(allFields, classNameTrim));
     sb.writeln(getHashCode(allFields));
     sb.writeln(getEquals(allFields, classNameTrim));

@@ -28,7 +28,7 @@ List<NameTypeWithComment> getDistinctFields(
   var fields = fieldsRaw.map((f) => NameTypeClassWithComment(f.name, f.type, f.class_.replaceAll("\$", ""), comment: f.comment));
 
   var interfaces2 = interfaces.map((interface) {
-    var result = List<NameType>();
+    var result = <NameType>[];
 
     for (var i = 0; i < interface.typeParamsNames.length; i++) {
       result.add(NameType(interface.typeArgsTypes[i], interface.typeParamsNames[i]));
@@ -128,24 +128,17 @@ String getPropertiesAbstract(List<NameTypeWithComment> fields) => //
                 : "${e.comment}\n${e.type} get ${e.name};")
         .join("\n");
 
-String getConstructorRows(List<NameType> fields, List<String> nullableFieldNames) => //
+String getConstructorRows(List<NameType> fields) => //
     fields
         .map((e) {
-          if (nullableFieldNames.indexOf(e.name) >= 0) {
+          if (e.type.contains("?")) {
             return "this.${e.name},";
           }
 
-          return "@required this.${e.name},";
+          return "required this.${e.name},";
         })
         .join("\n")
         .trim();
-
-String getNullAsserts(List<NameType> fields, List<String> nullableFieldNames) => //
-    fields //
-        .where((e) => nullableFieldNames.indexOf(e.name) == -1)
-        .map((e) => "assert(${e.name} != null)")
-        .joinToString(separator: ",\n") +
-    ";";
 
 String getToString(List<NameType> fields, String className) {
   if (fields.isEmpty) {
