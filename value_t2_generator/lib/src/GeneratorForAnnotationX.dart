@@ -39,6 +39,8 @@ abstract class GeneratorForAnnotationX<T> extends Generator {
   FutureOr<String> generate(LibraryReader library, BuildStep buildStep) async {
     final values = Set<String>();
 
+    values.add("// ignore_for_file: UNNECESSARY_CAST");
+
     var classElements = library.allElements //
         .whereType<ClassElement>()
         .toList();
