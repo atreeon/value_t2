@@ -12,14 +12,16 @@ class ValueT2 {
   /// int? get nullableValue;
   /// ```
   /// ---
-  /// ### to use the class omit the dollar
+  /// ### to instantiate or use the class omit the dollar
   /// ```
   /// MyClass(aValue: "x");
   /// ```
   /// ---
   /// ### to implement an interface use [implements]
   /// ```
-  /// MyClass(aValue: "x");
+  /// @ValueT2()
+  /// abstract class $B implements $$A<int, String> {
+  ///  String get z;
   /// ```
   /// ---
   /// ### abstract classes; prepend class with two dollars
