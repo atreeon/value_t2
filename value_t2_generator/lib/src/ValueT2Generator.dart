@@ -5,7 +5,7 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer_models/analyzer_models.dart';
 import 'package:build/src/builder/build_step.dart';
 import 'package:copy_with_e_generator/src/createCopyWith.dart';
-import 'package:dartx_nullsafety/dartx.dart';
+import 'package:dartx/dartx.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
 import 'package:value_t2_generator/src/classes.dart';

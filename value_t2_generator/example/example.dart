@@ -1,6 +1,6 @@
 //see example project in github for more examples
 
-//part 'example.g.dart';
+//part 'example.valuet2.dart';
 
 //THE SIMPLEST OF EXAMPLES
 

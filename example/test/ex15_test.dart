@@ -2,7 +2,7 @@ import 'package:quiver_hashcode/hashcode.dart';
 import 'package:test/test.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
 
-part 'ex15_test.g.dart';
+part 'ex15_test.valuet2.dart';
 
 //EQUALITY
 

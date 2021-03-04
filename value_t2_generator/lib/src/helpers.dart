@@ -1,5 +1,5 @@
 import 'package:analyzer_models/analyzer_models.dart';
-import 'package:dartx_nullsafety/dartx.dart';
+import 'package:dartx/dartx.dart';
 import 'package:value_t2_generator/src/classes.dart';
 
 String getClassComment(List<Interface> interfaces, String classComment) {

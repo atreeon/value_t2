@@ -2,7 +2,7 @@
 //import 'package:value_t2_annotation/value_t2_annotation.dart';
 //import 'package:meta/meta.dart';
 //
-//part 'ex6_test.g.dart';
+//part 'ex6_test.valuet2.dart';
 //
 ////CURRENTLY NOT ALLOWING CUSTOM GETTERS (CAN JUST USE A FUNCTION)
 ////  this is where mixins would have been a better approach

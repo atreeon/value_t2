@@ -56,10 +56,6 @@ abstract class GeneratorForAnnotationX<T> extends Generator {
       }
     }
 
-    if (values.length > 0) {
-      values.insert(0, "// ignore_for_file: UNNECESSARY_CAST");
-      values.insert(0, "// ignore: duplicate_ignore");
-    }
     return values.join('\n\n');
   }
 

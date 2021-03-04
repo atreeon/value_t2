@@ -2,7 +2,7 @@ import 'package:quiver_hashcode/hashcode.dart';
 import 'package:test/test.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
 
-part 'ex21_test.g.dart';
+part 'ex21_test.valuet2.dart';
 
 //PRIVATE CONSTRUCTOR FOR DEFAULT VALUES USES UNDERSCORE AT END OF CLASS
 
