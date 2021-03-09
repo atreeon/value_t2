@@ -289,6 +289,14 @@ void main() {
 
       expect(result.toString(), "final int age;\n///blah\nfinal String name;");
     });
+
+    test("6f remove dollars from valuet2 types", () {
+      var result = getProperties([
+        NameTypeWithComment("schedules", "List<\$ScheduleVM_Item>"),
+      ]);
+
+      expect(result.toString(), "final List<ScheduleVM_Item> schedules;");
+    });
   });
 
   group("getToString", () {

@@ -6,13 +6,12 @@ import 'package:analyzer_models/analyzer_models.dart';
 import 'package:build/src/builder/build_step.dart';
 import 'package:copy_with_e_generator/src/createCopyWith.dart';
 import 'package:dartx/dartx.dart';
+import 'package:generator_common/GeneratorForAnnotationX.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
 import 'package:value_t2_generator/src/classes.dart';
 import 'package:value_t2_generator/src/createValueT2.dart';
 import 'package:value_t2_generator/src/helpers.dart';
-
-import 'GeneratorForAnnotationX.dart';
 
 List<NameTypeClassWithComment> getAllFields(List<InterfaceType> interfaceTypes, ClassElement element) {
   var superTypeFields = interfaceTypes //
@@ -25,11 +24,9 @@ List<NameTypeClassWithComment> getAllFields(List<InterfaceType> interfaceTypes, 
 
   //distinct, will keep classFields over superTypeFields
   return (classFields + superTypeFields).distinctBy((x) => x.name).toList();
-
-//  return (classFields + superTypeFields);
 }
 
-class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
+class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<TValueT> {
   @override
   FutureOr<String> generateForAnnotatedElement(
     Element element,
@@ -156,7 +153,8 @@ class ValueT2Generator extends GeneratorForAnnotationX<ValueT2> {
       [...ce.interfaces.map((e) => e.element.name), ce.supertype.element.name],
     );
 
-    sb.writeln(createCopyWith(classDef, otherClasses));
+//    sb.writeln(createCopyWith(classDef, otherClasses));
+    sb.writeln(createCopyWith(classDef, otherClasses).replaceAll("\$", ""));
 
     var output = sb.toString();
     //use to comment output

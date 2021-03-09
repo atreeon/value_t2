@@ -3,26 +3,25 @@ targets:
     builders:
       value_t2_generator|value_t2:
         enabled: true
+      value_t3_generator|value_t3:
+        enabled: true
 
 builders:
   value_t2:
     target: ":value_t2_generator"
-    import: "package:value_t2_generator/value_t2_generator.dart"
+    import: "package:value_t2_generator/valueT2Builder.dart"
     builder_factories: ["valueT2Builder"]
     build_extensions: {".dart": [".valuet2.part"]}
     auto_apply: dependents
     build_to: source
-    runs_before: ["mock_creator_generator:mock_creator"]
+    runs_before: ["typedef_for_fn_generator:typedef_for_fn","mock_creator_generator:mock_creator","copy_with_e_generator:copy_with_e", "copy_with_e_generator:copy_with_e","memoizer_generator:memoizer_generator"]
+  value_t3:
+    target: ":value_t3_generator"
+    import: "package:value_t2_generator/valueT3Builder.dart"
+    builder_factories: ["valueT3Builder"]
+    build_extensions: {".dart": [".valuet3.part"]}
+    auto_apply: dependents
+    build_to: source
+    runs_before: ["value_t2_generator:value_t2", "typedef_for_fn_generator:typedef_for_fn","mock_creator_generator:mock_creator","copy_with_e_generator:copy_with_e", "copy_with_e_generator:copy_with_e","memoizer_generator:memoizer_generator"]
 
-
-#    applies_builders: ["source_gen|combining_builder"]
-#
-#
-#builders:
-#  freezed:
-#    import: "package:freezed/builder.dart"
-#    builder_factories: ["freezed"]
-#    build_extensions: { ".dart": [".freezed.dart"] }
-#    auto_apply: dependents
-#    build_to: source
-#    runs_before: ["json_serializable|json_serializable"]
+#    runs_before: ["|"]

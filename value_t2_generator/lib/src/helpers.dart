@@ -115,7 +115,8 @@ String getProperties(List<NameTypeWithComment> fields) => //
         .map((e) => //
             e.comment == null
                 ? //
-                "final ${e.type} ${e.name};" //
+//                "final ${e.type} ${e.name};" //
+                "final ${e.type.replaceAll("\$", "")} ${e.name};" //
                 : "${e.comment}\nfinal ${e.type} ${e.name};")
         .join("\n");
 
