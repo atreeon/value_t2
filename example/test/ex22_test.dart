@@ -6,7 +6,7 @@ part 'ex22_test.valuet2.dart';
 
 //NULL FIELD NAMES - NULL SAFETY USING ?
 
-@ValueT2()
+@valueT2
 abstract class $Pet {
   String? get type;
   String get name;

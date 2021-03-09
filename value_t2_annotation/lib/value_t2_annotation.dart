@@ -26,7 +26,7 @@ class ValueT2 implements ValueTX {
   /// ---
   /// ### to implement an interface use [implements]
   /// ```
-  /// @ValueT2()
+  /// @valueT2
   /// abstract class $B implements $$A<int, String> {
   ///  String get z;
   /// ```

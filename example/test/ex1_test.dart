@@ -6,7 +6,7 @@ part 'ex1_test.valuet2.dart';
 
 //THE SIMPLEST OF EXAMPLES
 
-@ValueT2()
+@valueT2
 abstract class $Pet {
   String get type;
 }

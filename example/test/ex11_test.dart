@@ -6,13 +6,13 @@ part 'ex11_test.valuet2.dart';
 
 //GENERIC SPECIFIED OF IMPLEMENTED CLASS
 
-@ValueT2()
+@valueT2
 abstract class $$A<T1, T2> {
   T1 get x;
   T2 get y;
 }
 
-@ValueT2()
+@valueT2
 abstract class $B implements $$A<int, String> {
   String get z;
 }

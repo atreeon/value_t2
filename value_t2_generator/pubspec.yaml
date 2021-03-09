@@ -9,6 +9,7 @@ environment:
 dependencies:  
   adi_helpers: ^1.0.7-nullsafety
   analyzer: '>=0.40.0 <=1.0.0'
+  analyzer_models: ^1.0.8
   build: ^1.6.3
   copy_with_e_generator: ^1.0.10-nullsafety13
   dartx: ^0.6.0

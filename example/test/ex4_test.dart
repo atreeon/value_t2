@@ -6,22 +6,22 @@ part 'ex4_test.valuet2.dart';
 
 //ONLY USE IMPLEMENTS, EXTENDS IS NOT ALLOWED
 
-@ValueT2()
+@valueT2
 abstract class $$Z {
   String get zValue;
 }
 
-@ValueT2()
+@valueT2
 abstract class $A implements $$Z {
   String get aValue;
 }
 
-@ValueT2()
+@valueT2
 abstract class $B implements $A {
   String get bValue;
 }
 
-@ValueT2()
+@valueT2
 abstract class $C implements $B {
   String get cValue;
 }

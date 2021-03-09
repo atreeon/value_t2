@@ -29,17 +29,17 @@ abstract class $BI {
   int get orderId;
 }
 
-@ValueT2()
+@valueT2
 abstract class $BQR {
   $BS<BI> get batch;
 }
 
-@ValueT2()
+@valueT2
 abstract class $BS<Tbi extends BI> {
   List<Tbi> get batchItems;
 }
 
-@ValueT2()
+@valueT2
 abstract class $BS_BI implements $BS<BI> {
   List<BI> get batchItems;
 }

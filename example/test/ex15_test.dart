@@ -6,17 +6,17 @@ part 'ex15_test.valuet2.dart';
 
 //EQUALITY
 
-@ValueT2()
+@valueT2
 abstract class $A {
   String get a;
 }
 
-@ValueT2()
+@valueT2
 abstract class $B implements $A {
   int get b;
 }
 
-@ValueT2()
+@valueT2
 abstract class $C implements $B {
   bool get c;
 }

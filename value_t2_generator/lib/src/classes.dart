@@ -70,6 +70,7 @@ class InterfaceWithComment extends Interface {
 //  GenericType(this.name, this.baseType);
 //}
 //
+////
 //class Interface {
 //  final String type;
 //  final List<String> typeArgs;

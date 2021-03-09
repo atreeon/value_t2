@@ -8,7 +8,7 @@ part 'ex25_test.valuet3.dart';
 ///EXPLICITLY BUILDING ONE BEFORE ANOTHER
 ///$ScheduleVM_Item should build before $ScheduleVM
 
-@ValueT2()
+@valueT2
 abstract class $ScheduleVM<T extends ScheduleVM_Item> {
   List<T> get schedules;
 }

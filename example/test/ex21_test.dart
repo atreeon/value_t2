@@ -6,7 +6,7 @@ part 'ex21_test.valuet2.dart';
 
 //PRIVATE CONSTRUCTOR FOR DEFAULT VALUES USES UNDERSCORE AT END OF CLASS
 
-@ValueT2()
+@valueT2
 abstract class $A_ {
   String get a;
 }

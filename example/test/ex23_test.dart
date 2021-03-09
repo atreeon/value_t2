@@ -7,7 +7,7 @@ part 'ex23_test.valuet2.dart';
 //TAKE COMMENTS FROM CLASS
 
 ///This is my class level comment
-@ValueT2()
+@valueT2
 abstract class $Cat {
   ///Type is a thingy thing
   String get type;

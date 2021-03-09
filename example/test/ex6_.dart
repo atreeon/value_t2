@@ -7,14 +7,14 @@
 ////CURRENTLY NOT ALLOWING CUSTOM GETTERS (CAN JUST USE A FUNCTION)
 ////  this is where mixins would have been a better approach
 //
-//@ValueT2()
+//@valueT2
 //abstract class $A {
 //  String get z;
 //
 //  const $A();
 //}
 //
-//@ValueT2()
+//@valueT2
 //abstract class $B {
 //  String get y;
 //  String get z => y;

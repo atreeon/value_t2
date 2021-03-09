@@ -6,17 +6,17 @@ part 'ex7_test.valuet2.dart';
 
 //CLASS B OVERRIDES A PROPERTY OF CLASS A
 
-@ValueT2()
+@valueT2
 abstract class $A {
   Person get a;
 }
 
-@ValueT2()
+@valueT2
 abstract class $B implements $A {
   Employee get a;
 }
 
-@ValueT2()
+@valueT2
 abstract class $C implements $B {
   Manager get a;
 }

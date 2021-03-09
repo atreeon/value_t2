@@ -4,5 +4,5 @@ part 'ex16.valuet2.dart';
 
 //ERROR ON NON ABSTRACT CLASSES WITH NO FIELDS
 
-@ValueT2()
+@valueT2
 abstract class $A {}

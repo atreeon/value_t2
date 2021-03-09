@@ -4,7 +4,7 @@
 
 //THE SIMPLEST OF EXAMPLES
 
-//@ValueT2()
+//@valueT2
 abstract class $Pet {
   String get type;
 }

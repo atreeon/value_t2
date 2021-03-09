@@ -6,17 +6,17 @@ part 'ex14_test.valuet2.dart';
 
 //TOSTRING
 
-@ValueT2()
+@valueT2
 abstract class $A {
   String get a;
 }
 
-@ValueT2()
+@valueT2
 abstract class $B implements $A {
   int get b;
 }
 
-@ValueT2()
+@valueT2
 abstract class $C implements $B {
   bool get c;
 }

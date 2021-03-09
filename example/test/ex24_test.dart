@@ -6,12 +6,12 @@ part 'ex24_test.valuet2.dart';
 
 ///A LIST THAT IS OF A GENERATED GENERIC TYPE
 
-@ValueT2()
+@valueT2
 abstract class $ScheduleVM {
   List<$ScheduleVM_Item> get schedules;
 }
 
-@ValueT2()
+@valueT2
 abstract class $ScheduleVM_Item {
   String get value;
 }

@@ -6,18 +6,18 @@ part 'ex2_test.valuet2.dart';
 
 //GENERIC INTERFACES AND GENERICS ARE HANDLED AUTOMATICALLY
 
-@ValueT2()
+@valueT2
 abstract class $$A<T> {
   T get x;
 }
 
-@ValueT2()
+@valueT2
 abstract class $B<T extends $C, T3> implements $$A<int>, $C {
   ///Blah
   T get y;
 }
 
-@ValueT2()
+@valueT2
 abstract class $C {
   String get z;
 }

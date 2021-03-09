@@ -23,7 +23,7 @@ String removeDollarsFromPropertyType(String propertyType) {
 
 List<NameTypeWithComment> getDistinctFields(
   List<NameTypeClassWithComment> fieldsRaw,
-  List<Interface> interfaces,
+  List<InterfaceWithComment> interfaces,
 ) {
   var fields = fieldsRaw.map((f) => NameTypeClassWithComment(f.name, f.type, f.class_.replaceAll("\$", ""), comment: f.comment));
 

@@ -6,17 +6,17 @@ part 'ex3_test.valuet2.dart';
 
 //INTERFACES ARE AUTO IMPLEMENTED
 
-@ValueT2()
+@valueT2
 abstract class $A {
   String get aValue;
 }
 
-@ValueT2()
+@valueT2
 abstract class $B implements $A {
   String get bValue;
 }
 
-@ValueT2()
+@valueT2
 abstract class $C implements $B {
   String get cValue;
 }
