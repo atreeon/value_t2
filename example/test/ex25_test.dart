@@ -13,7 +13,7 @@ abstract class $ScheduleVM<T extends ScheduleVM_Item> {
   List<T> get schedules;
 }
 
-@ValueT3()
+@valueT3
 abstract class $ScheduleVM_Item {
   String get value;
 }

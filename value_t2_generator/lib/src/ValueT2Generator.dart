@@ -60,7 +60,7 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
     var docComment = ce.documentationComment;
 
     var isAbstract = ce.name.startsWith("\$\$");
-    var allFields = getAllFields(ce.allSupertypes, ce);
+    var allFields = getAllFields(ce.allSupertypes, ce).where((x) => x.name != "hashCode").toList();
     var className = ce.name;
     var interfaces = ce.interfaces
         .map((e) => //
