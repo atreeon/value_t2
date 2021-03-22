@@ -1,6 +1,6 @@
 name: value_t2_generator
 description: Provides a short syntax, value type (ish) way of creating classes - copywith, toString, equality
-version: 1.0.27-nullsafety20
+version: 1.0.27-nullsafety21
 homepage: https://github.com/atreeon/value_t2
 
 environment:  
