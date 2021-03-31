@@ -46,5 +46,7 @@ String createValueT2(
 
   sb.writeln("}");
 
+  sb.writeln(getEnumPropertyList(allFields, className));
+
   return sb.toString();
 }

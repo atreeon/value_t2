@@ -19,6 +19,12 @@ abstract class $ScheduleVM_Item {
 }
 
 main() {
+  print('x');
+  print('x');
+  print('x');
+  print('blah');
+  print('blah');
+
   test("1", () {
     var a = ScheduleVM(
       schedules: [ScheduleVM_Item(value: "value")],

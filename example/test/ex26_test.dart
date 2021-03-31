@@ -18,6 +18,11 @@ abstract class $ScheduleVM<T> {
 }
 
 main() {
+  print('blim');
+  print('blim');
+  print('blim');
+  print('blah');
+
   test("1", () {
     var x = ScheduleVM(schedules: [1, 2, 3]);
     var y = ScheduleVM(schedules: [4, 5, 6]);

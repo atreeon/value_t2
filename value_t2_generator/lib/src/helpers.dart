@@ -110,6 +110,15 @@ String getImplements(List<Interface> interfaces) {
   return " implements $types";
 }
 
+String getEnumPropertyList(List<NameTypeWithComment> fields, String className) {
+  if (fields.isEmpty) //
+    return '';
+
+  var first = "enum ${className.replaceAll("\$", "")}\$ {";
+  var last = fields.map((e) => e.name).join(",") + "}";
+  return first + last;
+}
+
 String getProperties(List<NameTypeWithComment> fields) => //
     fields
         .map((e) => //

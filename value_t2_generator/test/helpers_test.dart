@@ -438,4 +438,25 @@ a == other.a && b == other.b && c == other.c;""";
       expect(result, "MyClass_._");
     });
   });
+
+  group("getEnumPropertyList", () {
+    test("1o", () {
+      var result = getEnumPropertyList(
+        [
+          NameTypeWithComment("age", "int"),
+          NameTypeWithComment("name", "String?"),
+        ],
+        "\$MyClass",
+      );
+      expect(result, "enum MyClass\$ {age,name}");
+    });
+
+    test("2o no fields", () {
+      var result = getEnumPropertyList(
+        [],
+        "\$MyClass",
+      );
+      expect(result, "");
+    });
+  });
 }

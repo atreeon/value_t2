@@ -77,9 +77,9 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
 
     var allFieldsDistinct = getDistinctFields(allFields, interfaces);
 
-    //where any of the supertypes have the same name as the class but without the dollar
-    //ie return a list of classes that are valuet2 types
     var otherClasses = allClasses //
+        //where any of the supertypes have the same name as the class but without the dollar
+        //ie return a list of classes that are valuet2 types
         .where((x) => x.allSupertypes.any((st) => //
             st.element.name.replaceAll("\$", "") == element.name.replaceAll("\$", "")))
         //odd hashCode bug where same class is passed in
@@ -94,6 +94,7 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
                 comment: e.element.documentationComment,
               )) //
           .toList();
+
       var distinctFields = getDistinctFields(getAllFields(x.allSupertypes, x), interfaces);
 
       return ClassDef(
@@ -111,6 +112,8 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
         ],
       );
     }).toList();
+
+    var otherClasses2 = otherClasses.distinctBy((x) => x.name.replaceAll("\$", "")).toList();
 
 //    var interfaces2 = ce.interfaces
 //        .map((e) => //
@@ -158,7 +161,7 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
       [...ce.interfaces.map((e) => e.element.name), ce.supertype.element.name],
     );
 
-    sb.writeln(createCopyWith(classDef, otherClasses).replaceAll("\$", ""));
+    sb.writeln(createCopyWith(classDef, otherClasses2).replaceAll("\$", ""));
 
     var output = sb.toString();
     //use to comment output
