@@ -1,4 +1,3 @@
-import 'package:quiver_hashcode/hashcode.dart';
 import 'package:test/test.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
 
@@ -24,5 +23,17 @@ main() {
     expect(a.x, 4);
     expect(a.y, "string");
     expect(a.z, "str");
+  });
+
+  test("1 ba copy with", () {
+    var b = B(x: 1, y: "y", z: "z");
+    var ba_copy = b.cwA(x: Opt(2), y: Opt("Y"));
+    expect(ba_copy.toString(), "(B-x:2|y:Y|z:z)");
+  });
+
+  test("2 bb copy with", () {
+    var b = B(x: 1, y: "y", z: "z");
+    var bb_copy = b.cwB(x: Opt(2), y: Opt("Y"), z: Opt("Z"));
+    expect(bb_copy.toString(), "(B-x:2|y:Y|z:Z)");
   });
 }

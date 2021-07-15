@@ -1,4 +1,5 @@
-import 'package:quiver_hashcode/hashcode.dart';
+
+
 import 'package:test/test.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
 
@@ -17,8 +18,6 @@ abstract class $ScheduleVM_Item {
 }
 
 main() {
-  print('x');
-
   test("1", () {
     var a = ScheduleVM(
       schedules: [ScheduleVM_Item(value: "value")],

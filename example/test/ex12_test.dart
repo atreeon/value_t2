@@ -1,4 +1,3 @@
-import 'package:quiver_hashcode/hashcode.dart';
 import 'package:test/test.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
 
@@ -7,9 +6,9 @@ part 'ex12_test.valuet2.dart';
 //GENERIC SPECIFIED OF IMPLEMENTED CLASS, WITH ANOTHER GENERIC
 
 @valueT2
-abstract class $$A<T1, T2> {
-  T1 get x;
-  T2 get y;
+abstract class $$A<Ta, Tb> {
+  Ta get x;
+  Tb get y;
 }
 
 @valueT2

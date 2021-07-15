@@ -1,30 +1,32 @@
 import 'dart:async';
 
+import 'package:adi_helpers/trees.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
-import 'package:analyzer_models/analyzer_models.dart';
+////import 'package:analyzer_models/analyzer_models.dart';
 import 'package:build/src/builder/build_step.dart';
-import 'package:copy_with_e_generator/src/createCopyWith.dart';
 import 'package:dartx/dartx.dart';
 import 'package:generator_common/GeneratorForAnnotationX.dart';
+import 'package:generator_common/NameType.dart';
+import 'package:generator_common/classes.dart';
+import 'package:generator_common/helpers.dart';
 import 'package:source_gen/source_gen.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
-import 'package:value_t2_generator/src/classes.dart';
 import 'package:value_t2_generator/src/createValueT2.dart';
 import 'package:value_t2_generator/src/helpers.dart';
 
-List<NameTypeClassWithComment> getAllFields(List<InterfaceType> interfaceTypes, ClassElement element) {
-  var superTypeFields = interfaceTypes //
-      .where((x) => x.element.name != "Object")
-      .flatMap((st) => st.element.fields.map((f) => //
-          NameTypeClassWithComment(f.name, f.type.toString(), st.element.name, comment: f.getter.documentationComment)))
-      .toList();
-  var classFields = element.fields.map((f) => //
-      NameTypeClassWithComment(f.name, f.type.toString(), element.name, comment: f.getter.documentationComment)).toList();
-
-  //distinct, will keep classFields over superTypeFields
-  return (classFields + superTypeFields).distinctBy((x) => x.name).toList();
-}
+//List<NameTypeClassComment> getAllFields(List<InterfaceType> interfaceTypes, ClassElement element) {
+//  var superTypeFields = interfaceTypes //
+//      .where((x) => x.element.name != "Object")
+//      .flatMap((st) => st.element.fields.map((f) => //
+//          NameTypeClassComment(f.name, f.type.toString(), st.element.name, comment: f.getter.documentationComment)))
+//      .toList();
+//  var classFields = element.fields.map((f) => //
+//      NameTypeClassComment(f.name, f.type.toString(), element.name, comment: f.getter.documentationComment)).toList();
+//
+//  //distinct, will keep classFields over superTypeFields
+//  return (classFields + superTypeFields).distinctBy((x) => x.name).toList();
+//}
 
 class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<TValueT> {
   @override
@@ -36,22 +38,13 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
   ) {
     var sb = StringBuffer();
 
-//    var nullFieldNames = <String>[];
-//    if (!annotation.read('nullFieldNames').isNull) {
-//      nullFieldNames = annotation
-//          .read('nullFieldNames') //
-//          .listValue
-//          .map((e) => e.toStringValue())
-//          .toList();
-//    }
-
 //    sb.writeln("//RULES: you must use implements, not extends");
 
     if (element is! ClassElement) {
       throw Exception("not a class");
     }
 
-    ClassElement ce = element;
+    ClassElement ce = element as ClassElement;
 
     if (ce.supertype.element.name != "Object") {
       throw Exception("you must use implements, not extends");
@@ -68,52 +61,109 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
               e.element.name,
               e.typeArguments.map((e) => e.toString()).toList(),
               e.element.typeParameters.map((x) => x.name).toList(),
+              e.element.fields.map((e) => NameType(e.name, e.type.toString())).toList(),
               comment: e.element.documentationComment,
             )) //
         .toList();
+
+//    interfaces.forEach((element) {
+//      sb.writeln("//interfacefields: ${element.fields.toString()})");
+//    });
+
     var classGenerics = ce.typeParameters
-        .map((e) => NameTypeWithComment(e.name, e.bound == null ? null : e.bound.toString())) //
+        .map((e) => NameTypeClassComment(e.name, e.bound == null ? null : e.bound.toString(), null)) //
         .toList();
 
     var allFieldsDistinct = getDistinctFields(allFields, interfaces);
 
-    var otherClasses = allClasses //
-        //where any of the supertypes have the same name as the class but without the dollar
-        //ie return a list of classes that are valuet2 types
-        .where((x) => x.allSupertypes.any((st) => //
-            st.element.name.replaceAll("\$", "") == element.name.replaceAll("\$", "")))
-        //odd hashCode bug where same class is passed in
-        .where((x) => x.name != element.name.replaceAll("\$", ""))
-        .map((x) {
-      var interfaces = x.interfaces
-          .map((e) => //
-              InterfaceWithComment(
-                e.element.name,
-                e.typeArguments.map((e) => e.toString()).toList(),
-                e.element.typeParameters.map((x) => x.name).toList(),
-                comment: e.element.documentationComment,
-              )) //
-          .toList();
+    //all ValueT interfaces of the class, not just those specified in the implements list
+    //  we need the ones that are inherited by the implements list
+    var allValueTInterfaces = flatten<InterfaceType>(ce.interfaces, (x) => x.interfaces) //
+        .map(
+          (e) {
+//            var blah = e.element.typeParameters.map((TypeParameterElement e) => e.);
+//            sb.writeln("//accessors${e.element.name}: " +
+//                e.element.accessors //
+//                    .map((e) => e.name + " " + e.type.returnType.toString())
+//                    .joinToString(separator: " | "));
+//
+//            sb.writeln(
+//              "//fields${e.element.name}: " +
+//                  e.element.fields //
+//                      .map((e) => NameType(e.name, e.type.toString()).toString())
+//                      .joinToString(separator: " | "),
+//            );
 
-      var distinctFields = getDistinctFields(getAllFields(x.allSupertypes, x), interfaces);
+//            var allFields = getAllFields(e.element.allSupertypes, e.element).where((x) => x.name != "hashCode").toList();
+//            sb.writeln("//allFields${e.element.name}: " + allFields.toString());
 
-      return ClassDef(
-        x.name.startsWith("\$\$"),
-        x.name.replaceAll("\$", ""),
-        distinctFields,
-//        x.typeParameters.isEmpty ? [] : x.typeParameters.where((x) => x.name != null).toList(),
-        x.typeParameters.isEmpty ? [] : x.typeParameters.where((x) => x.name != null).map((x) => //
-            GenericType(x.name, x.bound == null ? null : x.bound.toString())).toList(),
-        [
-          ...x.interfaces
-              .where((e) => e.element.name != "Object") //
-              .map((e) => e.element.name.replaceAll("\$", "")),
-          x.supertype.element.name
-        ],
-      );
-    }).toList();
+            return Interface.fromGenerics(
+              e.element.name,
+              e.element.typeParameters //
+                  .map((TypeParameterElement x) => //
+                      NameType(x.name, x.bound == null ? null : x.bound.toString()))
+                  .toList(),
+              getAllFields(e.element.allSupertypes, e.element).where((x) => x.name != "hashCode").toList(),
+//                e.element.accessors //
+//                    .map((x) => NameType(x.name, x.type.returnType.toString()))
+//                    .toList()
 
-    var otherClasses2 = otherClasses.distinctBy((x) => x.name.replaceAll("\$", "")).toList();
+//              e.element.fields
+//                  .map(
+//                    (e) => NameType(e.name, e.type.toString()),
+//                  )
+//                  .toList(),
+            );
+
+//            return Interface(
+//                e.element.name,
+//                e.typeArguments.map((e) => e.toString()).toList(),
+//                e.element.typeParameters.map((x) => x.name).toList(),
+//                e.element.fields
+//                    .map(
+//                      (e) => NameType(e.name, e.type.toString()),
+//                    )
+//                    .toList());
+          },
+        )
+        .distinctBy((element) => element.interfaceName)
+        .toList();
+
+//    var otherClasses = allClasses //
+//        //where any of the supertypes have the same name as the class but without the dollar
+//        //ie return a list of classes that are valuet2 types
+//        .where((x) => x.allSupertypes.any((st) => //
+//            st.element.name.replaceAll("\$", "") == element.name.replaceAll("\$", "")))
+//        //odd hashCode bug where same class is passed in
+//        .where((x) => x.name != element.name.replaceAll("\$", ""))
+//        .map((x) {
+//      var interfaces = x.interfaces
+//          .map((e) => //
+//              InterfaceWithComment(
+//                e.element.name,
+//                e.typeArguments.map((e) => e.toString()).toList(),
+//                e.element.typeParameters.map((x) => x.name).toList(),
+//                comment: e.element.documentationComment,
+//              )) //
+//          .toList();
+//
+//      var distinctFields = getDistinctFields(getAllFields(x.allSupertypes, x), interfaces);
+//
+//      return ClassDef(
+//        x.name.startsWith("\$\$"),
+//        x.name.replaceAll("\$", ""),
+//        distinctFields,
+////        x.typeParameters.isEmpty ? [] : x.typeParameters.where((x) => x.name != null).toList(),
+//        x.typeParameters.isEmpty ? [] : x.typeParameters.where((x) => x.name != null).map((x) => //
+//            GenericsNameType(x.name, x.bound == null ? null : x.bound.toString())).toList(),
+//        [
+//          ...x.interfaces
+//              .where((e) => e.element.name != "Object") //
+//              .map((e) => e.element.name.replaceAll("\$", "")),
+//          x.supertype.element.name
+//        ],
+//      );
+//    }).toList();
 
 //    var interfaces2 = ce.interfaces
 //        .map((e) => //
@@ -143,29 +193,33 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
 //    if (allFieldsDistinct.count() > 1) //
 //      sb.writeln("//af:${allFieldsDistinct[1].comment}");
 
+//    var classDef = ClassDef(
+//      isAbstract,
+//      ce.name.replaceAll("\$", ""),
+//      allFieldsDistinct,
+//      ce.typeParameters.isEmpty ? [] : ce.typeParameters.where((x) => x.name != null).map((x) => //
+//          GenericsNameType(x.name, x.bound == null ? null : x.bound.toString())).toList(),
+//      [...ce.interfaces.map((e) => e.element.name), ce.supertype.element.name],
+//      otherClasses,
+//    );
+
     sb.writeln(createValueT2(
       isAbstract,
       allFieldsDistinct,
       className,
       docComment,
       interfaces,
+      allValueTInterfaces,
       classGenerics,
     ));
 
-    var classDef = ClassDef(
-      isAbstract,
-      ce.name.replaceAll("\$", ""),
-      allFieldsDistinct,
-      ce.typeParameters.isEmpty ? [] : ce.typeParameters.where((x) => x.name != null).map((x) => //
-          GenericType(x.name, x.bound == null ? null : x.bound.toString())).toList(),
-      [...ce.interfaces.map((e) => e.element.name), ce.supertype.element.name],
-    );
+//    sb.writeln(createCopyWith(classDef, otherClasses2).replaceAll("\$", ""));
 
-    sb.writeln(createCopyWith(classDef, otherClasses2).replaceAll("\$", ""));
+    var isOutputCommented = false;
 
-    var output = sb.toString();
-    //use to comment output
-    //output = output.replaceAll("\n", "\n//");
+    var output = isOutputCommented //
+        ? sb.toString().replaceAll("\n", "\n//")
+        : sb.toString();
 
     return output;
   }

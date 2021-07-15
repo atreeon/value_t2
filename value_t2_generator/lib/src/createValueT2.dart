@@ -1,27 +1,39 @@
-import 'package:analyzer_models/analyzer_models.dart';
-import 'package:value_t2_generator/src/classes.dart';
+import 'package:generator_common/NameType.dart';
+import 'package:generator_common/classes.dart';
 import 'package:value_t2_generator/src/helpers.dart';
 
 String createValueT2(
   bool isAbstract,
-  List<NameTypeWithComment> allFields,
+  List<NameTypeClassComment> allFields,
   String className,
   String classComment,
-  List<Interface> interfaces,
-  List<NameTypeWithComment> classGenerics,
+  List<Interface> interfacesFromImplements,
+  List<Interface> interfacesAllInclSubInterfaces,
+  List<NameTypeClassComment> classGenerics,
 ) {
+  //recursively go through otherClasses and get my fieldnames &
+
   var sb = StringBuffer();
-  sb.write(getClassComment(interfaces, classComment));
+
+//  interfacesAllInclSubInterfaces.forEach((element) {
+//    sb.writeln("//interfaceGeneric:" + element.typeParams.toString());
+//    sb.writeln("//interfaceFields:" + element.fields.toString());
+//  });
+
+  sb.write(getClassComment(interfacesFromImplements, classComment));
   sb.write(getClassDefinition(isAbstract, className));
+
   if (classGenerics.isNotEmpty) {
     sb.write(getClassGenerics(classGenerics));
   }
+
   sb.write(" extends ${className}");
+
   if (classGenerics.isNotEmpty) {
     sb.write(getExtendsGenerics(classGenerics));
   }
-  if (interfaces.isNotEmpty) {
-    sb.write(getImplements(interfaces));
+  if (interfacesFromImplements.isNotEmpty) {
+    sb.write(getImplements(interfacesFromImplements, className));
   }
   sb.writeln(" {");
   var classNameTrim = className.replaceAll("\$", "");
@@ -29,13 +41,14 @@ String createValueT2(
   if (isAbstract) {
     sb.writeln(getPropertiesAbstract(allFields));
   } else if (allFields.isEmpty) {
-    sb.write(getClassComment(interfaces, classComment));
+    //comment required, when would allFields be empty?
+    sb.write(getClassComment(interfacesFromImplements, classComment));
     sb.writeln("${constructorName}();");
     sb.writeln(getHashCode(allFields));
     sb.writeln(getEquals(allFields, classNameTrim));
   } else {
     sb.writeln(getProperties(allFields));
-    sb.write(getClassComment(interfaces, classComment));
+    sb.write(getClassComment(interfacesFromImplements, classComment));
     sb.writeln("${constructorName}({");
     sb.writeln(getConstructorRows(allFields));
     sb.writeln("});");
@@ -43,6 +56,29 @@ String createValueT2(
     sb.writeln(getHashCode(allFields));
     sb.writeln(getEquals(allFields, classNameTrim));
   }
+
+  var interfacesX = [
+    ...interfacesAllInclSubInterfaces,
+    Interface.fromGenerics(
+      className,
+      classGenerics.map((e) => NameType(e.name, e.type)).toList(),
+      allFields,
+    ),
+  ];
+
+  interfacesX.forEach((x) {
+//    sb.writeln("//${x.interfaceName}");
+    sb.writeln(
+      getCopyWith(
+        classFields: allFields,
+        interfaceFields: x.fields,
+        interfaceName: x.interfaceName,
+        className: className,
+        isClassAbstract: isAbstract,
+        interfaceGenerics: x.typeParams,
+      ),
+    );
+  });
 
   sb.writeln("}");
 

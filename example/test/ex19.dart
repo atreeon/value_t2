@@ -1,4 +1,3 @@
-import 'package:quiver_hashcode/hashcode.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
 
 part 'ex19.valuet2.dart';

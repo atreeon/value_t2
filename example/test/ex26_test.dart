@@ -1,4 +1,3 @@
-import 'package:quiver_hashcode/hashcode.dart';
 import 'package:test/test.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
 
@@ -18,15 +17,10 @@ abstract class $ScheduleVM<T> {
 }
 
 main() {
-  print('blim');
-  print('blim');
-  print('blim');
-  print('blah');
-
   test("1", () {
     var x = ScheduleVM(schedules: [1, 2, 3]);
     var y = ScheduleVM(schedules: [4, 5, 6]);
-    print(x.toString());
-    print(y.toString());
+    expect(x.toString(), "(ScheduleVM-schedules:[1, 2, 3])");
+    expect(y.toString(), "(ScheduleVM-schedules:[4, 5, 6])");
   });
 }

@@ -6,5 +6,8 @@ environment:
   sdk: ">=2.12.0-0 <3.0.0"
 
 dependencies:
+  adi_helpers:
+    path: ../../../dart/adi_helpers
+  quiver: ^3.0.1
 
 homepage: https://github.com/atreeon/value_t2

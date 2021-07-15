@@ -18,8 +18,3 @@ abstract class $$Batch_Staged_Lesson implements $$Batch_Lesson {}
 ///This is my actual class
 @valueT2
 abstract class $Batch_Staged_Lesson_Lectures implements $$Batch_Staged_Lesson, $$Lesson_Lectures {}
-
-main() {
-  Batch_Staged_Lesson_Lectures blah = Batch_Staged_Lesson_Lectures();
-  print(blah.toString());
-}

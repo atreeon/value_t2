@@ -1,7 +1,6 @@
-import 'package:quiver_hashcode/hashcode.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
 
-part 'ex27_test.valuet2.dart';
+part 'ex27.valuet2.dart';
 
 ///HASHCODE ERROR AGAIN
 
@@ -15,11 +14,4 @@ abstract class $UserLectureInfoPopupVM {
 abstract class $UserLectureInfoPopupVM_worstWords implements $UserLectureInfoPopupVM {
   String get worstWordDue;
   String get stageOfStages;
-}
-
-main() {
-  print('blah');
-  print('x');
-  print('blah');
-  print('blah');
 }

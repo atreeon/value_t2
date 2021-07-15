@@ -1,0 +1,8 @@
+linter:
+  rules:
+    camel_case_types: false
+
+analyzer:
+  strong-mode:
+    implicit-casts: false
+#    implicit-dynamic: false
