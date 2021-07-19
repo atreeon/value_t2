@@ -15,7 +15,6 @@ dependencies:
   adi_helpers:
     path: ../../../dart/adi_helpers
   analyzer: '>=1.7.0 <=1.7.1'
-#  analyzer_models: ^1.0.8
   build: ^1.6.3
   #^1.0.10-nullsafety13
 #  copy_with_e_generator:
