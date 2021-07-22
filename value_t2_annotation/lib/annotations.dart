@@ -56,6 +56,16 @@ class ValueT2 implements ValueTX {
   /// ```
   ///
   /// it makes it explict that the default constructor cannot be used
+  /// ---
+  /// ### constant constructors
+  /// ```
+  /// abstract class $A {
+  ///  int get a;
+  ///  const $A();
+  ///  }
+  ///  ```
+  ///
+  ///  must add a ```const $A()``` constructor to abstract class
   /// {@endtemplate}
   const ValueT2();
 }

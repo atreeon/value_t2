@@ -40,19 +40,25 @@ String createValueT2(
   var constructorName = getConstructorName(classNameTrim);
   if (isAbstract) {
     sb.writeln(getPropertiesAbstract(allFields));
-  } else if (allFields.isEmpty) {
-    //comment required, when would allFields be empty?
-    sb.write(getClassComment(interfacesFromImplements, classComment));
-    sb.writeln("${constructorName}();");
-    sb.writeln(getHashCode(allFields));
-    sb.writeln(getEquals(allFields, classNameTrim));
   } else {
     sb.writeln(getProperties(allFields));
     sb.write(getClassComment(interfacesFromImplements, classComment));
-    sb.writeln("${constructorName}({");
-    sb.writeln(getConstructorRows(allFields));
-    sb.writeln("});");
-    sb.writeln(getToString(allFields, classNameTrim));
+
+    if (allFields.isEmpty) {
+      sb.writeln("${constructorName}();");
+    } else {
+      sb.writeln("${constructorName}({");
+      sb.writeln(getConstructorRows(allFields));
+      sb.writeln("});");
+
+      if (!constructorName.endsWith("_")) {
+        sb.writeln("const ${constructorName}.constant({");
+        sb.writeln(getConstructorRows(allFields));
+        sb.writeln("});");
+      }
+      sb.writeln(getToString(allFields, classNameTrim));
+    }
+
     sb.writeln(getHashCode(allFields));
     sb.writeln(getEquals(allFields, classNameTrim));
   }
