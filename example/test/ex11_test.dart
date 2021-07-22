@@ -9,11 +9,15 @@ part 'ex11_test.valuet2.dart';
 abstract class $$A<T1, T2> {
   T1 get x;
   T2 get y;
+
+  const $$A();
 }
 
 @valueT2
 abstract class $B implements $$A<int, String> {
   String get z;
+
+  const $B();
 }
 
 main() {

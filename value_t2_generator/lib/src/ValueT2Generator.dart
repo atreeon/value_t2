@@ -46,6 +46,8 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
 
     ClassElement ce = element as ClassElement;
 
+    var hasConstConstructor = ce.constructors.any((e) => e.isConst);
+
     if (ce.supertype.element.name != "Object") {
       throw Exception("you must use implements, not extends");
     }
@@ -211,6 +213,7 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
       interfaces,
       allValueTInterfaces,
       classGenerics,
+      hasConstConstructor,
     ));
 
 //    sb.writeln(createCopyWith(classDef, otherClasses2).replaceAll("\$", ""));

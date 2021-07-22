@@ -10,6 +10,7 @@ String createValueT2(
   List<Interface> interfacesFromImplements,
   List<Interface> interfacesAllInclSubInterfaces,
   List<NameTypeClassComment> classGenerics,
+  bool hasConstContructor,
 ) {
   //recursively go through otherClasses and get my fieldnames &
 
@@ -51,7 +52,7 @@ String createValueT2(
       sb.writeln(getConstructorRows(allFields));
       sb.writeln("});");
 
-      if (!constructorName.endsWith("_")) {
+      if (hasConstContructor) {
         sb.writeln("const ${constructorName}.constant({");
         sb.writeln(getConstructorRows(allFields));
         sb.writeln("});");
