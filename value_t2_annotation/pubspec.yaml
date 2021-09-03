@@ -9,5 +9,6 @@ dependencies:
   adi_helpers:
     path: ../../../dart/adi_helpers
   quiver: ^3.0.1
+  collection: ^1.15.0-nullsafety.5
 
 homepage: https://github.com/atreeon/value_t2

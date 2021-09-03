@@ -181,7 +181,12 @@ String getEquals(List<NameType> fields, String className) {
 
   sb.writeln(fields.isEmpty ? "" : " &&");
 
-  sb.write(fields.map((e) => "${e.name} == other.${e.name}").joinToString(separator: " && "));
+  sb.write(fields.map((e) {
+    if (e.type.characters.take(5).string == "List<" || e.type.characters.take(4).string == "Set<") //
+      return "${e.name}.equalUnorderedD(other.${e.name})";
+
+    return "${e.name} == other.${e.name}";
+  }).joinToString(separator: " && "));
 
   sb.write(";");
 
