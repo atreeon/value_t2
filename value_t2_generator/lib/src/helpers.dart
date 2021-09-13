@@ -182,8 +182,14 @@ String getEquals(List<NameType> fields, String className) {
   sb.writeln(fields.isEmpty ? "" : " &&");
 
   sb.write(fields.map((e) {
-    if (e.type.characters.take(5).string == "List<" || e.type.characters.take(4).string == "Set<") //
-      return "${e.name}.equalUnorderedD(other.${e.name})";
+    if ((e.type.characters.take(5).string == "List<" || e.type.characters.take(4).string == "Set<")) {
+      //todo: hack here, a nullable entry won't compare properly to an empty list
+      if (e.type.characters.last == "?") {
+        return "(${e.name}??[]).equalUnorderedD(other.${e.name}??[])";
+      } else {
+        return "(${e.name}).equalUnorderedD(other.${e.name})";
+      }
+    }
 
     return "${e.name} == other.${e.name}";
   }).joinToString(separator: " && "));

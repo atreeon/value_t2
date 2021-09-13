@@ -3,7 +3,7 @@ import 'package:value_t2_annotation/value_t2_annotation.dart';
 
 part 'ex33_test.valuet2.dart';
 
-//EQUALITY
+//EQUALITY WITH LISTS
 
 @valueT2
 abstract class $A {
