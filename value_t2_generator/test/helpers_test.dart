@@ -427,6 +427,16 @@ a == other.a && b == other.b && c == other.c;""";
 
       expect(result, r"batch:BS<$$BI>");
     });
+
+    test("3m if a single value, remove the dollars", () {
+      var result = removeDollarsFromPropertyType("\$Word");
+      expect(result, "Word");
+    });
+
+    test("4m if a Function data type and we have a valueT2 class then don't remove", () {
+      var result = removeDollarsFromPropertyType("bool Function(int blah, \$X blim)");
+      expect(result, "bool Function(int blah, \$X blim)");
+    });
   });
 
   group("getConstructorName", () {
@@ -1040,6 +1050,154 @@ return A_._(
 a: a == null ? this.a as String : a.value as String,
 );
 }""");
+    });
+
+    test("26p function to leave in dollar", () {
+      var result = getCopyWith(
+        classFields: [
+          NameTypeClassComment("fn", "bool Function(\$X)", null),
+        ],
+        interfaceFields: [
+          NameTypeClassComment("fn", "bool Function(\$X)", null),
+        ],
+        interfaceGenerics: [],
+        interfaceName: "X",
+        className: "X",
+        isClassAbstract: false,
+      );
+      expect(result, """X cwX({
+Opt<bool Function(\$X)>? fn,
+}) {
+return X(
+fn: fn == null ? this.fn as bool Function(\$X) : fn.value as bool Function(\$X),
+);
+}""");
+    });
+
+    test("27p subtype from a supertype", () {
+      var result = getCopyWith(
+        classFields: [
+          NameTypeClassComment("x", "String", null),
+        ],
+        interfaceFields: [
+          NameTypeClassComment("x", "String", null),
+          NameTypeClassComment("y", "String", null),
+        ],
+        interfaceGenerics: [],
+        interfaceName: "\$B",
+        className: "A",
+        isClassAbstract: false,
+        isExplicitSubType: true,
+      );
+      expect(result, """B copyToB({
+required String y,
+Opt<String>? x,
+}) {
+return B(
+y: y as String,
+x: x == null ? this.x as String : x.value as String,
+);
+}""");
+    });
+
+    test("28p subtype from a supertype", () {
+      var result = getCopyWith(
+        classFields: [
+          NameTypeClassComment("x", "String", null),
+        ],
+        interfaceFields: [
+          NameTypeClassComment("x", "String", null),
+          NameTypeClassComment("y", "String", null),
+          NameTypeClassComment("z", "\$Z", null),
+        ],
+        interfaceGenerics: [],
+        interfaceName: "\$B",
+        className: "A",
+        isClassAbstract: false,
+        isExplicitSubType: true,
+      );
+      expect(result, """B copyToB({
+required String y,
+required Z z,
+Opt<String>? x,
+}) {
+return B(
+y: y as String,
+z: z as Z,
+x: x == null ? this.x as String : x.value as String,
+);
+}""");
+    });
+
+    test("29p sub to sub sibling with abstract parent", () {
+      var result = getCopyWith(
+        classFields: [
+          NameTypeClassComment("x", "String", null),
+        ],
+        interfaceFields: [
+          NameTypeClassComment("x", "String", null),
+          NameTypeClassComment("y", "String", null),
+          NameTypeClassComment("z", "\$Z", null),
+        ],
+        interfaceGenerics: [],
+        interfaceName: "\$B",
+        className: "A",
+        isClassAbstract: false,
+        isExplicitSubType: true,
+      );
+      expect(result, """B copyToB({
+required String y,
+required Z z,
+Opt<String>? x,
+}) {
+return B(
+y: y as String,
+z: z as Z,
+x: x == null ? this.x as String : x.value as String,
+);
+}""");
+    });
+
+    test("30p function to leave in dollar", () {
+      var result = getCopyWith(
+        classFields: [
+          NameTypeClassComment("x", "String", null),
+          NameTypeClassComment("cs", "List<\$C>", null),
+          NameTypeClassComment("z", "\$Z", null),
+        ],
+        interfaceFields: [
+          NameTypeClassComment("x", "String", null),
+          NameTypeClassComment("cs", "List<\$C>", null),
+          NameTypeClassComment("z", "\$Z", null),
+        ],
+        interfaceGenerics: [],
+        interfaceName: "\$B",
+        className: "\$B",
+        isClassAbstract: false,
+      );
+      expect(result, """B cwB({
+Opt<String>? x,
+Opt<List<C>>? cs,
+Opt<Z>? z,
+}) {
+return B(
+x: x == null ? this.x as String : x.value as String,
+cs: cs == null ? this.cs as List<C> : cs.value as List<C>,
+z: z == null ? this.z as Z : z.value as Z,
+);
+}""");
+    });
+  });
+
+  group("remove dollars from data type", () {
+    test("1q if a single value, remove the dollars", () {
+      var result = getDataTypeWithoutDollars("\$Word");
+      expect(result, "Word");
+    });
+
+    test("2q if a Function data type and we have a valueT2 class then don't remove", () {
+      var result = getDataTypeWithoutDollars("bool Function(int blah, \$X blim)");
+      expect(result, "bool Function(int blah, \$X blim)");
     });
   });
 

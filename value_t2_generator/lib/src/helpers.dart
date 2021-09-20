@@ -19,7 +19,16 @@ String getClassComment(List<Interface> interfaces, String classComment) {
   return a.join("\n").trim() + "\n";
 }
 
+/// remove dollars from the property type allowing for functions where
+/// the dollars need to remain
 String removeDollarsFromPropertyType(String propertyType) {
+  var regex = RegExp("Function\((.*)\)");
+  var result = regex.allMatches(propertyType);
+
+  if (result.isNotEmpty) {
+    return propertyType;
+  }
+
   return propertyType.replaceAll(RegExp(r"(?<!<)(?<!<\$)\$\$?"), "");
 }
 
@@ -125,13 +134,23 @@ String getEnumPropertyList(List<NameTypeClassComment> fields, String className) 
   return first + last;
 }
 
+/// remove dollars from the dataType except for function types
+String getDataTypeWithoutDollars(String type) {
+  var regex = RegExp("Function\((.*)\)");
+  var result = regex.allMatches(type);
+
+  if (result.isNotEmpty) {
+    return type;
+  }
+
+  return type.replaceAll("\$", "");
+}
+
 String getProperties(List<NameTypeClassComment> fields) => //
     fields
         .map((e) => //
             e.comment == null
-                ? //
-//                "final ${e.type} ${e.name};" //
-                "final ${e.type.replaceAll("\$", "")} ${e.name};" //
+                ? "final ${getDataTypeWithoutDollars(e.type)} ${e.name};" //
                 : "${e.comment}\nfinal ${e.type} ${e.name};")
         .join("\n");
 
@@ -139,8 +158,7 @@ String getPropertiesAbstract(List<NameTypeClassComment> fields) => //
     fields
         .map((e) => //
             e.comment == null
-                ? //
-                "${e.type} get ${e.name};" //
+                ? "${getDataTypeWithoutDollars(e.type)} get ${e.name};" //
                 : "${e.comment}\n${e.type} get ${e.name};")
         .join("\n");
 
@@ -206,22 +224,16 @@ String getCopyWith({
   @required String className,
   @required bool isClassAbstract,
   @required List<NameType> interfaceGenerics,
-//  @required List<NameType> classGenerics,
+  bool isExplicitSubType = false, //for where we specify the explicit subtypes for copyTo
 }) {
   var sb = StringBuffer();
 
   var classNameTrimmed = className.replaceAll("\$", "");
   var interfaceNameTrimmed = interfaceName.replaceAll("\$", "");
 
-//  sb.writeln("///Careful! the below won't work");
-//  sb.writeln();
-//  sb.writeln("///`A.cwA(person:Person()) & B.cwB(person:Person())`");
-//  sb.writeln();
-//  sb.writeln("///when B.b is a subtype of Person such as Employee");
-//  sb.writeln();
-//  sb.writeln("///it must match the type of the subtype");
-
-  sb.write("$classNameTrimmed cw$interfaceNameTrimmed");
+  isExplicitSubType //
+      ? sb.write("$interfaceNameTrimmed copyTo${interfaceNameTrimmed}")
+      : sb.write("$classNameTrimmed cw$interfaceNameTrimmed");
 
   if (interfaceGenerics.isNotEmpty) {
     var generic = interfaceGenerics //
@@ -240,18 +252,26 @@ String getCopyWith({
   var fieldsForSignature = classFields //
       .where((element) => interfaceFields.map((e) => e.name).contains(element.name));
 
-//  sb.writeln("//fieldsForSignature:${interfaceFields.toString()}");
-//  sb.writeln("//classFields:${classFields.toString()}");
-//  sb.writeln("//interfaceFields:${interfaceFields.toString()}");
+  // identify fields in the interface not in the class
+  var requiredFields = isExplicitSubType //
+      ? interfaceFields //
+          .where((x) => classFields.none((cf) => cf.name == x.name))
+          .toList()
+      : <NameType>[];
 
-  if (fieldsForSignature.isNotEmpty) //
+  if (fieldsForSignature.isNotEmpty || requiredFields.isNotEmpty) //
     sb.write("{");
 
   sb.writeln();
 
+  sb.write(requiredFields.map((e) {
+    var interfaceType = interfaceFields.firstWhere((element) => element.name == e.name).type;
+    return "required ${getDataTypeWithoutDollars(interfaceType)} ${e.name},\n";
+  }).join());
+
   sb.write(fieldsForSignature.map((e) {
     var interfaceType = interfaceFields.firstWhere((element) => element.name == e.name).type;
-    return "Opt<$interfaceType>? ${e.name},\n";
+    return "Opt<${getDataTypeWithoutDollars(interfaceType)}>? ${e.name},\n";
   }).join());
 
   if (fieldsForSignature.isNotEmpty) //
@@ -264,15 +284,25 @@ String getCopyWith({
 
   sb.writeln(") {");
 
-  if (className.endsWith("_")) {
-    sb.writeln("return $classNameTrimmed._(");
+  if (isExplicitSubType) {
+    sb.writeln("return ${getDataTypeWithoutDollars(interfaceName)}(");
   } else {
-    sb.writeln("return $classNameTrimmed(");
+    if (className.endsWith("_")) {
+      sb.writeln("return $classNameTrimmed._(");
+    } else {
+      sb.writeln("return $classNameTrimmed(");
+    }
   }
+
+  sb.write(requiredFields //
+      .map((e) {
+    var classType = getDataTypeWithoutDollars(e.type);
+    return "${e.name}: ${e.name} as $classType,\n";
+  }).join());
 
   sb.write(fieldsForSignature //
       .map((e) {
-    var classType = classFields.firstWhere((element) => element.name == e.name).type.replaceAll("\$", "");
+    var classType = getDataTypeWithoutDollars(classFields.firstWhere((element) => element.name == e.name).type);
     return "${e.name}: ${e.name} == null ? this.${e.name} as $classType : ${e.name}.value as $classType,\n";
   }).join());
 

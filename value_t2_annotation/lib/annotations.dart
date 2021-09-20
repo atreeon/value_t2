@@ -7,6 +7,9 @@ const valueT2 = ValueT2();
 const valueT3 = ValueT3();
 
 class ValueT2 implements ValueTX {
+  /// if we want a copyWith (cwX) method for a subtype in this same class
+  final List<Type>? explicitSubTypes;
+
   /// {@template ValueTX}
   /// ### normal class; prepend class with a single dollar & make abstract
   /// ```
@@ -67,11 +70,15 @@ class ValueT2 implements ValueTX {
   ///
   ///  must add a ```const $A()``` constructor to abstract class
   /// {@endtemplate}
-  const ValueT2();
+  const ValueT2([this.explicitSubTypes]);
 }
 
 class ValueT3 implements ValueTX {
-  const ValueT3();
+  final List<Type>? explicitSubTypes;
+
+  const ValueT3([this.explicitSubTypes]);
 }
 
-abstract class ValueTX {}
+abstract class ValueTX {
+  List<Type>? get explicitSubTypes;
+}

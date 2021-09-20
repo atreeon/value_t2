@@ -16,11 +16,6 @@ String createValueT2(
 
   var sb = StringBuffer();
 
-//  interfacesAllInclSubInterfaces.forEach((element) {
-//    sb.writeln("//interfaceGeneric:" + element.typeParams.toString());
-//    sb.writeln("//interfaceFields:" + element.fields.toString());
-//  });
-
   sb.write(getClassComment(interfacesFromImplements, classComment));
   sb.write(getClassDefinition(isAbstract, className));
 
@@ -63,7 +58,7 @@ String createValueT2(
     sb.writeln(getHashCode(allFields));
     sb.writeln(getEquals(allFields, classNameTrim));
   }
-
+//
   var interfacesX = [
     ...interfacesAllInclSubInterfaces,
     Interface.fromGenerics(
@@ -73,8 +68,7 @@ String createValueT2(
     ),
   ];
 
-  interfacesX.forEach((x) {
-//    sb.writeln("//${x.interfaceName}");
+  interfacesX.where((element) => !element.isExplicitSubType).forEach((x) {
     sb.writeln(
       getCopyWith(
         classFields: allFields,
@@ -83,10 +77,29 @@ String createValueT2(
         className: className,
         isClassAbstract: isAbstract,
         interfaceGenerics: x.typeParams,
+        isExplicitSubType: x.isExplicitSubType,
       ),
     );
   });
 
+  sb.writeln("}");
+
+  sb.writeln();
+  sb.writeln("extension ${className}_copyTo_E on ${className} {");
+
+  interfacesX.where((element) => element.isExplicitSubType).forEach((x) {
+    sb.writeln(
+      getCopyWith(
+        classFields: allFields,
+        interfaceFields: x.fields,
+        interfaceName: x.interfaceName,
+        className: className,
+        isClassAbstract: isAbstract,
+        interfaceGenerics: x.typeParams,
+        isExplicitSubType: x.isExplicitSubType,
+      ),
+    );
+  });
   sb.writeln("}");
 
   sb.writeln(getEnumPropertyList(allFields, className));
