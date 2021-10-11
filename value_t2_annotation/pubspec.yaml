@@ -2,13 +2,18 @@ name: value_t2_annotation
 description: annotation for value_t2_generator which provides a short syntax, value type (ish) way of creating classes
 version: 1.0.7-nullsafety.3
 
-environment:  
+environment:
   sdk: ">=2.12.0-0 <3.0.0"
+
+#dependency_overrides:
+#  adi_helpers:
+#    path: ../../adi_helpers
 
 dependencies:
   adi_helpers:
-    path: ../../../dart/adi_helpers
-  quiver: ^3.0.1
-  collection: ^1.15.0-nullsafety.5
+    path: ../../adi_helpers
+#  adi_helpers: ^1.0.7-nullsafety2
+#  quiver: ^3.0.1
+#  collection: ^1.15.0-nullsafety.5
 
 homepage: https://github.com/atreeon/value_t2

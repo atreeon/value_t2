@@ -1,9 +1,7 @@
 import 'package:test/test.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
 
-// COPY WITH FROM SUB CLASS TO SUPER CLASS
-// AND
-// FROM SUPERCLASS TO SUB CLASS
+// COPY TO - FROM SUPERCLASS TO SUB CLASS
 
 part 'ex36_test.valuet2.dart';
 

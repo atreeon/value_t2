@@ -1187,6 +1187,32 @@ z: z == null ? this.z as Z : z.value as Z,
 );
 }""");
     });
+
+    test("31p FROM ABSTRACT SUPERCLASS TO SUB CLASS", () {
+      var result = getCopyWith(
+        classFields: [
+          NameTypeClassComment("x", "String", null),
+        ],
+        interfaceFields: [
+          NameTypeClassComment("x", "String", null),
+          NameTypeClassComment("y", "String", null),
+        ],
+        interfaceGenerics: [],
+        interfaceName: "\$B",
+        className: "\$\$Super",
+        isClassAbstract: true,
+        isExplicitSubType: true,
+      );
+      expect(result, """B copyToB({
+required String y,
+Opt<String>? x,
+}) {
+return B(
+y: y as String,
+x: x == null ? this.x as String : x.value as String,
+);
+}""");
+    });
   });
 
   group("remove dollars from data type", () {

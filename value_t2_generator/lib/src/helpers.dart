@@ -217,6 +217,10 @@ String getEquals(List<NameType> fields, String className) {
   return sb.toString();
 }
 
+///[classFields] & [interfaceFields] should be renamed
+/// for copyTo [classFields] and [className] is what we are copying from
+/// and [interfaceFields] and [interfaceName] is what we are copying to
+/// [classFields] can be an interface & [interfaceFields] can be a class!
 String getCopyWith({
   @required List<NameType> classFields,
   @required List<NameType> interfaceFields,
@@ -227,6 +231,7 @@ String getCopyWith({
   bool isExplicitSubType = false, //for where we specify the explicit subtypes for copyTo
 }) {
   var sb = StringBuffer();
+  // sb.writeln("//${classFields}|${interfaceFields}|$interfaceName|$className");
 
   var classNameTrimmed = className.replaceAll("\$", "");
   var interfaceNameTrimmed = interfaceName.replaceAll("\$", "");
@@ -277,7 +282,7 @@ String getCopyWith({
   if (fieldsForSignature.isNotEmpty) //
     sb.write("}");
 
-  if (isClassAbstract) {
+  if (isClassAbstract && !isExplicitSubType) {
     sb.write(");");
     return sb.toString();
   }
