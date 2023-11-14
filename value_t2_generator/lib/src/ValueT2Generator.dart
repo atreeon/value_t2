@@ -31,7 +31,7 @@ import 'package:value_t2_generator/src/helpers.dart';
 class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<TValueT> {
   @override
   FutureOr<String> generateForAnnotatedElement(
-    Element element,
+    Element ce,
     ConstantReader annotation,
     BuildStep buildStep,
     List<ClassElement> allClasses,
@@ -40,15 +40,13 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
 
 //    sb.writeln("//RULES: you must use implements, not extends");
 
-    if (element is! ClassElement) {
+    if (ce is! ClassElement) {
       throw Exception("not a class");
     }
 
-    ClassElement ce = element as ClassElement;
-
     var hasConstConstructor = ce.constructors.any((e) => e.isConst);
 
-    if (ce.supertype.element.name != "Object") {
+    if (ce.supertype?.element.name != "Object") {
       throw Exception("you must use implements, not extends");
     }
 
@@ -86,11 +84,11 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
           .read('explicitSubTypes') //
           .listValue
           .map((x) {
-        if (x.toTypeValue().element is! ClassElement) {
+        if (x.toTypeValue()?.element is! ClassElement) {
           throw Exception("each type for the copywith def must all be classes");
         }
 
-        var el = x.toTypeValue().element as ClassElement;
+        var el = x.toTypeValue()?.element as ClassElement;
 
         return Interface.fromGenerics(
           el.name,
@@ -117,7 +115,7 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
                   .map((TypeParameterElement x) => //
                       NameType(x.name, x.bound == null ? null : x.bound.toString()))
                   .toList(),
-              getAllFields(e.element.allSupertypes, e.element).where((x) => x.name != "hashCode").toList(),
+              getAllFields(e.element.allSupertypes, e.element as ClassElement).where((x) => x.name != "hashCode").toList(),
             );
           },
         )
@@ -129,7 +127,7 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
       isAbstract,
       allFieldsDistinct,
       className,
-      docComment,
+      docComment ?? "",
       interfaces,
       allValueTInterfaces,
       classGenerics,
@@ -138,12 +136,14 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
 
 //    sb.writeln(createCopyWith(classDef, otherClasses2).replaceAll("\$", ""));
 
-    var isOutputCommented = false;
+    // var isOutputCommented = false;
+    //
+    // var output = isOutputCommented //
+    //     ? sb.toString().replaceAll("\n", "\n//")
+    //     : sb.toString();
 
-    var output = isOutputCommented //
-        ? sb.toString().replaceAll("\n", "\n//")
-        : sb.toString();
+    // return output;
 
-    return output;
+    return sb.toString();
   }
 }

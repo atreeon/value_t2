@@ -31,7 +31,7 @@ extension A_E on A {
     required $C z,
   }) {
     return B(
-      x: x == null ? this.x as String : x.value as String,
+      x: x == null ? this.x : x.value as String,
       y: y,
       z: z as C,
     );

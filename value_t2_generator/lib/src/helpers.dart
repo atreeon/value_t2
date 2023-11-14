@@ -2,10 +2,11 @@
 import 'package:dartx/dartx.dart';
 import 'package:generator_common/NameType.dart';
 import 'package:generator_common/classes.dart';
-import 'package:meta/meta.dart';
+// import 'package:meta/meta.dart';
 
 String getClassComment(List<Interface> interfaces, String classComment) {
-  var a = interfaces.where((e) => e is InterfaceWithComment && e.comment != classComment) //
+  var a = interfaces
+      .where((e) => e is InterfaceWithComment && e.comment != classComment) //
       .map((e) {
     var interfaceComment = e is InterfaceWithComment && e.comment != null //
         ? "\n${e.comment}"
@@ -13,8 +14,7 @@ String getClassComment(List<Interface> interfaces, String classComment) {
     return "///implements [${e.interfaceName}]\n///\n$interfaceComment\n///";
   }).toList();
 
-  if (classComment != null) //
-    a.insert(0, classComment + "\n///");
+  a.insert(0, classComment + "\n///");
 
   return a.join("\n").trim() + "\n";
 }
@@ -36,7 +36,7 @@ List<NameTypeClassComment> getDistinctFields(
   List<NameTypeClassComment> fieldsRaw,
   List<InterfaceWithComment> interfaces,
 ) {
-  var fields = fieldsRaw.map((f) => NameTypeClassComment(f.name, f.type, f.className.replaceAll("\$", ""), comment: f.comment));
+  var fields = fieldsRaw.map((f) => NameTypeClassComment(f.name, f.type, f.className?.replaceAll("\$", ""), comment: f.comment));
 
   var interfaces2 = interfaces //
       .map((x) => Interface.fromGenerics(
@@ -49,23 +49,24 @@ List<NameTypeClassComment> getDistinctFields(
 //    return Interface2(interface.type.replaceAll("\$", ""), result);
 //  }).toList();
 
-  var sortedFields = fields.sortedBy((element) => element.className).toList();
+  var sortedFields = fields.sortedBy((element) => element.className ?? "").toList();
   var distinctFields = sortedFields.distinctBy((element) => element.name).toList();
 
   var adjustedFields = distinctFields.map((classField) {
-    var i = interfaces2.firstWhere((i) => i.interfaceName == classField.className, orElse: () => null);
-    if (i != null) {
-      var paramNameType = i.typeParams.firstWhere(
-          (interfaceGeneric) => //
-              interfaceGeneric.name == classField.type,
-          orElse: () => null);
-      if (paramNameType != null) {
-        var name = removeDollarsFromPropertyType(paramNameType.type);
+    var i = interfaces2.where((x) => x.interfaceName == classField.className).take(1).toList();
+    if (i.length > 0) {
+      var paramNameType = i[0]
+          .typeParams
+          .where((interfaceGeneric) => //
+              interfaceGeneric.name == classField.type)
+          .toList();
+      if (paramNameType.length > 0) {
+        var name = removeDollarsFromPropertyType(paramNameType[0].type!);
         return NameTypeClassComment(classField.name, name, null, comment: classField.comment);
       }
     }
 
-    var type = removeDollarsFromPropertyType(classField.type);
+    var type = removeDollarsFromPropertyType(classField.type!);
     return NameTypeClassComment(classField.name, type, null, comment: classField.comment);
   }).toList();
 
@@ -150,7 +151,7 @@ String getProperties(List<NameTypeClassComment> fields) => //
     fields
         .map((e) => //
             e.comment == null
-                ? "final ${getDataTypeWithoutDollars(e.type)} ${e.name};" //
+                ? "final ${getDataTypeWithoutDollars(e.type ?? "")} ${e.name};" //
                 : "${e.comment}\nfinal ${e.type} ${e.name};")
         .join("\n");
 
@@ -158,14 +159,14 @@ String getPropertiesAbstract(List<NameTypeClassComment> fields) => //
     fields
         .map((e) => //
             e.comment == null
-                ? "${getDataTypeWithoutDollars(e.type)} get ${e.name};" //
+                ? "${getDataTypeWithoutDollars(e.type ?? "")} get ${e.name};" //
                 : "${e.comment}\n${e.type} get ${e.name};")
         .join("\n");
 
 String getConstructorRows(List<NameType> fields) => //
     fields
         .map((e) {
-          if (e.type.contains("?")) {
+          if (e.type!.contains("?")) {
             return "this.${e.name},";
           }
 
@@ -200,9 +201,9 @@ String getEquals(List<NameType> fields, String className) {
   sb.writeln(fields.isEmpty ? "" : " &&");
 
   sb.write(fields.map((e) {
-    if ((e.type.characters.take(5).string == "List<" || e.type.characters.take(4).string == "Set<")) {
+    if ((e.type!.characters.take(5).string == "List<" || e.type!.characters.take(4).string == "Set<")) {
       //todo: hack here, a nullable entry won't compare properly to an empty list
-      if (e.type.characters.last == "?") {
+      if (e.type!.characters.last == "?") {
         return "(${e.name}??[]).equalUnorderedD(other.${e.name}??[])";
       } else {
         return "(${e.name}).equalUnorderedD(other.${e.name})";
@@ -222,12 +223,12 @@ String getEquals(List<NameType> fields, String className) {
 /// and [interfaceFields] and [interfaceName] is what we are copying to
 /// [classFields] can be an interface & [interfaceFields] can be a class!
 String getCopyWith({
-  @required List<NameType> classFields,
-  @required List<NameType> interfaceFields,
-  @required String interfaceName,
-  @required String className,
-  @required bool isClassAbstract,
-  @required List<NameType> interfaceGenerics,
+  required List<NameType> classFields,
+  required List<NameType> interfaceFields,
+  required String interfaceName,
+  required String className,
+  required bool isClassAbstract,
+  required List<NameType> interfaceGenerics,
   bool isExplicitSubType = false, //for where we specify the explicit subtypes for copyTo
 }) {
   var sb = StringBuffer();
@@ -271,12 +272,12 @@ String getCopyWith({
 
   sb.write(requiredFields.map((e) {
     var interfaceType = interfaceFields.firstWhere((element) => element.name == e.name).type;
-    return "required ${getDataTypeWithoutDollars(interfaceType)} ${e.name},\n";
+    return "required ${getDataTypeWithoutDollars(interfaceType!)} ${e.name},\n";
   }).join());
 
   sb.write(fieldsForSignature.map((e) {
     var interfaceType = interfaceFields.firstWhere((element) => element.name == e.name).type;
-    return "Opt<${getDataTypeWithoutDollars(interfaceType)}>? ${e.name},\n";
+    return "Opt<${getDataTypeWithoutDollars(interfaceType!)}>? ${e.name},\n";
   }).join());
 
   if (fieldsForSignature.isNotEmpty) //
@@ -301,13 +302,13 @@ String getCopyWith({
 
   sb.write(requiredFields //
       .map((e) {
-    var classType = getDataTypeWithoutDollars(e.type);
+    var classType = getDataTypeWithoutDollars(e.type!);
     return "${e.name}: ${e.name} as $classType,\n";
   }).join());
 
   sb.write(fieldsForSignature //
       .map((e) {
-    var classType = getDataTypeWithoutDollars(classFields.firstWhere((element) => element.name == e.name).type);
+    var classType = getDataTypeWithoutDollars(classFields.firstWhere((element) => element.name == e.name).type!);
     return "${e.name}: ${e.name} == null ? this.${e.name} as $classType : ${e.name}.value as $classType,\n";
   }).join());
 

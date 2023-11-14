@@ -3,8 +3,8 @@ targets:
     builders:
       value_t2_generator|value_t2:
         enabled: true
-      value_t3_generator|value_t3:
-        enabled: true
+#      value_t3_generator|value_t3:
+#        enabled: true
 
 builders:
   value_t2:
