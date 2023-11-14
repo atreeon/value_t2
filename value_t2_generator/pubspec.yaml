@@ -16,7 +16,7 @@ dependencies:
   value_t2_annotation:
     git:
       url: https://github.com/atreeon/value_t2.git
-      ref: dart_3
+      ref: master
       path: value_t2_annotation
   adi_helpers:
     git:
