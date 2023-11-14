@@ -1,0 +1,110 @@
+// ignore_for_file: UNNECESSARY_CAST
+
+part of 'ex41_inheritance_generics.dart';
+
+// **************************************************************************
+// Generator: ValueT2Generator<ValueT2>
+// **************************************************************************
+
+//x()
+///
+abstract class A<T> extends $$A<T> {
+  A cwA<T>();
+}
+
+extension $$A_copyTo_E on $$A {}
+
+//x()
+///
+///implements [$$A]
+///
+
+///
+class B<T> extends $B<T> implements A<T> {
+  final T data;
+
+  ///
+  ///implements [$$A]
+  ///
+
+  ///
+  B({
+    required this.data,
+  });
+  String toString() => "(B-data:${data.toString()})";
+  int get hashCode => hashObjects([data.hashCode]);
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is B && runtimeType == other.runtimeType && data == other.data;
+  B cwA<T>() {
+    return B(
+      data: (this as B).data,
+    );
+  }
+
+  B cwB<T>({
+    Opt<T>? data,
+  }) {
+    return B(
+      data: data == null ? this.data as T : data.value as T,
+    );
+  }
+}
+
+extension $B_copyTo_E on $B {}
+
+enum B$ { data }
+
+//x()
+///
+///implements [$$A]
+///
+
+///
+class C<T> extends $C<T> implements A<T> {
+  final eEnumExample failureCode;
+  final String description;
+
+  ///
+  ///implements [$$A]
+  ///
+
+  ///
+  C({
+    required this.failureCode,
+    required this.description,
+  });
+  String toString() =>
+      "(C-failureCode:${failureCode.toString()}|description:${description.toString()})";
+  int get hashCode => hashObjects([failureCode.hashCode, description.hashCode]);
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is C &&
+          runtimeType == other.runtimeType &&
+          failureCode == other.failureCode &&
+          description == other.description;
+  C cwA<T>() {
+    return C(
+      failureCode: (this as C).failureCode,
+      description: (this as C).description,
+    );
+  }
+
+  C cwC<T>({
+    Opt<eEnumExample>? failureCode,
+    Opt<String>? description,
+  }) {
+    return C(
+      failureCode: failureCode == null
+          ? this.failureCode as eEnumExample
+          : failureCode.value as eEnumExample,
+      description: description == null
+          ? this.description as String
+          : description.value as String,
+    );
+  }
+}
+
+extension $C_copyTo_E on $C {}
+
+enum C$ { failureCode, description }
