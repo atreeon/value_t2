@@ -1,0 +1,232 @@
+// ignore_for_file: UNNECESSARY_CAST
+
+part of 'ex4_test.dart';
+
+// **************************************************************************
+// Generator: ValueT2Generator<ValueT2>
+// **************************************************************************
+
+//x()
+///
+abstract class Z extends $$Z {
+  String get zValue;
+  Z cwZ({
+    Opt<String>? zValue,
+  });
+}
+
+extension $$Z_copyTo_E on $$Z {}
+
+enum Z$ { zValue }
+
+//x()
+///
+///implements [$$Z]
+///
+
+///
+class A extends $A implements Z {
+  final String aValue;
+  final String zValue;
+
+  ///
+  ///implements [$$Z]
+  ///
+
+  ///
+  A({
+    required this.aValue,
+    required this.zValue,
+  });
+  String toString() =>
+      "(A-aValue:${aValue.toString()}|zValue:${zValue.toString()})";
+  int get hashCode => hashObjects([aValue.hashCode, zValue.hashCode]);
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is A &&
+          runtimeType == other.runtimeType &&
+          aValue == other.aValue &&
+          zValue == other.zValue;
+  A cwZ({
+    Opt<String>? zValue,
+  }) {
+    return A(
+      zValue: zValue == null ? this.zValue as String : zValue.value as String,
+      aValue: (this as A).aValue,
+    );
+  }
+
+  A cwA({
+    Opt<String>? aValue,
+    Opt<String>? zValue,
+  }) {
+    return A(
+      aValue: aValue == null ? this.aValue as String : aValue.value as String,
+      zValue: zValue == null ? this.zValue as String : zValue.value as String,
+    );
+  }
+}
+
+extension $A_copyTo_E on $A {}
+
+enum A$ { aValue, zValue }
+
+//x()
+///
+///implements [$A]
+///
+
+///
+class B extends $B implements A {
+  final String aValue;
+  final String bValue;
+  final String zValue;
+
+  ///
+  ///implements [$A]
+  ///
+
+  ///
+  B({
+    required this.aValue,
+    required this.bValue,
+    required this.zValue,
+  });
+  String toString() =>
+      "(B-aValue:${aValue.toString()}|bValue:${bValue.toString()}|zValue:${zValue.toString()})";
+  int get hashCode =>
+      hashObjects([aValue.hashCode, bValue.hashCode, zValue.hashCode]);
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is B &&
+          runtimeType == other.runtimeType &&
+          aValue == other.aValue &&
+          bValue == other.bValue &&
+          zValue == other.zValue;
+  B cwA({
+    Opt<String>? aValue,
+    Opt<String>? zValue,
+  }) {
+    return B(
+      aValue: aValue == null ? this.aValue as String : aValue.value as String,
+      zValue: zValue == null ? this.zValue as String : zValue.value as String,
+      bValue: (this as B).bValue,
+    );
+  }
+
+  B cwZ({
+    Opt<String>? zValue,
+  }) {
+    return B(
+      zValue: zValue == null ? this.zValue as String : zValue.value as String,
+      aValue: (this as B).aValue,
+      bValue: (this as B).bValue,
+    );
+  }
+
+  B cwB({
+    Opt<String>? aValue,
+    Opt<String>? bValue,
+    Opt<String>? zValue,
+  }) {
+    return B(
+      aValue: aValue == null ? this.aValue as String : aValue.value as String,
+      bValue: bValue == null ? this.bValue as String : bValue.value as String,
+      zValue: zValue == null ? this.zValue as String : zValue.value as String,
+    );
+  }
+}
+
+extension $B_copyTo_E on $B {}
+
+enum B$ { aValue, bValue, zValue }
+
+//x()
+///
+///implements [$B]
+///
+
+///
+class C extends $C implements B {
+  final String aValue;
+  final String bValue;
+  final String cValue;
+  final String zValue;
+
+  ///
+  ///implements [$B]
+  ///
+
+  ///
+  C({
+    required this.aValue,
+    required this.bValue,
+    required this.cValue,
+    required this.zValue,
+  });
+  String toString() =>
+      "(C-aValue:${aValue.toString()}|bValue:${bValue.toString()}|cValue:${cValue.toString()}|zValue:${zValue.toString()})";
+  int get hashCode => hashObjects(
+      [aValue.hashCode, bValue.hashCode, cValue.hashCode, zValue.hashCode]);
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is C &&
+          runtimeType == other.runtimeType &&
+          aValue == other.aValue &&
+          bValue == other.bValue &&
+          cValue == other.cValue &&
+          zValue == other.zValue;
+  C cwB({
+    Opt<String>? aValue,
+    Opt<String>? bValue,
+    Opt<String>? zValue,
+  }) {
+    return C(
+      aValue: aValue == null ? this.aValue as String : aValue.value as String,
+      bValue: bValue == null ? this.bValue as String : bValue.value as String,
+      zValue: zValue == null ? this.zValue as String : zValue.value as String,
+      cValue: (this as C).cValue,
+    );
+  }
+
+  C cwA({
+    Opt<String>? aValue,
+    Opt<String>? zValue,
+  }) {
+    return C(
+      aValue: aValue == null ? this.aValue as String : aValue.value as String,
+      zValue: zValue == null ? this.zValue as String : zValue.value as String,
+      bValue: (this as C).bValue,
+      cValue: (this as C).cValue,
+    );
+  }
+
+  C cwZ({
+    Opt<String>? zValue,
+  }) {
+    return C(
+      zValue: zValue == null ? this.zValue as String : zValue.value as String,
+      aValue: (this as C).aValue,
+      bValue: (this as C).bValue,
+      cValue: (this as C).cValue,
+    );
+  }
+
+  C cwC({
+    Opt<String>? aValue,
+    Opt<String>? bValue,
+    Opt<String>? cValue,
+    Opt<String>? zValue,
+  }) {
+    return C(
+      aValue: aValue == null ? this.aValue as String : aValue.value as String,
+      bValue: bValue == null ? this.bValue as String : bValue.value as String,
+      cValue: cValue == null ? this.cValue as String : cValue.value as String,
+      zValue: zValue == null ? this.zValue as String : zValue.value as String,
+    );
+  }
+}
+
+extension $C_copyTo_E on $C {}
+
+enum C$ { aValue, bValue, cValue, zValue }

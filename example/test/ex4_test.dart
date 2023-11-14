@@ -1,28 +1,26 @@
-import 'package:meta/meta.dart';
 import 'package:test/test.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
-import 'package:quiver_hashcode/hashcode.dart';
 
-part 'ex4_test.g.dart';
+part 'ex4_test.valuet2.dart';
 
 //ONLY USE IMPLEMENTS, EXTENDS IS NOT ALLOWED
 
-@ValueT2()
+@valueT2
 abstract class $$Z {
   String get zValue;
 }
 
-@ValueT2()
+@valueT2
 abstract class $A implements $$Z {
   String get aValue;
 }
 
-@ValueT2()
+@valueT2
 abstract class $B implements $A {
   String get bValue;
 }
 
-@ValueT2()
+@valueT2
 abstract class $C implements $B {
   String get cValue;
 }

@@ -1,19 +1,17 @@
-import 'package:meta/meta.dart';
 import 'package:test/test.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
-import 'package:quiver_hashcode/hashcode.dart';
 
-part 'ex12_test.g.dart';
+part 'ex12_test.valuet2.dart';
 
 //GENERIC SPECIFIED OF IMPLEMENTED CLASS, WITH ANOTHER GENERIC
 
-@ValueT2()
-abstract class $$A<T1, T2> {
-  T1 get x;
-  T2 get y;
+@valueT2
+abstract class $$A<Ta, Tb> {
+  Ta get x;
+  Tb get y;
 }
 
-@ValueT2()
+@valueT2
 abstract class $B<Ta, Tb> implements $$A<Ta, Tb> {
   String get z;
 }

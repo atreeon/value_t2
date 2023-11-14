@@ -1,19 +1,17 @@
-import 'package:meta/meta.dart';
-import 'package:quiver_hashcode/hashcode.dart';
 import 'package:test/test.dart';
 import 'package:value_t2_annotation/value_t2_annotation.dart';
 
-part 'ex23_test.g.dart';
+part 'ex23_test.valuet2.dart';
 
 //TAKE COMMENTS FROM CLASS
 
 ///This is my class level comment
-@ValueT2()
+@valueT2
 abstract class $Cat {
   ///Type is a thingy thing
   String get type;
 
-  String colour; //no comment
+  String get colour; //no comment
 }
 
 main() {
