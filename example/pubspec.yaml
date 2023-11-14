@@ -23,15 +23,8 @@ dependencies:
       url: https://github.com/atreeon/adi_helpers
       ref: master
 
-dev_dependency_overrides:
-  value_t2_generator:
-    path: ../value_t2_annotation
-
 dev_dependencies:
   build_runner: ^2.4.6
   test: ^1.24.8
   value_t2_generator:
-    git:
-      url: https://github.com/atreeon/value_t2_generator.git
-      ref: master
-      path: value_t2_generator
+    path: ../value_t2_generator

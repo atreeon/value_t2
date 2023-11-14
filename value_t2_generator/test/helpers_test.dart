@@ -411,6 +411,17 @@ a == other.a && b == other.b && c == other.c;""";
 
       expect(result.toString(), "required this.age,\nthis.name,");
     });
+
+    test("4k with null collection", () {
+      var result = getConstructorRows(
+        [
+          NameTypeClassComment("age", "int", null),
+          NameTypeClassComment("listOfStrings", "List<String?>", null),
+        ],
+      );
+
+      expect(result.toString(), "required this.age,\nrequired this.listOfStrings,");
+    });
   });
 
   group("removeDollarsFromPropertyType", () {

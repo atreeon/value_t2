@@ -166,7 +166,7 @@ String getPropertiesAbstract(List<NameTypeClassComment> fields) => //
 String getConstructorRows(List<NameType> fields) => //
     fields
         .map((e) {
-          if (e.type!.contains("?")) {
+          if (e.type!.substring(e.type!.length - 1) == "?") {
             return "this.${e.name},";
           }
 
