@@ -85,7 +85,7 @@ String createValueT2(
   sb.writeln("}");
 
   sb.writeln();
-  sb.writeln("extension ${className}_copyTo_E on ${className} {");
+  sb.writeln("extension ${className}_changeTo_E on ${className} {");
 
   interfacesX.where((element) => element.isExplicitSubType).forEach((x) {
     sb.writeln(

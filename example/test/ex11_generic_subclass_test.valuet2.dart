@@ -11,13 +11,13 @@ part of 'ex11_generic_subclass_test.dart';
 abstract class A<T1, T2> extends $$A<T1, T2> {
   T1 get x;
   T2 get y;
-  A cwA<T1, T2>({
+  A copyWith_A<T1, T2>({
     Opt<T1>? x,
     Opt<T2>? y,
   });
 }
 
-extension $$A_copyTo_E on $$A {}
+extension $$A_changeTo_E on $$A {}
 
 enum A$ { x, y }
 
@@ -57,7 +57,7 @@ class B extends $B implements A<int, String> {
           x == other.x &&
           y == other.y &&
           z == other.z;
-  B cwA<T1, T2>({
+  B copyWith_A<T1, T2>({
     Opt<T1>? x,
     Opt<T2>? y,
   }) {
@@ -68,7 +68,7 @@ class B extends $B implements A<int, String> {
     );
   }
 
-  B cwB({
+  B copyWith_B({
     Opt<int>? x,
     Opt<String>? y,
     Opt<String>? z,
@@ -81,6 +81,6 @@ class B extends $B implements A<int, String> {
   }
 }
 
-extension $B_copyTo_E on $B {}
+extension $B_changeTo_E on $B {}
 
 enum B$ { x, y, z }

@@ -20,7 +20,7 @@ class Pet extends $Pet {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is Pet && runtimeType == other.runtimeType && type == other.type;
-  Pet cwPet({
+  Pet copyWith_Pet({
     Opt<String>? type,
   }) {
     return Pet(
@@ -29,6 +29,6 @@ class Pet extends $Pet {
   }
 }
 
-extension $Pet_copyTo_E on $Pet {}
+extension $Pet_changeTo_E on $Pet {}
 
 enum Pet$ { type }

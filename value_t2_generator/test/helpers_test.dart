@@ -498,7 +498,7 @@ a == other.a && b == other.b && c == other.c;""";
         isClassAbstract: true,
         interfaceGenerics: [],
       );
-      expect(result, """A cwA({
+      expect(result, """A copyWith_A({
 Opt<String>? a,
 });""");
     });
@@ -517,7 +517,7 @@ Opt<String>? a,
         isClassAbstract: true,
         interfaceGenerics: [],
       );
-      expect(result, """B cwA({
+      expect(result, """B copyWith_A({
 Opt<int>? a,
 });""");
     });
@@ -535,7 +535,7 @@ Opt<int>? a,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """A cwA({
+      expect(result, """A copyWith_A({
 Opt<String>? a,
 }) {
 return A(
@@ -558,7 +558,7 @@ a: a == null ? this.a as String : a.value as String,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """B cwA({
+      expect(result, """B copyWith_A({
 Opt<String>? a,
 }) {
 return B(
@@ -583,7 +583,7 @@ b: (this as B).b,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """B cwB({
+      expect(result, """B copyWith_B({
 Opt<String>? a,
 Opt<T1>? b,
 }) {
@@ -609,7 +609,7 @@ b: b == null ? this.b as T1 : b.value as T1,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """C cwA({
+      expect(result, """C copyWith_A({
 Opt<String>? a,
 }) {
 return C(
@@ -636,7 +636,7 @@ c: (this as C).c,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """C cwB({
+      expect(result, """C copyWith_B({
 Opt<String>? a,
 Opt<T1>? b,
 }) {
@@ -665,7 +665,7 @@ c: (this as C).c,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """C cwC({
+      expect(result, """C copyWith_C({
 Opt<String>? a,
 Opt<T1>? b,
 Opt<bool>? c,
@@ -692,7 +692,7 @@ c: c == null ? this.c as bool : c.value as bool,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """D cwA({
+      expect(result, """D copyWith_A({
 Opt<String>? a,
 }) {
 return D(
@@ -717,7 +717,7 @@ b: (this as D).b,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """D cwB({
+      expect(result, """D copyWith_B({
 Opt<String>? a,
 Opt<T1>? b,
 }) {
@@ -743,7 +743,7 @@ b: b == null ? this.b as T1 : b.value as T1,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """D cwD({
+      expect(result, """D copyWith_D({
 Opt<String>? a,
 Opt<T1>? b,
 }) {
@@ -763,7 +763,7 @@ b: b == null ? this.b as T1 : b.value as T1,
         isClassAbstract: true,
         interfaceGenerics: [],
       );
-      expect(result, """X cwX(
+      expect(result, """X copyWith_X(
 );""");
     });
 
@@ -778,7 +778,7 @@ b: b == null ? this.b as T1 : b.value as T1,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """Y cwX(
+      expect(result, """Y copyWith_X(
 ) {
 return Y(
 a: (this as Y).a,
@@ -799,7 +799,7 @@ a: (this as Y).a,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """Y cwY({
+      expect(result, """Y copyWith_Y({
 Opt<String>? a,
 }) {
 return Y(
@@ -821,7 +821,7 @@ a: a == null ? this.a as String : a.value as String,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """A cwA({
+      expect(result, """A copyWith_A({
 Opt<Person>? a,
 }) {
 return A(
@@ -843,7 +843,7 @@ a: a == null ? this.a as Person : a.value as Person,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """B cwA({
+      expect(result, """B copyWith_A({
 Opt<Person>? a,
 }) {
 return B(
@@ -865,7 +865,7 @@ a: a == null ? this.a as Employee : a.value as Employee,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """B cwB({
+      expect(result, """B copyWith_B({
 Opt<Employee>? a,
 }) {
 return B(
@@ -887,7 +887,7 @@ a: a == null ? this.a as Employee : a.value as Employee,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """C cwA({
+      expect(result, """C copyWith_A({
 Opt<Person>? a,
 }) {
 return C(
@@ -909,7 +909,7 @@ a: a == null ? this.a as Manager : a.value as Manager,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """C cwB({
+      expect(result, """C copyWith_B({
 Opt<Employee>? a,
 }) {
 return C(
@@ -931,7 +931,7 @@ a: a == null ? this.a as Manager : a.value as Manager,
         isClassAbstract: false,
         interfaceGenerics: [],
       );
-      expect(result, """C cwC({
+      expect(result, """C copyWith_C({
 Opt<Manager>? a,
 }) {
 return C(
@@ -956,7 +956,7 @@ a: a == null ? this.a as Manager : a.value as Manager,
         className: "B",
         isClassAbstract: false,
       );
-      expect(result, """B cwA<T1, T2>({
+      expect(result, """B copyWith_A<T1, T2>({
 Opt<T1>? x,
 Opt<T2>? y,
 }) {
@@ -985,7 +985,7 @@ z: (this as B).z,
         className: "B",
         isClassAbstract: false,
       );
-      expect(result, """B cwB({
+      expect(result, """B copyWith_B({
 Opt<int>? x,
 Opt<String>? y,
 Opt<String>? z,
@@ -1011,7 +1011,7 @@ z: z == null ? this.z as String : z.value as String,
         className: "A",
         isClassAbstract: true,
       );
-      expect(result, """A cwA<T>({
+      expect(result, """A copyWith_A<T>({
 Opt<T>? x,
 });""");
     });
@@ -1031,7 +1031,7 @@ Opt<T>? x,
         className: "B",
         isClassAbstract: false,
       );
-      expect(result, """B cwA<T>({
+      expect(result, """B copyWith_A<T>({
 Opt<T>? x,
 }) {
 return B(
@@ -1054,7 +1054,7 @@ y: (this as B).y,
         className: "A_",
         isClassAbstract: false,
       );
-      expect(result, """A_ cwA_({
+      expect(result, """A_ copyWith_A_({
 Opt<String>? a,
 }) {
 return A_._(
@@ -1076,7 +1076,7 @@ a: a == null ? this.a as String : a.value as String,
         className: "X",
         isClassAbstract: false,
       );
-      expect(result, """X cwX({
+      expect(result, """X copyWith_X({
 Opt<bool Function(\$X)>? fn,
 }) {
 return X(
@@ -1100,7 +1100,7 @@ fn: fn == null ? this.fn as bool Function(\$X) : fn.value as bool Function(\$X),
         isClassAbstract: false,
         isExplicitSubType: true,
       );
-      expect(result, """B copyToB({
+      expect(result, """B changeTo_B({
 required String y,
 Opt<String>? x,
 }) {
@@ -1127,7 +1127,7 @@ x: x == null ? this.x as String : x.value as String,
         isClassAbstract: false,
         isExplicitSubType: true,
       );
-      expect(result, """B copyToB({
+      expect(result, """B changeTo_B({
 required String y,
 required Z z,
 Opt<String>? x,
@@ -1156,7 +1156,7 @@ x: x == null ? this.x as String : x.value as String,
         isClassAbstract: false,
         isExplicitSubType: true,
       );
-      expect(result, """B copyToB({
+      expect(result, """B changeTo_B({
 required String y,
 required Z z,
 Opt<String>? x,
@@ -1186,7 +1186,7 @@ x: x == null ? this.x as String : x.value as String,
         className: "\$B",
         isClassAbstract: false,
       );
-      expect(result, """B cwB({
+      expect(result, """B copyWith_B({
 Opt<String>? x,
 Opt<List<C>>? cs,
 Opt<Z>? z,
@@ -1214,7 +1214,7 @@ z: z == null ? this.z as Z : z.value as Z,
         isClassAbstract: true,
         isExplicitSubType: true,
       );
-      expect(result, """B copyToB({
+      expect(result, """B changeTo_B({
 required String y,
 Opt<String>? x,
 }) {
@@ -1247,7 +1247,7 @@ x: x == null ? this.x as String : x.value as String,
 //        ],
 //        "A",
 //      );
-//      expect(result, """A cwA({
+//      expect(result, """A copyWith_A({
 //required int a,
 //required String? b,
 //}) {""");

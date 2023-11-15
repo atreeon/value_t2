@@ -30,7 +30,7 @@ main() {
   test("subA to subB (sub sibling to sub)", () {
     // SubA subA = SubA(x: "x", y: "y");
     SubA subA = SubA(x: "x");
-    SubB subB = subA.copyToSubB(z: "z");
+    SubB subB = subA.changeTo_SubB(z: "z");
 
     expect(subB.toString(), "(SubB-z:z|x:x)");
   });

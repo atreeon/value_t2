@@ -22,7 +22,7 @@ class ScheduleVM_Item extends $ScheduleVM_Item {
       other is ScheduleVM_Item &&
           runtimeType == other.runtimeType &&
           value == other.value;
-  ScheduleVM_Item cwScheduleVM_Item({
+  ScheduleVM_Item copyWith_ScheduleVM_Item({
     Opt<String>? value,
   }) {
     return ScheduleVM_Item(
@@ -31,6 +31,6 @@ class ScheduleVM_Item extends $ScheduleVM_Item {
   }
 }
 
-extension $ScheduleVM_Item_copyTo_E on $ScheduleVM_Item {}
+extension $ScheduleVM_Item_changeTo_E on $ScheduleVM_Item {}
 
 enum ScheduleVM_Item$ { value }

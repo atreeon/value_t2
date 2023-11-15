@@ -21,8 +21,8 @@ bob1 == bob2; //true
 
 ```
 var bob = Employee(age: 5, name: "bob", id: "123);
-var bobby = bob.cwPerson(age: 6, name: "bobby");
-var robert = bob.cwEmployee(age: 25, name: "robert", id: "123);
+var bobby = bob.copyWith_Person(age: 6, name: "bobby");
+var robert = bob.copyWith_Employee(age: 25, name: "robert", id: "123);
 
 bobby is Employee; //true
 robert is Employee; //true

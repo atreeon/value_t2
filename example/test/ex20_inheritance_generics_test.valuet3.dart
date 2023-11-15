@@ -22,7 +22,7 @@ class BI extends $BI {
       other is BI &&
           runtimeType == other.runtimeType &&
           orderId == other.orderId;
-  BI cwBI({
+  BI copyWith_BI({
     Opt<int>? orderId,
   }) {
     return BI(
@@ -31,6 +31,6 @@ class BI extends $BI {
   }
 }
 
-extension $BI_copyTo_E on $BI {}
+extension $BI_changeTo_E on $BI {}
 
 enum BI$ { orderId }

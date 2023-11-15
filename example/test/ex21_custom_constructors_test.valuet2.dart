@@ -20,7 +20,7 @@ class A_ extends $A_ {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is A_ && runtimeType == other.runtimeType && a == other.a;
-  A_ cwA_({
+  A_ copyWith_A_({
     Opt<String>? a,
   }) {
     return A_._(
@@ -29,6 +29,6 @@ class A_ extends $A_ {
   }
 }
 
-extension $A__copyTo_E on $A_ {}
+extension $A__changeTo_E on $A_ {}
 
 enum A_$ { a }

@@ -17,7 +17,7 @@ class A extends $A {
 
   String toString() => "(A-a:$a)";
 
-  A cwA({
+  A copyWith_A({
     Opt<Person>? a,
   }) {
     return A(
@@ -38,7 +38,7 @@ class B extends $B implements A {
 
   String toString() => "(B-a:$a)";
 
-  B cwA({
+  B copyWith_A({
     Opt<Person>? a,
   }) {
     return B(
@@ -46,7 +46,7 @@ class B extends $B implements A {
     );
   }
 
-  B cwB({
+  B copyWith_B({
     Opt<Employee>? a,
   }) {
     return B(
@@ -67,7 +67,7 @@ class C extends $C implements B {
 
   String toString() => "(C-a:$a)";
 
-  C cwA({
+  C copyWith_A({
     Opt<Person>? a,
   }) {
     return C(
@@ -75,7 +75,7 @@ class C extends $C implements B {
     );
   }
 
-  C cwB({
+  C copyWith_B({
     Opt<Employee>? a,
   }) {
     return C(
@@ -83,7 +83,7 @@ class C extends $C implements B {
     );
   }
 
-  C cwC({
+  C copyWith_C({
     Opt<Manager>? a,
   }) {
     return C(
@@ -108,37 +108,37 @@ main() {
 
   test("2 aa copy with", () {
     var a = A(a: Person("1"));
-    var a_copy = a.cwA(a: Opt(Person("X")));
+    var a_copy = a.copyWith_A(a: Opt(Person("X")));
     expect(a_copy.toString(), "(A-a:X)");
   });
 
   test("2 ba copy with", () {
     var b = B(a: Employee("1", "2"));
-    var ba_copy = b.cwA(a: Opt(Employee("X", "Y")));
+    var ba_copy = b.copyWith_A(a: Opt(Employee("X", "Y")));
     expect(ba_copy.toString(), "(B-a:X|Y)");
   });
 
   test("3 bb copy with", () {
     var b = B(a: Employee("1", "2"));
-    var bb_copy = b.cwB(a: Opt(Employee("X", "Y")));
+    var bb_copy = b.copyWith_B(a: Opt(Employee("X", "Y")));
     expect(bb_copy.toString(), "(B-a:X|Y)");
   });
 
   test("4 ca copy with", () {
     var c = C(a: Manager("1", "2", "3"));
-    var ca_copy = c.cwA(a: Opt(Manager("X", "Y", "Z")));
+    var ca_copy = c.copyWith_A(a: Opt(Manager("X", "Y", "Z")));
     expect(ca_copy.toString(), "(C-a:X|Y|Z)");
   });
 
   test("5 cb copy with", () {
     var c = C(a: Manager("1", "2", "3"));
-    var cb_copy = c.cwB(a: Opt(Manager("X", "Y", "Z")));
+    var cb_copy = c.copyWith_B(a: Opt(Manager("X", "Y", "Z")));
     expect(cb_copy.toString(), "(C-a:X|Y|Z)");
   });
 
   test("6 cc copy with", () {
     var c = C(a: Manager("1", "2", "3"));
-    var cc_copy = c.cwC(a: Opt(Manager("X", "Y", "Z")));
+    var cc_copy = c.copyWith_C(a: Opt(Manager("X", "Y", "Z")));
     expect(cc_copy.toString(), "(C-a:X|Y|Z)");
   });
 }

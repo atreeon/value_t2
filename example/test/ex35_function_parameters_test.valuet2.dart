@@ -16,7 +16,7 @@ abstract class A extends $$A {
   bool Function(int, $X, int) get t2TypeAsParameter2;
   $X Function() get t2TypeAsReturn;
   X get stuff;
-  A cwA({
+  A copyWith_A({
     Opt<int>? id,
     Opt<bool Function($X)>? t2TypeAsParameter1,
     Opt<bool Function(int, $X, int)>? t2TypeAsParameter2,
@@ -25,7 +25,7 @@ abstract class A extends $$A {
   });
 }
 
-extension $$A_copyTo_E on $$A {}
+extension $$A_changeTo_E on $$A {}
 
 enum A$ { id, t2TypeAsParameter1, t2TypeAsParameter2, t2TypeAsReturn, stuff }
 
@@ -76,7 +76,7 @@ class B extends $B implements A {
           t2TypeAsParameter2 == other.t2TypeAsParameter2 &&
           t2TypeAsReturn == other.t2TypeAsReturn &&
           stuff == other.stuff;
-  B cwA({
+  B copyWith_A({
     Opt<int>? id,
     Opt<bool Function($X)>? t2TypeAsParameter1,
     Opt<bool Function(int, $X, int)>? t2TypeAsParameter2,
@@ -98,7 +98,7 @@ class B extends $B implements A {
     );
   }
 
-  B cwB({
+  B copyWith_B({
     Opt<int>? id,
     Opt<bool Function($X)>? t2TypeAsParameter1,
     Opt<bool Function(int, $X, int)>? t2TypeAsParameter2,
@@ -121,7 +121,7 @@ class B extends $B implements A {
   }
 }
 
-extension $B_copyTo_E on $B {}
+extension $B_changeTo_E on $B {}
 
 enum B$ { id, t2TypeAsParameter1, t2TypeAsParameter2, t2TypeAsReturn, stuff }
 
@@ -139,7 +139,7 @@ class X extends $X {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is X && runtimeType == other.runtimeType && id == other.id;
-  X cwX({
+  X copyWith_X({
     Opt<int>? id,
   }) {
     return X(
@@ -148,6 +148,6 @@ class X extends $X {
   }
 }
 
-extension $X_copyTo_E on $X {}
+extension $X_changeTo_E on $X {}
 
 enum X$ { id }

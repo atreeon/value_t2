@@ -9,10 +9,10 @@ part of 'ex41_inheritance_generics.dart';
 //x()
 ///
 abstract class A<T> extends $$A<T> {
-  A cwA<T>();
+  A copyWith_A<T>();
 }
 
-extension $$A_copyTo_E on $$A {}
+extension $$A_changeTo_E on $$A {}
 
 //x()
 ///
@@ -36,13 +36,13 @@ class B<T> extends $B<T> implements A<T> {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is B && runtimeType == other.runtimeType && data == other.data;
-  B cwA<T>() {
+  B copyWith_A<T>() {
     return B(
       data: (this as B).data,
     );
   }
 
-  B cwB<T>({
+  B copyWith_B<T>({
     Opt<T>? data,
   }) {
     return B(
@@ -51,7 +51,7 @@ class B<T> extends $B<T> implements A<T> {
   }
 }
 
-extension $B_copyTo_E on $B {}
+extension $B_changeTo_E on $B {}
 
 enum B$ { data }
 
@@ -83,14 +83,14 @@ class C<T> extends $C<T> implements A<T> {
           runtimeType == other.runtimeType &&
           failureCode == other.failureCode &&
           description == other.description;
-  C cwA<T>() {
+  C copyWith_A<T>() {
     return C(
       failureCode: (this as C).failureCode,
       description: (this as C).description,
     );
   }
 
-  C cwC<T>({
+  C copyWith_C<T>({
     Opt<eEnumExample>? failureCode,
     Opt<String>? description,
   }) {
@@ -105,6 +105,6 @@ class C<T> extends $C<T> implements A<T> {
   }
 }
 
-extension $C_copyTo_E on $C {}
+extension $C_changeTo_E on $C {}
 
 enum C$ { failureCode, description }

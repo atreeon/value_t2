@@ -26,7 +26,7 @@ class ScheduleVM<T extends ScheduleVM_Item> extends $ScheduleVM<T> {
       other is ScheduleVM &&
           runtimeType == other.runtimeType &&
           (schedules).equalUnorderedD(other.schedules);
-  ScheduleVM cwScheduleVM<T extends ScheduleVM_Item>({
+  ScheduleVM copyWith_ScheduleVM<T extends ScheduleVM_Item>({
     Opt<List<T>>? schedules,
   }) {
     return ScheduleVM(
@@ -37,6 +37,6 @@ class ScheduleVM<T extends ScheduleVM_Item> extends $ScheduleVM<T> {
   }
 }
 
-extension $ScheduleVM_copyTo_E on $ScheduleVM {}
+extension $ScheduleVM_changeTo_E on $ScheduleVM {}
 
 enum ScheduleVM$ { schedules }

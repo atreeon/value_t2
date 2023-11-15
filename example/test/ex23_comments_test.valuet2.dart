@@ -29,7 +29,7 @@ class Cat extends $Cat {
           runtimeType == other.runtimeType &&
           type == other.type &&
           colour == other.colour;
-  Cat cwCat({
+  Cat copyWith_Cat({
     Opt<String>? type,
     Opt<String>? colour,
   }) {
@@ -40,6 +40,6 @@ class Cat extends $Cat {
   }
 }
 
-extension $Cat_copyTo_E on $Cat {}
+extension $Cat_changeTo_E on $Cat {}
 
 enum Cat$ { type, colour }

@@ -28,7 +28,7 @@ class UserLectureInfoPopupVM extends $UserLectureInfoPopupVM {
           runtimeType == other.runtimeType &&
           lectureId == other.lectureId &&
           isExcluded == other.isExcluded;
-  UserLectureInfoPopupVM cwUserLectureInfoPopupVM({
+  UserLectureInfoPopupVM copyWith_UserLectureInfoPopupVM({
     Opt<String>? lectureId,
     Opt<bool>? isExcluded,
   }) {
@@ -43,7 +43,7 @@ class UserLectureInfoPopupVM extends $UserLectureInfoPopupVM {
   }
 }
 
-extension $UserLectureInfoPopupVM_copyTo_E on $UserLectureInfoPopupVM {}
+extension $UserLectureInfoPopupVM_changeTo_E on $UserLectureInfoPopupVM {}
 
 enum UserLectureInfoPopupVM$ { lectureId, isExcluded }
 
@@ -90,7 +90,7 @@ class UserLectureInfoPopupVM_worstWords
           isExcluded == other.isExcluded &&
           worstWordDue == other.worstWordDue &&
           stageOfStages == other.stageOfStages;
-  UserLectureInfoPopupVM_worstWords cwUserLectureInfoPopupVM({
+  UserLectureInfoPopupVM_worstWords copyWith_UserLectureInfoPopupVM({
     Opt<String>? lectureId,
     Opt<bool>? isExcluded,
   }) {
@@ -106,7 +106,7 @@ class UserLectureInfoPopupVM_worstWords
     );
   }
 
-  UserLectureInfoPopupVM_worstWords cwUserLectureInfoPopupVM_worstWords({
+  UserLectureInfoPopupVM_worstWords copyWith_UserLectureInfoPopupVM_worstWords({
     Opt<String>? lectureId,
     Opt<bool>? isExcluded,
     Opt<String>? worstWordDue,
@@ -129,7 +129,7 @@ class UserLectureInfoPopupVM_worstWords
   }
 }
 
-extension $UserLectureInfoPopupVM_worstWords_copyTo_E
+extension $UserLectureInfoPopupVM_worstWords_changeTo_E
     on $UserLectureInfoPopupVM_worstWords {}
 
 enum UserLectureInfoPopupVM_worstWords$ {

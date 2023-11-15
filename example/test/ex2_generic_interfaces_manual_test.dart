@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 abstract class A<T> {
   T get x;
 
-  A cwA<T>({
+  A copyWith_A<T>({
     Opt<T>? x,
   });
 }
@@ -22,7 +22,7 @@ class B<T extends $C, T3> implements A<int> {
 
   String toString() => "(B-x:$x|y:$y)";
 
-  B cwA<T>({
+  B copyWith_A<T>({
     Opt<T>? x,
   }) {
     return B(
@@ -31,7 +31,7 @@ class B<T extends $C, T3> implements A<int> {
     );
   }
 
-  B cwB<T extends $C, T3>({
+  B copyWith_B<T extends $C, T3>({
     Opt<int>? x,
     Opt<T>? y,
   }) {
@@ -55,13 +55,13 @@ class C implements $C {
 main() {
   test("1 ba copy with", () {
     var b = B(x: 1, y: C("z"));
-    var ba_copy = b.cwA(x: Opt(2));
+    var ba_copy = b.copyWith_A(x: Opt(2));
     expect(ba_copy.toString(), "(B-x:2|y:(C-z:z))");
   });
 
   test("2 bb copy with", () {
     var b = B(x: 1, y: C("z"));
-    var bb_copy = b.cwB(x: Opt(2), y: Opt(C("Z")));
+    var bb_copy = b.copyWith_B(x: Opt(2), y: Opt(C("Z")));
     expect(bb_copy.toString(), "(B-x:2|y:(C-z:Z))");
   });
 }

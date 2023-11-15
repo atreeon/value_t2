@@ -20,7 +20,7 @@ class BQR extends $BQR {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is BQR && runtimeType == other.runtimeType && batch == other.batch;
-  BQR cwBQR({
+  BQR copyWith_BQR({
     Opt<BS<BI>>? batch,
   }) {
     return BQR(
@@ -29,7 +29,7 @@ class BQR extends $BQR {
   }
 }
 
-extension $BQR_copyTo_E on $BQR {}
+extension $BQR_changeTo_E on $BQR {}
 
 enum BQR$ { batch }
 
@@ -49,7 +49,7 @@ class BS<Tbi extends BI> extends $BS<Tbi> {
       other is BS &&
           runtimeType == other.runtimeType &&
           (batchItems).equalUnorderedD(other.batchItems);
-  BS cwBS<Tbi extends BI>({
+  BS copyWith_BS<Tbi extends BI>({
     Opt<List<Tbi>>? batchItems,
   }) {
     return BS(
@@ -60,7 +60,7 @@ class BS<Tbi extends BI> extends $BS<Tbi> {
   }
 }
 
-extension $BS_copyTo_E on $BS {}
+extension $BS_changeTo_E on $BS {}
 
 enum BS$ { batchItems }
 
@@ -88,7 +88,7 @@ class BS_BI extends $BS_BI implements BS<BI> {
       other is BS_BI &&
           runtimeType == other.runtimeType &&
           (batchItems).equalUnorderedD(other.batchItems);
-  BS_BI cwBS<Tbi extends BI>({
+  BS_BI copyWith_BS<Tbi extends BI>({
     Opt<List<Tbi>>? batchItems,
   }) {
     return BS_BI(
@@ -98,7 +98,7 @@ class BS_BI extends $BS_BI implements BS<BI> {
     );
   }
 
-  BS_BI cwBS_BI({
+  BS_BI copyWith_BS_BI({
     Opt<List<BI>>? batchItems,
   }) {
     return BS_BI(
@@ -109,6 +109,6 @@ class BS_BI extends $BS_BI implements BS<BI> {
   }
 }
 
-extension $BS_BI_copyTo_E on $BS_BI {}
+extension $BS_BI_changeTo_E on $BS_BI {}
 
 enum BS_BI$ { batchItems }

@@ -22,7 +22,7 @@ class A<T> extends $A<T> {
       other is A &&
           runtimeType == other.runtimeType &&
           (batchItems).equalUnorderedD(other.batchItems);
-  A cwA<T>({
+  A copyWith_A<T>({
     Opt<List<T>>? batchItems,
   }) {
     return A(
@@ -33,7 +33,7 @@ class A<T> extends $A<T> {
   }
 }
 
-extension $A_copyTo_E on $A {}
+extension $A_changeTo_E on $A {}
 
 enum A$ { batchItems }
 
@@ -61,7 +61,7 @@ class B extends $B implements A<$X> {
       other is B &&
           runtimeType == other.runtimeType &&
           (batchItems).equalUnorderedD(other.batchItems);
-  B cwA<T>({
+  B copyWith_A<T>({
     Opt<List<T>>? batchItems,
   }) {
     return B(
@@ -71,7 +71,7 @@ class B extends $B implements A<$X> {
     );
   }
 
-  B cwB({
+  B copyWith_B({
     Opt<List<X>>? batchItems,
   }) {
     return B(
@@ -82,7 +82,7 @@ class B extends $B implements A<$X> {
   }
 }
 
-extension $B_copyTo_E on $B {}
+extension $B_changeTo_E on $B {}
 
 enum B$ { batchItems }
 
@@ -100,7 +100,7 @@ class X extends $X {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is X && runtimeType == other.runtimeType && id == other.id;
-  X cwX({
+  X copyWith_X({
     Opt<int>? id,
   }) {
     return X(
@@ -109,6 +109,6 @@ class X extends $X {
   }
 }
 
-extension $X_copyTo_E on $X {}
+extension $X_changeTo_E on $X {}
 
 enum X$ { id }

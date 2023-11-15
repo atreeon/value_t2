@@ -219,7 +219,7 @@ String getEquals(List<NameType> fields, String className) {
 }
 
 ///[classFields] & [interfaceFields] should be renamed
-/// for copyTo [classFields] and [className] is what we are copying from
+/// for changeTo [classFields] and [className] is what we are copying from
 /// and [interfaceFields] and [interfaceName] is what we are copying to
 /// [classFields] can be an interface & [interfaceFields] can be a class!
 String getCopyWith({
@@ -229,7 +229,7 @@ String getCopyWith({
   required String className,
   required bool isClassAbstract,
   required List<NameType> interfaceGenerics,
-  bool isExplicitSubType = false, //for where we specify the explicit subtypes for copyTo
+  bool isExplicitSubType = false, //for where we specify the explicit subtypes for changeTo
 }) {
   var sb = StringBuffer();
   // sb.writeln("//${classFields}|${interfaceFields}|$interfaceName|$className");
@@ -238,8 +238,8 @@ String getCopyWith({
   var interfaceNameTrimmed = interfaceName.replaceAll("\$", "");
 
   isExplicitSubType //
-      ? sb.write("$interfaceNameTrimmed copyTo${interfaceNameTrimmed}")
-      : sb.write("$classNameTrimmed cw$interfaceNameTrimmed");
+      ? sb.write("$interfaceNameTrimmed changeTo_${interfaceNameTrimmed}")
+      : sb.write("$classNameTrimmed copyWith_$interfaceNameTrimmed");
 
   if (interfaceGenerics.isNotEmpty) {
     var generic = interfaceGenerics //

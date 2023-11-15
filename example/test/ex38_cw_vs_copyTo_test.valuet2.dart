@@ -12,12 +12,12 @@ part of 'ex38_cw_vs_copyTo_test.dart';
 ///
 abstract class Super extends $$Super {
   String get x;
-  Super cwSuper({
+  Super copyWith_Super({
     Opt<String>? x,
   });
 }
 
-extension $$Super_copyTo_E on $$Super {}
+extension $$Super_changeTo_E on $$Super {}
 
 enum Super$ { x }
 
@@ -47,7 +47,7 @@ class SubA extends $SubA implements Super {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is SubA && runtimeType == other.runtimeType && x == other.x;
-  SubA cwSuper({
+  SubA copyWith_Super({
     Opt<String>? x,
   }) {
     return SubA(
@@ -55,7 +55,7 @@ class SubA extends $SubA implements Super {
     );
   }
 
-  SubA cwSubA({
+  SubA copyWith_SubA({
     Opt<String>? x,
   }) {
     return SubA(
@@ -64,8 +64,8 @@ class SubA extends $SubA implements Super {
   }
 }
 
-extension $SubA_copyTo_E on $SubA {
-  SubB copyToSubB({
+extension $SubA_changeTo_E on $SubA {
+  SubB changeTo_SubB({
     required String z,
     required List<C> cs,
     Opt<String>? x,
@@ -115,7 +115,7 @@ class SubB extends $SubB implements Super {
           z == other.z &&
           (cs).equalUnorderedD(other.cs) &&
           x == other.x;
-  SubB cwSuper({
+  SubB copyWith_Super({
     Opt<String>? x,
   }) {
     return SubB(
@@ -125,7 +125,7 @@ class SubB extends $SubB implements Super {
     );
   }
 
-  SubB cwSubB({
+  SubB copyWith_SubB({
     Opt<String>? z,
     Opt<List<C>>? cs,
     Opt<String>? x,
@@ -138,7 +138,7 @@ class SubB extends $SubB implements Super {
   }
 }
 
-extension $SubB_copyTo_E on $SubB {}
+extension $SubB_changeTo_E on $SubB {}
 
 enum SubB$ { z, cs, x }
 
@@ -156,7 +156,7 @@ class C extends $C {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is C && runtimeType == other.runtimeType && m == other.m;
-  C cwC({
+  C copyWith_C({
     Opt<String>? m,
   }) {
     return C(
@@ -165,6 +165,6 @@ class C extends $C {
   }
 }
 
-extension $C_copyTo_E on $C {}
+extension $C_changeTo_E on $C {}
 
 enum C$ { m }

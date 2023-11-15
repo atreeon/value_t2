@@ -14,9 +14,9 @@ class A extends $A {
 
   bool operator ==(Object other) =>
       identical(this, other) || other is A && runtimeType == other.runtimeType;
-  A cwA() {
+  A copyWith_A() {
     return A();
   }
 }
 
-extension $A_copyTo_E on $A {}
+extension $A_changeTo_E on $A {}

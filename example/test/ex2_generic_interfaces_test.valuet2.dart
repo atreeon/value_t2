@@ -10,12 +10,12 @@ part of 'ex2_generic_interfaces_test.dart';
 ///
 abstract class A<T> extends $$A<T> {
   T get x;
-  A cwA<T>({
+  A copyWith_A<T>({
     Opt<T>? x,
   });
 }
 
-extension $$A_copyTo_E on $$A {}
+extension $$A_changeTo_E on $$A {}
 
 enum A$ { x }
 
@@ -60,7 +60,7 @@ class B<T extends $C, T3> extends $B<T, T3> implements A<int>, C {
           x == other.x &&
           y == other.y &&
           z == other.z;
-  B cwA<T>({
+  B copyWith_A<T>({
     Opt<T>? x,
   }) {
     return B(
@@ -70,7 +70,7 @@ class B<T extends $C, T3> extends $B<T, T3> implements A<int>, C {
     );
   }
 
-  B cwC({
+  B copyWith_C({
     Opt<String>? z,
   }) {
     return B(
@@ -80,7 +80,7 @@ class B<T extends $C, T3> extends $B<T, T3> implements A<int>, C {
     );
   }
 
-  B cwB<T extends $C, T3>({
+  B copyWith_B<T extends $C, T3>({
     Opt<int>? x,
     Opt<T>? y,
     Opt<String>? z,
@@ -93,7 +93,7 @@ class B<T extends $C, T3> extends $B<T, T3> implements A<int>, C {
   }
 }
 
-extension $B_copyTo_E on $B {}
+extension $B_changeTo_E on $B {}
 
 enum B$ { x, y, z }
 
@@ -111,7 +111,7 @@ class C extends $C {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is C && runtimeType == other.runtimeType && z == other.z;
-  C cwC({
+  C copyWith_C({
     Opt<String>? z,
   }) {
     return C(
@@ -120,6 +120,6 @@ class C extends $C {
   }
 }
 
-extension $C_copyTo_E on $C {}
+extension $C_changeTo_E on $C {}
 
 enum C$ { z }

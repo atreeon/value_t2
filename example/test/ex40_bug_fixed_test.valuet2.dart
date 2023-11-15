@@ -14,7 +14,7 @@ abstract class MonitorI extends $$MonitorI {
   String get monitorName;
   String get monitorPostcode;
   bool get isExcluded;
-  MonitorI cwMonitorI({
+  MonitorI copyWith_MonitorI({
     Opt<String>? monitorId,
     Opt<int>? locationId,
     Opt<String>? monitorName,
@@ -23,7 +23,7 @@ abstract class MonitorI extends $$MonitorI {
   });
 }
 
-extension $$MonitorI_copyTo_E on $$MonitorI {}
+extension $$MonitorI_changeTo_E on $$MonitorI {}
 
 enum MonitorI$ {
   monitorId,
@@ -80,7 +80,7 @@ class Monitor_PurpleAir extends $Monitor_PurpleAir implements MonitorI {
           monitorPostcode == other.monitorPostcode &&
           isExcluded == other.isExcluded &&
           purpleAirSensorApiId == other.purpleAirSensorApiId;
-  Monitor_PurpleAir cwMonitorI({
+  Monitor_PurpleAir copyWith_MonitorI({
     Opt<String>? monitorId,
     Opt<int>? locationId,
     Opt<String>? monitorName,
@@ -106,7 +106,7 @@ class Monitor_PurpleAir extends $Monitor_PurpleAir implements MonitorI {
     );
   }
 
-  Monitor_PurpleAir cwMonitor_PurpleAir({
+  Monitor_PurpleAir copyWith_Monitor_PurpleAir({
     Opt<String>? monitorId,
     Opt<int>? locationId,
     Opt<String>? monitorName,
@@ -136,7 +136,7 @@ class Monitor_PurpleAir extends $Monitor_PurpleAir implements MonitorI {
   }
 }
 
-extension $Monitor_PurpleAir_copyTo_E on $Monitor_PurpleAir {}
+extension $Monitor_PurpleAir_changeTo_E on $Monitor_PurpleAir {}
 
 enum Monitor_PurpleAir$ {
   monitorId,

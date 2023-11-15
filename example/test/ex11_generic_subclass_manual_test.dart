@@ -7,7 +7,7 @@ abstract class A<T1, T2> {
   T1 get x;
   T2 get y;
 
-  A cwA<T1, T2>({
+  A copyWith_A<T1, T2>({
     Opt<T1>? x,
     Opt<T2>? y,
   });
@@ -26,7 +26,7 @@ class B implements A<int, String> {
 
   String toString() => "(B-x:$x|y:$y|z:$z)";
 
-  B cwA<T1, T2>({
+  B copyWith_A<T1, T2>({
     Opt<T1>? x,
     Opt<T2>? y,
   }) {
@@ -37,7 +37,7 @@ class B implements A<int, String> {
     );
   }
 
-  B cwB({
+  B copyWith_B({
     Opt<int>? x,
     Opt<String>? y,
     Opt<String>? z,
@@ -53,13 +53,13 @@ class B implements A<int, String> {
 main() {
   test("1 ba copy with", () {
     var b = B(x: 1, y: "y", z: "z");
-    var ba_copy = b.cwA(x: Opt(2), y: Opt("Y"));
+    var ba_copy = b.copyWith_A(x: Opt(2), y: Opt("Y"));
     expect(ba_copy.toString(), "(B-x:2|y:Y|z:z)");
   });
 
   test("2 bb copy with", () {
     var b = B(x: 1, y: "y", z: "z");
-    var bb_copy = b.cwB(x: Opt(2), y: Opt("Y"), z: Opt("Z"));
+    var bb_copy = b.copyWith_B(x: Opt(2), y: Opt("Y"), z: Opt("Z"));
     expect(bb_copy.toString(), "(B-x:2|y:Y|z:Z)");
   });
 }

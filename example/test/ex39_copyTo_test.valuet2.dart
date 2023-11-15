@@ -10,13 +10,13 @@ part of 'ex39_copyTo_test.dart';
 ///
 abstract class Super extends $$Super {
   String get x;
-  Super cwSuper({
+  Super copyWith_Super({
     Opt<String>? x,
   });
 }
 
-extension $$Super_copyTo_E on $$Super {
-  B copyToB({
+extension $$Super_changeTo_E on $$Super {
+  B changeTo_B({
     required String y,
     Opt<String>? x,
   }) {
@@ -56,7 +56,7 @@ class A extends $A implements Super {
           runtimeType == other.runtimeType &&
           x == other.x &&
           z == other.z;
-  A cwSuper({
+  A copyWith_Super({
     Opt<String>? x,
   }) {
     return A(
@@ -65,7 +65,7 @@ class A extends $A implements Super {
     );
   }
 
-  A cwA({
+  A copyWith_A({
     Opt<String>? x,
     Opt<String>? z,
   }) {
@@ -76,7 +76,7 @@ class A extends $A implements Super {
   }
 }
 
-extension $A_copyTo_E on $A {}
+extension $A_changeTo_E on $A {}
 
 enum A$ { x, z }
 
@@ -107,7 +107,7 @@ class B extends $B implements Super {
           runtimeType == other.runtimeType &&
           x == other.x &&
           y == other.y;
-  B cwSuper({
+  B copyWith_Super({
     Opt<String>? x,
   }) {
     return B(
@@ -116,7 +116,7 @@ class B extends $B implements Super {
     );
   }
 
-  B cwB({
+  B copyWith_B({
     Opt<String>? x,
     Opt<String>? y,
   }) {
@@ -127,6 +127,6 @@ class B extends $B implements Super {
   }
 }
 
-extension $B_copyTo_E on $B {}
+extension $B_changeTo_E on $B {}
 
 enum B$ { x, y }

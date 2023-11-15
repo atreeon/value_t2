@@ -9,10 +9,10 @@ part of 'ex19_inheritance_generics.dart';
 //x()
 ///
 abstract class A extends $$A {
-  A cwA();
+  A copyWith_A();
 }
 
-extension $$A_copyTo_E on $$A {}
+extension $$A_changeTo_E on $$A {}
 
 //x()
 ///
@@ -21,22 +21,22 @@ extension $$A_copyTo_E on $$A {}
 
 ///
 abstract class B extends $$B implements A {
-  B cwA();
-  B cwB();
+  B copyWith_A();
+  B copyWith_B();
 }
 
-extension $$B_copyTo_E on $$B {}
+extension $$B_changeTo_E on $$B {}
 
 //x()
 ///
 abstract class C<TBatchItem extends $$A> extends $$C<TBatchItem> {
   List<TBatchItem> get items;
-  C cwC<TBatchItem extends $$A>({
+  C copyWith_C<TBatchItem extends $$A>({
     Opt<List<TBatchItem>>? items,
   });
 }
 
-extension $$C_copyTo_E on $$C {}
+extension $$C_changeTo_E on $$C {}
 
 enum C$ { items }
 
@@ -44,12 +44,12 @@ enum C$ { items }
 ///
 abstract class D extends $$D {
   List<B> get items;
-  D cwD({
+  D copyWith_D({
     Opt<List<B>>? items,
   });
 }
 
-extension $$D_copyTo_E on $$D {}
+extension $$D_changeTo_E on $$D {}
 
 enum D$ { items }
 
@@ -85,7 +85,7 @@ class E extends $E implements C<$$B>, D {
       other is E &&
           runtimeType == other.runtimeType &&
           (items).equalUnorderedD(other.items);
-  E cwC<TBatchItem extends $$A>({
+  E copyWith_C<TBatchItem extends $$A>({
     Opt<List<TBatchItem>>? items,
   }) {
     return E(
@@ -93,7 +93,7 @@ class E extends $E implements C<$$B>, D {
     );
   }
 
-  E cwD({
+  E copyWith_D({
     Opt<List<B>>? items,
   }) {
     return E(
@@ -101,7 +101,7 @@ class E extends $E implements C<$$B>, D {
     );
   }
 
-  E cwE({
+  E copyWith_E({
     Opt<List<B>>? items,
   }) {
     return E(
@@ -110,6 +110,6 @@ class E extends $E implements C<$$B>, D {
   }
 }
 
-extension $E_copyTo_E on $E {}
+extension $E_changeTo_E on $E {}
 
 enum E$ { items }

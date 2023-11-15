@@ -37,7 +37,7 @@ class Pet extends $Pet {
           runtimeType == other.runtimeType &&
           type == other.type &&
           name == other.name;
-  Pet cwPet({
+  Pet copyWith_Pet({
     Opt<String?>? type,
     Opt<String>? name,
   }) {
@@ -48,6 +48,6 @@ class Pet extends $Pet {
   }
 }
 
-extension $Pet_copyTo_E on $Pet {}
+extension $Pet_changeTo_E on $Pet {}
 
 enum Pet$ { type, name }

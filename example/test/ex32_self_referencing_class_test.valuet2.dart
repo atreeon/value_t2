@@ -31,7 +31,7 @@ class A extends $A {
           runtimeType == other.runtimeType &&
           a == other.a &&
           b == other.b;
-  A cwA({
+  A copyWith_A({
     Opt<A?>? a,
     Opt<int>? b,
   }) {
@@ -42,6 +42,6 @@ class A extends $A {
   }
 }
 
-extension $A_copyTo_E on $A {}
+extension $A_changeTo_E on $A {}
 
 enum A$ { a, b }

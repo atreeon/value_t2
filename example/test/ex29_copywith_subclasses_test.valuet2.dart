@@ -11,12 +11,12 @@ part of 'ex29_copywith_subclasses_test.dart';
 ///
 abstract class A extends $$A {
   String get a;
-  A cwA({
+  A copyWith_A({
     Opt<String>? a,
   });
 }
 
-extension $$A_copyTo_E on $$A {}
+extension $$A_changeTo_E on $$A {}
 
 enum A$ { a }
 
@@ -49,7 +49,7 @@ class B<T1> extends $B<T1> implements A {
           runtimeType == other.runtimeType &&
           a == other.a &&
           b == other.b;
-  B cwA({
+  B copyWith_A({
     Opt<String>? a,
   }) {
     return B(
@@ -58,7 +58,7 @@ class B<T1> extends $B<T1> implements A {
     );
   }
 
-  B cwB<T1>({
+  B copyWith_B<T1>({
     Opt<String>? a,
     Opt<T1>? b,
   }) {
@@ -69,7 +69,7 @@ class B<T1> extends $B<T1> implements A {
   }
 }
 
-extension $B_copyTo_E on $B {}
+extension $B_changeTo_E on $B {}
 
 enum B$ { a, b }
 
@@ -104,7 +104,7 @@ class C<T1> extends $C<T1> implements B<T1> {
           a == other.a &&
           b == other.b &&
           c == other.c;
-  C cwB<T1>({
+  C copyWith_B<T1>({
     Opt<String>? a,
     Opt<T1>? b,
   }) {
@@ -115,7 +115,7 @@ class C<T1> extends $C<T1> implements B<T1> {
     );
   }
 
-  C cwA({
+  C copyWith_A({
     Opt<String>? a,
   }) {
     return C(
@@ -125,7 +125,7 @@ class C<T1> extends $C<T1> implements B<T1> {
     );
   }
 
-  C cwC<T1>({
+  C copyWith_C<T1>({
     Opt<String>? a,
     Opt<T1>? b,
     Opt<bool>? c,
@@ -138,7 +138,7 @@ class C<T1> extends $C<T1> implements B<T1> {
   }
 }
 
-extension $C_copyTo_E on $C {}
+extension $C_changeTo_E on $C {}
 
 enum C$ { a, b, c }
 
@@ -169,7 +169,7 @@ class D<T1> extends $D<T1> implements B<T1> {
           runtimeType == other.runtimeType &&
           a == other.a &&
           b == other.b;
-  D cwB<T1>({
+  D copyWith_B<T1>({
     Opt<String>? a,
     Opt<T1>? b,
   }) {
@@ -179,7 +179,7 @@ class D<T1> extends $D<T1> implements B<T1> {
     );
   }
 
-  D cwA({
+  D copyWith_A({
     Opt<String>? a,
   }) {
     return D(
@@ -188,7 +188,7 @@ class D<T1> extends $D<T1> implements B<T1> {
     );
   }
 
-  D cwD<T1>({
+  D copyWith_D<T1>({
     Opt<String>? a,
     Opt<T1>? b,
   }) {
@@ -199,17 +199,17 @@ class D<T1> extends $D<T1> implements B<T1> {
   }
 }
 
-extension $D_copyTo_E on $D {}
+extension $D_changeTo_E on $D {}
 
 enum D$ { a, b }
 
 //x()
 ///
 abstract class X extends $$X {
-  X cwX();
+  X copyWith_X();
 }
 
-extension $$X_copyTo_E on $$X {}
+extension $$X_changeTo_E on $$X {}
 
 //x()
 ///
@@ -233,13 +233,13 @@ class Y extends $Y implements X {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is Y && runtimeType == other.runtimeType && a == other.a;
-  Y cwX() {
+  Y copyWith_X() {
     return Y(
       a: (this as Y).a,
     );
   }
 
-  Y cwY({
+  Y copyWith_Y({
     Opt<String>? a,
   }) {
     return Y(
@@ -248,6 +248,6 @@ class Y extends $Y implements X {
   }
 }
 
-extension $Y_copyTo_E on $Y {}
+extension $Y_changeTo_E on $Y {}
 
 enum Y$ { a }

@@ -49,7 +49,7 @@ class Task3 extends $Task3 {
           hasChildren == other.hasChildren &&
           (parentHierarchy).equalUnorderedD(other.parentHierarchy) &&
           isCollapsed == other.isCollapsed;
-  Task3 cwTask3({
+  Task3 copyWith_Task3({
     Opt<String>? id,
     Opt<String?>? parentId,
     Opt<String>? description,
@@ -81,7 +81,7 @@ class Task3 extends $Task3 {
   }
 }
 
-extension $Task3_copyTo_E on $Task3 {}
+extension $Task3_changeTo_E on $Task3 {}
 
 enum Task3$ {
   id,

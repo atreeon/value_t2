@@ -10,12 +10,12 @@ part of 'ex4_inheritance_test.dart';
 ///
 abstract class Z extends $$Z {
   String get zValue;
-  Z cwZ({
+  Z copyWith_Z({
     Opt<String>? zValue,
   });
 }
 
-extension $$Z_copyTo_E on $$Z {}
+extension $$Z_changeTo_E on $$Z {}
 
 enum Z$ { zValue }
 
@@ -47,7 +47,7 @@ class A extends $A implements Z {
           runtimeType == other.runtimeType &&
           aValue == other.aValue &&
           zValue == other.zValue;
-  A cwZ({
+  A copyWith_Z({
     Opt<String>? zValue,
   }) {
     return A(
@@ -56,7 +56,7 @@ class A extends $A implements Z {
     );
   }
 
-  A cwA({
+  A copyWith_A({
     Opt<String>? aValue,
     Opt<String>? zValue,
   }) {
@@ -67,7 +67,7 @@ class A extends $A implements Z {
   }
 }
 
-extension $A_copyTo_E on $A {}
+extension $A_changeTo_E on $A {}
 
 enum A$ { aValue, zValue }
 
@@ -103,7 +103,7 @@ class B extends $B implements A {
           aValue == other.aValue &&
           bValue == other.bValue &&
           zValue == other.zValue;
-  B cwA({
+  B copyWith_A({
     Opt<String>? aValue,
     Opt<String>? zValue,
   }) {
@@ -114,7 +114,7 @@ class B extends $B implements A {
     );
   }
 
-  B cwZ({
+  B copyWith_Z({
     Opt<String>? zValue,
   }) {
     return B(
@@ -124,7 +124,7 @@ class B extends $B implements A {
     );
   }
 
-  B cwB({
+  B copyWith_B({
     Opt<String>? aValue,
     Opt<String>? bValue,
     Opt<String>? zValue,
@@ -137,7 +137,7 @@ class B extends $B implements A {
   }
 }
 
-extension $B_copyTo_E on $B {}
+extension $B_changeTo_E on $B {}
 
 enum B$ { aValue, bValue, zValue }
 
@@ -176,7 +176,7 @@ class C extends $C implements B {
           bValue == other.bValue &&
           cValue == other.cValue &&
           zValue == other.zValue;
-  C cwB({
+  C copyWith_B({
     Opt<String>? aValue,
     Opt<String>? bValue,
     Opt<String>? zValue,
@@ -189,7 +189,7 @@ class C extends $C implements B {
     );
   }
 
-  C cwA({
+  C copyWith_A({
     Opt<String>? aValue,
     Opt<String>? zValue,
   }) {
@@ -201,7 +201,7 @@ class C extends $C implements B {
     );
   }
 
-  C cwZ({
+  C copyWith_Z({
     Opt<String>? zValue,
   }) {
     return C(
@@ -212,7 +212,7 @@ class C extends $C implements B {
     );
   }
 
-  C cwC({
+  C copyWith_C({
     Opt<String>? aValue,
     Opt<String>? bValue,
     Opt<String>? cValue,
@@ -227,6 +227,6 @@ class C extends $C implements B {
   }
 }
 
-extension $C_copyTo_E on $C {}
+extension $C_changeTo_E on $C {}
 
 enum C$ { aValue, bValue, cValue, zValue }

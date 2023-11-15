@@ -24,7 +24,7 @@ class A extends $A {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is A && runtimeType == other.runtimeType && x == other.x;
-  A cwA({
+  A copyWith_A({
     Opt<String>? x,
   }) {
     return A(
@@ -33,8 +33,8 @@ class A extends $A {
   }
 }
 
-extension $A_copyTo_E on $A {
-  B copyToB({
+extension $A_changeTo_E on $A {
+  B changeTo_B({
     required String y,
     Opt<String>? x,
   }) {
@@ -78,7 +78,7 @@ class B extends $B implements A {
           runtimeType == other.runtimeType &&
           x == other.x &&
           y == other.y;
-  B cwA({
+  B copyWith_A({
     Opt<String>? x,
   }) {
     return B(
@@ -87,7 +87,7 @@ class B extends $B implements A {
     );
   }
 
-  B cwB({
+  B copyWith_B({
     Opt<String>? x,
     Opt<String>? y,
   }) {
@@ -98,6 +98,6 @@ class B extends $B implements A {
   }
 }
 
-extension $B_copyTo_E on $B {}
+extension $B_changeTo_E on $B {}
 
 enum B$ { x, y }

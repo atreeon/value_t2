@@ -22,7 +22,7 @@ abstract class $B implements $A {
 main() {
   test("a to b (super to sub)", () {
     A a = A(x: "x");
-    B b = a.copyToB(y: "y");
+    B b = a.changeTo_B(y: "y");
 
     expect(b.toString(), "(B-x:x|y:y)");
   });

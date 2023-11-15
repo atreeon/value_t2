@@ -6,7 +6,7 @@ import 'package:test/test.dart';
 abstract class A {
   String get a;
 
-  A cwA({
+  A copyWith_A({
     Opt<String>? a,
   });
 }
@@ -19,7 +19,7 @@ class B<T1> implements A {
 
   String toString() => "${a.toString()} ${b.toString()}";
 
-  B cwA({
+  B copyWith_A({
     Opt<String>? a,
   }) {
     return B(
@@ -28,7 +28,7 @@ class B<T1> implements A {
     );
   }
 
-  B cwB({
+  B copyWith_B({
     Opt<String>? a,
     Opt<T1>? b,
   }) {
@@ -48,7 +48,7 @@ class C<T1> implements B<T1> {
 
   String toString() => "${a.toString()} ${b.toString()} ${c.toString()}";
 
-  C cwA({
+  C copyWith_A({
     Opt<String>? a,
   }) {
     return C(
@@ -58,7 +58,7 @@ class C<T1> implements B<T1> {
     );
   }
 
-  C cwB({
+  C copyWith_B({
     Opt<String>? a,
     Opt<T1>? b,
   }) {
@@ -69,7 +69,7 @@ class C<T1> implements B<T1> {
     );
   }
 
-  C cwC({
+  C copyWith_C({
     Opt<String>? a,
     Opt<T1>? b,
     Opt<bool>? c,
@@ -90,7 +90,7 @@ class D<T1> implements B<T1> {
 
   String toString() => "${a.toString()} ${b.toString()}";
 
-  D cwA({
+  D copyWith_A({
     Opt<String>? a,
   }) {
     return D(
@@ -99,7 +99,7 @@ class D<T1> implements B<T1> {
     );
   }
 
-  D cwB({
+  D copyWith_B({
     Opt<String>? a,
     Opt<T1>? b,
   }) {
@@ -109,7 +109,7 @@ class D<T1> implements B<T1> {
     );
   }
 
-  D cwD({
+  D copyWith_D({
     Opt<String>? a,
     Opt<T1>? b,
   }) {
@@ -121,7 +121,7 @@ class D<T1> implements B<T1> {
 }
 
 abstract class X {
-  X cwX();
+  X copyWith_X();
 }
 
 class Y implements X {
@@ -131,13 +131,13 @@ class Y implements X {
 
   String toString() => "${a.toString()}";
 
-  Y cwX() {
+  Y copyWith_X() {
     return Y(
       a: (this as Y).a,
     );
   }
 
-  Y cwY({
+  Y copyWith_Y({
     Opt<String>? a,
   }) {
     return Y(
@@ -149,61 +149,61 @@ class Y implements X {
 main() {
   test("ba", () {
     A ba = B(b: 5, a: "A");
-    A ba_copy = ba.cwA(a: Opt("a"));
+    A ba_copy = ba.copyWith_A(a: Opt("a"));
     expect(ba_copy.toString(), "a 5");
   });
 
   test("bb", () {
     B bb = B(b: 5, a: "A");
-    B bb_copy = bb.cwB(a: Opt("a"), b: Opt(6));
+    B bb_copy = bb.copyWith_B(a: Opt("a"), b: Opt(6));
     expect(bb_copy.toString(), "a 6");
   });
 
   test("ca", () {
     A ca = C(b: 5, a: "A", c: true);
-    A ca_copy = ca.cwA(a: Opt("a"));
+    A ca_copy = ca.copyWith_A(a: Opt("a"));
     expect(ca_copy.toString(), "a 5 true");
   });
 
   test("cb", () {
     B cb = C(b: 5, a: "A", c: true);
-    B cb_copy = cb.cwB(a: Opt("a"), b: Opt(6));
+    B cb_copy = cb.copyWith_B(a: Opt("a"), b: Opt(6));
     expect(cb_copy.toString(), "a 6 true");
   });
 
   test("cc", () {
     C cc = C(b: 5, a: "A", c: true);
-    var cc_copy = cc.cwC(a: Opt("a"), b: Opt(6), c: Opt(false));
+    var cc_copy = cc.copyWith_C(a: Opt("a"), b: Opt(6), c: Opt(false));
     expect(cc_copy.toString(), "a 6 false");
   });
 
   test("da", () {
     D da = D(b: 5, a: "A");
-    var da_copy = da.cwA(a: Opt("a"));
+    var da_copy = da.copyWith_A(a: Opt("a"));
     expect(da_copy.toString(), "a 5");
   });
 
   test("db", () {
     D db = D(b: 5, a: "A");
-    var db_copy = db.cwB(a: Opt("a"), b: Opt(6));
+    var db_copy = db.copyWith_B(a: Opt("a"), b: Opt(6));
     expect(db_copy.toString(), "a 6");
   });
 
   test("dd", () {
     D dd = D(b: 5, a: "A");
-    var dd_copy = dd.cwD(a: Opt("a"), b: Opt(6));
+    var dd_copy = dd.copyWith_D(a: Opt("a"), b: Opt(6));
     expect(dd_copy.toString(), "a 6");
   });
 
   test("yx", () {
     Y yx = Y(a: "A");
-    var yx_copy = yx.cwX();
+    var yx_copy = yx.copyWith_X();
     expect(yx_copy.toString(), "A");
   });
 
   test("yY", () {
     Y yy = Y(a: "A");
-    var yy_copy = yy.cwY(a: Opt("a"));
+    var yy_copy = yy.copyWith_Y(a: Opt("a"));
     expect(yy_copy.toString(), "a");
   });
 }

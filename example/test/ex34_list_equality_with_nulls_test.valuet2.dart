@@ -20,7 +20,7 @@ class A extends $A {
   bool operator ==(Object other) =>
       identical(this, other) ||
       other is A && runtimeType == other.runtimeType && a == other.a;
-  A cwA({
+  A copyWith_A({
     Opt<String>? a,
   }) {
     return A(
@@ -29,7 +29,7 @@ class A extends $A {
   }
 }
 
-extension $A_copyTo_E on $A {}
+extension $A_changeTo_E on $A {}
 
 enum A$ { a }
 
@@ -49,7 +49,7 @@ class B extends $B {
       other is B &&
           runtimeType == other.runtimeType &&
           (b ?? []).equalUnorderedD(other.b ?? []);
-  B cwB({
+  B copyWith_B({
     Opt<List<int>?>? b,
   }) {
     return B(
@@ -58,6 +58,6 @@ class B extends $B {
   }
 }
 
-extension $B_copyTo_E on $B {}
+extension $B_changeTo_E on $B {}
 
 enum B$ { b }
