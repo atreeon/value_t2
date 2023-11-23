@@ -9,7 +9,7 @@ We need a way to simplify our Dart classes, keep things cleaner and provide more
 ### Why Not Freezed or Built Value?
 Well the main reason; I actually wrote this before Freezed was released.
 Freezed is really good, established and well used.  
-However if you prefer more of an inheritance based approach to code gen this might suit your needs. 
+However if you prefer more of an inheritance based approach to code gen this might suit your needs.
 Build Value is also good but I find ValueT2 more concise than Built Value.
 
 
@@ -29,8 +29,8 @@ To create a new class.
     }
     ```
 
-3. `$Pet` is the class definition name. The generated class, the one you use to create objects, will drop the dollar, ie `Pet` 
-4. your fields are defined using public getters, ie `String get type` 
+3. `$Pet` is the class definition name. The generated class, the one you use to create objects, will drop the dollar, ie `Pet`
+4. your fields are defined using public getters, ie `String get type`
 5. and that's it; you then get loads of functionality and create your objects!
 
 ```
@@ -112,7 +112,7 @@ then the copyWith still works whilst preserving the underlying type.
     
     expect(petsOlder[0].age, 5);
     expect(petsOlder[1].age, 5);
- 
+
 Importantly the type remains the same, it is not converted to a Pet class.
 
     expect(petsOlder[0].runtimeType, Cat);
@@ -130,7 +130,7 @@ Importantly the type remains the same, it is not converted to a Pet class.
 
 ### Generics are allowed
 
-Specify the class definition if you want to constrain your generic type (use the dollar) 
+Specify the class definition if you want to constrain your generic type (use the dollar)
 
     @valueT2
     abstract class $PetOwner<TPet extends $Pet> {
@@ -159,7 +159,7 @@ Sometimes you might want to turn a super class into a subclass (Pet into a Cat)
 
 ### Convert object to Json
 
-In order to convert the object to Json specify the `generateJson`. 
+In order to convert the object to Json specify the `generateJson`.
 
     @ValueT2(generateJson: true)
     abstract class $Pet {
@@ -183,7 +183,7 @@ Use the factory method `Pet.fromJson()` to create the new object.
 ### Json to Object Polymorphism
 
 Unlike other json conversions you can convert subtypes using the super types toJson and fromJson functions.
-   
+
 The subtypes must be specified in the explicitSubTypes and in the correct order for this to work.
 
     @ValueT2(generateJson: true, explicitSubTypes: [$Z, $Y])
@@ -238,7 +238,7 @@ We also allow multiple inheritance.
 
 ### Custom Constructors
 
-To allow custom constructors you can simply create a function that creates a new class. 
+To allow custom constructors you can simply create a function that creates a new class.
 If you'd like to hide the automatic constructor end your function with an underscore.
 If you hide the constructor the custom one should belong in the same file that you defined your class.
 
@@ -267,7 +267,7 @@ Optional parameters can be specified using the ? keyword on the getter property.
 ### Comments
 
 Comments are copied from the class definition to the generated class
-and for ease of use copied to the constructor too. 
+and for ease of use copied to the constructor too.
 
 ### Constant Constructor
 

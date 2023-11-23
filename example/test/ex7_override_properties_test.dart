@@ -4,8 +4,10 @@ import 'package:value_t2_annotation/value_t2_annotation.dart';
 part 'ex7_override_properties_test.valuet2.dart';
 
 //CLASS B OVERRIDES A PROPERTY OF CLASS A
+//BUG!!! if you use explicitSubTypes
 
-@valueT2
+// @ValueT2(explicitSubTypes: [$C, $B]) - this causes an error
+@ValueT2()
 abstract class $A {
   Person get a;
 }

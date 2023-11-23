@@ -38,7 +38,7 @@ class A extends $A {
       );
     } else {
       throw UnsupportedError(
-          "The _className_ '${json['_className_']}' is not supported by the A.fromJson constructor.");
+          "The _className_ '${json['_className_']}' is not supported by the A.fromJson constructor. Ensure the classes are included in the annotation (explicitSubTypes).");
     }
   }
 
