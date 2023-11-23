@@ -14,6 +14,8 @@ dependencies:
     git:
       url: https://github.com/atreeon/adi_helpers
       ref: master
+  collection: ^1.18.0
+  dartx: ^1.2.0
 #  adi_helpers:
 #    path: ../../adi_helpers
 

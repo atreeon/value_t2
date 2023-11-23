@@ -6,7 +6,6 @@ part of 'ex28_field_list_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///FIELD LIST ENUM
 ///It is sometimes useful to have an enum of all the individual fields specified for a class.
 ///

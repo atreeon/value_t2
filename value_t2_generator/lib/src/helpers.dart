@@ -351,3 +351,102 @@ String getCopyWith({
 String getConstructorName(String trimmedClassName) {
   return trimmedClassName[trimmedClassName.length - 1] == "_" ? "$trimmedClassName._" : trimmedClassName;
 }
+
+String generateFromJsonHeader(String className) {
+  var _className = "${className.replaceFirst("\$", "")}";
+
+  return "factory ${_className.replaceFirst("\$", "")}.fromJson(Map<String, dynamic> json) {";
+}
+
+String generateFromJsonBody(String className, List<NameType> generics, List<Interface> interfaces) {
+  var _className = "${className.replaceFirst("\$", "")}";
+  var _class = Interface(_className, generics.map((e) => e.type ?? "").toList(), generics.map((e) => e.name).toList(), []);
+  var _classes = [...interfaces, _class];
+
+  var body = _classes.mapIndexed((i, c) {
+    var _interfaceName = "${c.interfaceName.replaceFirst("\$", "")}";
+    var start = i == 0 ? "if" : "} else if";
+    var genericTypes = c.typeParams.map((e) => "'_${e.name}_'").join(",");
+    // var types = c.typeParams.length == 0 ? "" : "<${c.typeParams.map((t) => "dynamic").join(', ')}>";
+
+    if (c.typeParams.length > 0) {
+      return """$start (json['_className_'] == "$_interfaceName") {
+      var fn_fromJson = getFromJsonToGenericFn(
+        ${_interfaceName}_Generics_Sing().fns,
+        json,
+        [$genericTypes],
+      );    
+      return fn_fromJson(json);
+""";
+    } else {
+      return """$start (json['_className_'] == "$_interfaceName") {
+    return _\$${_interfaceName}FromJson(json, ); 
+""";
+    }
+  }).join("\n");
+
+  var end = """    } else {
+      throw UnsupportedError("The _className_ '\${json['_className_']}' is not supported by the ${_className}.fromJson constructor.");
+    }
+  }
+""";
+
+  return body + end;
+}
+
+String generateToJson(String className, List<NameType> generics) {
+  var _className = "${className.replaceFirst("\$", "")}";
+
+  var getGenericFn = generics //
+      .map((e) => "    var fn_${e.name} = getGenericToJsonFn(_fns, ${e.name});")
+      .join("\n");
+
+  var toJsonParams = generics //
+      .map((e) => "      fn_${e.name} as Object? Function(${e.name})")
+      .join(",\n");
+
+  var recordType = generics //
+      .map((e) => "    data['_${e.name}_'] = ${e.name}.toString();")
+      .join("\n");
+
+  var result = """
+  Map<Type, Object? Function(Never)> _fns = {};
+
+  Map<String, dynamic> toJson_2(Map<Type, Object? Function(Never)> fns){
+    this._fns = fns;
+    return toJson();
+  }
+
+  Map<String, dynamic> toJson() {
+$getGenericFn
+    final Map<String, dynamic> data = _\$${_className}ToJson(this,
+$toJsonParams);
+    // Adding custom key-value pair
+    data['_className_'] = '$_className';
+$recordType
+
+    return data;
+  }""";
+
+  return result;
+}
+
+String createJsonSingleton(String classNameTrim, List<NameType> generics) {
+  if (generics.length == 0) //
+    return "";
+
+  var objects = generics.map((e) => "Object").join(", ");
+
+  var result = """
+class ${classNameTrim}_Generics_Sing {
+  Map<List<String>, $classNameTrim<${objects}> Function(Map<String, dynamic>)> fns = {};
+
+  factory ${classNameTrim}_Generics_Sing() => _singleton;
+  static final ${classNameTrim}_Generics_Sing _singleton = ${classNameTrim}_Generics_Sing._internal();
+
+  ${classNameTrim}_Generics_Sing._internal() {}
+}    
+    """;
+
+  return result;
+}

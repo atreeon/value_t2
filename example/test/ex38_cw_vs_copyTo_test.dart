@@ -13,7 +13,7 @@ abstract class $$Super {
   String get x;
 }
 
-@ValueT2([$SubB])
+@ValueT2(explicitSubTypes: [$SubB])
 abstract class $SubA implements $$Super {}
 
 @ValueT2()

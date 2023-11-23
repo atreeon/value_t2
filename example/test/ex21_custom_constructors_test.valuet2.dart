@@ -6,7 +6,6 @@ part of 'ex21_custom_constructors_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///
 class A_ extends $A_ {
   final String a;

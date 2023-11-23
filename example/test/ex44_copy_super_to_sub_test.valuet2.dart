@@ -6,7 +6,6 @@ part of 'ex44_copy_super_to_sub_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x($Sub)
 /// ChangeTo_ function is used to change the underlying type from one to another
 /// To enable ChangeTo on a class we need to add the type to the list of explicitSubTypes in the annotation
 /// To copy from a super class to a sub we will always change the underlining type.
@@ -55,7 +54,6 @@ extension $Super_changeTo_E on $Super {
 
 enum Super$ { id }
 
-//x()
 ///
 ///implements [$Super]
 ///

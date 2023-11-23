@@ -12,7 +12,7 @@ part 'ex44_copy_super_to_sub_test.valuet2.dart';
 /// A reminder that copyWith always retains the original type
 /// even though it can be used polymorphically; ie on super and sub classes.
 
-@ValueT2([$Sub])
+@ValueT2(explicitSubTypes: [$Sub])
 abstract class $Super {
   String get id;
 }

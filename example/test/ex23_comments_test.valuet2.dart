@@ -6,7 +6,6 @@ part of 'ex23_comments_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///This is my class level comment
 ///
 class Cat extends $Cat {

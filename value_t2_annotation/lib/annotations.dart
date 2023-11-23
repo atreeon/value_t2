@@ -1,14 +1,18 @@
+import 'package:collection/collection.dart';
+
 /// {@macro ValueTX}
-const valueT2 = ValueT2();
+const valueT2 = ValueT2(generateJson: false, explicitSubTypes: null);
 
 /// ### ValueT3 will be created before ValueT2, sometimes the generator needs a related class to be built before another.
 /// ---
 /// {@macro ValueTX}
-const valueT3 = ValueT3();
+const valueT3 = ValueT3(generateJson: false, explicitSubTypes: null);
 
 class ValueT2 implements ValueTX {
   /// if we want a copyWith (cwX) method for a subtype in this same class
   final List<Type>? explicitSubTypes;
+
+  final bool generateJson;
 
   /// {@template ValueTX}
   /// ### normal class; prepend class with a single dollar & make abstract
@@ -70,15 +74,63 @@ class ValueT2 implements ValueTX {
   ///
   ///  must add a ```const $A()``` constructor to abstract class
   /// {@endtemplate}
-  const ValueT2([this.explicitSubTypes]);
+  ///
+  /// ### generics / type parameters
+  /// When defining new type parameters on sibling classes ensure that the
+  /// type parameter names are different.
+  ///
+  /// This is ok
+  /// `class $A<T> {`
+  /// `class $B<T, TB1> implements $A {`
+  /// `class $C<T, TC1> implements $A {`
+  ///
+  /// This will throw an error
+  /// `class $A<T> {`
+  /// `class $B<T, T1> implements $A {`
+  /// `class $C<T, T1> implements $A {`
+  const ValueT2({
+    this.explicitSubTypes = null,
+    this.generateJson = false,
+  });
 }
 
 class ValueT3 implements ValueTX {
   final List<Type>? explicitSubTypes;
+  final bool generateJson;
 
-  const ValueT3([this.explicitSubTypes]);
+  const ValueT3({
+    this.explicitSubTypes = null,
+    this.generateJson = false,
+  });
 }
 
 abstract class ValueTX {
   List<Type>? get explicitSubTypes;
+
+  bool get generateJson;
+}
+
+Object? Function(Never) getGenericToJsonFn(
+  Map<Type, Object? Function(Never)> fns,
+  Type type,
+) {
+  var type1_fn = fns[type];
+
+  if (type1_fn == null) //
+    return (x) => x;
+
+  return type1_fn;
+}
+
+dynamic getFromJsonToGenericFn(
+  Map<List<String>, dynamic Function(Map<String, dynamic>)> fns,
+  Map<String, dynamic> json,
+  List<String> genericType,
+) {
+  var types = genericType.map((e) => json[e]).toList();
+
+  var fromJsonToGeneric_fn = fns.entries.firstWhereOrNull((entry) => ListEquality().equals(entry.key, types))?.value;
+  if (fromJsonToGeneric_fn == null) //
+    throw Exception("From JSON function not found");
+  return fromJsonToGeneric_fn;
 }

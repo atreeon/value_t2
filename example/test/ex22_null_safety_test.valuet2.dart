@@ -6,7 +6,6 @@ part of 'ex22_null_safety_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///
 class Pet extends $Pet {
   final String? type;

@@ -6,7 +6,6 @@ part of 'ex42_bug_fixed_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///
 class Task3 extends $Task3 {
   final String id;

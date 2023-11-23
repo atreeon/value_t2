@@ -6,7 +6,6 @@ part of 'ex38_cw_vs_copyTo_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///copyToX converts the class to that new X class
 ///cwX, if actually a Y class, copies the new class but only specifies the X fields
 ///
@@ -21,7 +20,6 @@ extension $$Super_changeTo_E on $$Super {}
 
 enum Super$ { x }
 
-//x($SubB)
 ///
 ///implements [$$Super]
 ///
@@ -80,7 +78,6 @@ extension $SubA_changeTo_E on $SubA {
 
 enum SubA$ { x }
 
-//x()
 ///
 ///implements [$$Super]
 ///
@@ -142,7 +139,6 @@ extension $SubB_changeTo_E on $SubB {}
 
 enum SubB$ { z, cs, x }
 
-//x()
 ///
 class C extends $C {
   final String m;

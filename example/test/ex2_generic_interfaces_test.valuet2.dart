@@ -6,7 +6,6 @@ part of 'ex2_generic_interfaces_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///
 abstract class A<T> extends $$A<T> {
   T get x;
@@ -19,7 +18,6 @@ extension $$A_changeTo_E on $$A {}
 
 enum A$ { x }
 
-//x()
 ///
 ///implements [$$A]
 ///
@@ -97,7 +95,6 @@ extension $B_changeTo_E on $B {}
 
 enum B$ { x, y, z }
 
-//x()
 ///
 class C extends $C {
   final String z;

@@ -1,15 +1,13 @@
 // ignore_for_file: UNNECESSARY_CAST
 
-part of 'ex37_copyWith_siblings_test.dart';
+part of 'ex37_changeTo_siblings_test.dart';
 
 // **************************************************************************
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 /// We can also copy to a sibling class.
-///
-/// todo: this should work but doesn't;
+/// todo: y property on SubA class not properly working. This doesn't quite work yet.
 /// Any properties not in the newly created sibling class, the values are lost.
 ///
 abstract class Super extends $$Super {
@@ -23,14 +21,12 @@ extension $$Super_changeTo_E on $$Super {}
 
 enum Super$ { x }
 
-//x($SubB)
 ///
 ///implements [$$Super]
 ///
 
 /// We can also copy to a sibling class.
-///
-/// todo: this should work but doesn't;
+/// todo: y property on SubA class not properly working. This doesn't quite work yet.
 /// Any properties not in the newly created sibling class, the values are lost.
 ///
 class SubA extends $SubA implements Super {
@@ -41,8 +37,7 @@ class SubA extends $SubA implements Super {
   ///
 
   /// We can also copy to a sibling class.
-  ///
-  /// todo: this should work but doesn't;
+  /// todo: y property on SubA class not properly working. This doesn't quite work yet.
   /// Any properties not in the newly created sibling class, the values are lost.
   ///
   SubA({
@@ -84,14 +79,12 @@ extension $SubA_changeTo_E on $SubA {
 
 enum SubA$ { x }
 
-//x()
 ///
 ///implements [$$Super]
 ///
 
 /// We can also copy to a sibling class.
-///
-/// todo: this should work but doesn't;
+/// todo: y property on SubA class not properly working. This doesn't quite work yet.
 /// Any properties not in the newly created sibling class, the values are lost.
 ///
 class SubB extends $SubB implements Super {
@@ -103,8 +96,7 @@ class SubB extends $SubB implements Super {
   ///
 
   /// We can also copy to a sibling class.
-  ///
-  /// todo: this should work but doesn't;
+  /// todo: y property on SubA class not properly working. This doesn't quite work yet.
   /// Any properties not in the newly created sibling class, the values are lost.
   ///
   SubB({

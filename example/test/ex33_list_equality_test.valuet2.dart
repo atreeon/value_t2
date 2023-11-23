@@ -6,7 +6,6 @@ part of 'ex33_list_equality_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///
 class A extends $A {
   final String a;
@@ -33,7 +32,6 @@ extension $A_changeTo_E on $A {}
 
 enum A$ { a }
 
-//x()
 ///
 class B extends $B {
   final List<int> b;
@@ -62,7 +60,6 @@ extension $B_changeTo_E on $B {}
 
 enum B$ { b }
 
-//x()
 ///
 class C extends $C {
   final List<A> c;

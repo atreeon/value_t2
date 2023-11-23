@@ -6,7 +6,6 @@ part of 'ex32_self_referencing_class_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///where a property of one class is the same type
 ///
 class A extends $A {

@@ -6,7 +6,6 @@ part of 'ex39_copyTo_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x($B)
 ///
 abstract class Super extends $$Super {
   String get x;
@@ -29,7 +28,6 @@ extension $$Super_changeTo_E on $$Super {
 
 enum Super$ { x }
 
-//x()
 ///
 ///implements [$$Super]
 ///
@@ -80,7 +78,6 @@ extension $A_changeTo_E on $A {}
 
 enum A$ { x, z }
 
-//x()
 ///
 ///implements [$$Super]
 ///

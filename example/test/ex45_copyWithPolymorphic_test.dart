@@ -14,7 +14,7 @@ part 'ex45_copyWithPolymorphic_test.valuet2.dart';
 
 // ignore_for_file: unqualified_reference_to_non_local_static_member
 
-@ValueT2([$Sub])
+@ValueT2(explicitSubTypes: [$Sub])
 abstract class $Super {
   String get id;
 }

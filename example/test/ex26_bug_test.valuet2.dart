@@ -6,7 +6,6 @@ part of 'ex26_bug_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///WEIRD HASHCODE BUG
 ///To recreate
 ///1. run pw

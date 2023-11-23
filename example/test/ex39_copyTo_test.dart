@@ -5,7 +5,7 @@ import 'package:value_t2_annotation/value_t2_annotation.dart';
 
 part 'ex39_copyTo_test.valuet2.dart';
 
-@ValueT2([$B])
+@ValueT2(explicitSubTypes: [$B])
 abstract class $$Super {
   String get x;
 }

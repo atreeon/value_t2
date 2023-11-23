@@ -6,7 +6,6 @@ part of 'ex25_class_build_order_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///EXPLICITLY BUILDING ONE BEFORE ANOTHER
 ///$ScheduleVM_Item should build before $ScheduleVM
 ///

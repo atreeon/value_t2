@@ -8,7 +8,7 @@ part 'ex36_create_subclass_from_super_test.valuet2.dart';
 /// Use .copyToX to create a subclass from a superclass
 /// todo: whats the difference between copyToX & cwX
 
-@ValueT2([$B])
+@ValueT2(explicitSubTypes:  [$B])
 abstract class $A {
   String get x;
 }

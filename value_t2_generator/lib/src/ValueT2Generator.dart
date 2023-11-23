@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:adi_helpers/trees.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
+
 ////import 'package:analyzer_models/analyzer_models.dart';
 import 'package:build/src/builder/build_step.dart';
 import 'package:dartx/dartx.dart';
@@ -102,8 +103,6 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
       }).toList();
     }
 
-    sb.writeln("//x" + typesExplicit.map((e) => e.interfaceName).toString());
-
     //all ValueT interfaces of the class, not just those specified in the implements list
     //  we need the ones that are inherited by the implements list
     var allValueTInterfaces = flatten<InterfaceType>(ce.interfaces, (x) => x.interfaces) //
@@ -132,6 +131,8 @@ class ValueT2Generator<TValueT extends ValueTX> extends GeneratorForAnnotationX<
       allValueTInterfaces,
       classGenerics,
       hasConstConstructor,
+      annotation.read('generateJson').boolValue,
+      typesExplicit,
     ));
 
 //    sb.writeln(createCopyWith(classDef, otherClasses2).replaceAll("\$", ""));

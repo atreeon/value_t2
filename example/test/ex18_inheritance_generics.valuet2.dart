@@ -6,7 +6,6 @@ part of 'ex18_inheritance_generics.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///
 class A<T> extends $A<T> {
   final List<T> batchItems;
@@ -37,7 +36,6 @@ extension $A_changeTo_E on $A {}
 
 enum A$ { batchItems }
 
-//x()
 ///
 ///implements [$A]
 ///
@@ -86,7 +84,6 @@ extension $B_changeTo_E on $B {}
 
 enum B$ { batchItems }
 
-//x()
 ///
 class X extends $X {
   final int id;

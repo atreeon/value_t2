@@ -6,7 +6,6 @@ part of 'ex25_class_build_order_test.dart';
 // Generator: ValueT2Generator<ValueT3>
 // **************************************************************************
 
-//x()
 ///
 class ScheduleVM_Item extends $ScheduleVM_Item {
   final String value;

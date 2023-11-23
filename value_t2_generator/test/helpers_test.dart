@@ -1,8 +1,11 @@
 //import 'package:analyzer_models/analyzer_models.dart';
+import 'package:adi_helpers/formatCodeStringForComparison.dart';
 import 'package:generator_common/NameType.dart';
 import 'package:generator_common/classes.dart';
 import 'package:test/test.dart';
 import 'package:value_t2_generator/src/helpers.dart';
+
+var expectS = (String a, String b) => expect(formatCodeStringForComparison(a), formatCodeStringForComparison(b));
 
 void main() {
   group("getClassComment", () {
@@ -334,7 +337,8 @@ void main() {
         NameTypeClassComment("c", "String", null),
       ]);
 
-      expect(result.toString(), //
+      expect(
+          result.toString(), //
           """int get hashCode => hashObjects([a.hashCode, b.hashCode, c.hashCode]);""");
     });
   });
@@ -1235,6 +1239,232 @@ x: x == null ? this.x as String : x.value as String,
     test("2q if a Function data type and we have a valueT2 class then don't remove", () {
       var result = getDataTypeWithoutDollars("bool Function(int blah, \$X blim)");
       expect(result, "bool Function(int blah, \$X blim)");
+    });
+  });
+
+  group("generateFromJsonHeader", () {
+    test("1r ", () {
+      var result = generateFromJsonHeader("\$Pet");
+      expect(result, "factory Pet.fromJson(Map<String, dynamic> json) {");
+    });
+  });
+
+  group("generateFromJsonBody", () {
+    test("1s no explicit", () {
+      var result = generateFromJsonBody("\$Pet", [], []);
+
+      var expected = """
+    if (json['_className_'] == "Pet") {
+
+      return _\$PetFromJson(json, );
+    } else {
+      throw UnsupportedError("The _className_ '\${json['_className_']}' is not supported by the Pet.fromJson constructor.");
+    }
+  }""";
+
+      expectS(result, expected);
+    });
+
+    test("2s with interface", () {
+      var result = generateFromJsonBody(
+        "\$Person",
+        [],
+        [
+          Interface("\$Manager", [], [], [NameType("hairLength", "int")]),
+        ],
+      );
+
+      var expected = """
+    if (json['_className_'] == "Manager") {
+      return _\$ManagerFromJson(json, );            
+    } else if (json['_className_'] == "Person") {
+      return _\$PersonFromJson(json, );
+    } else {
+      throw UnsupportedError("The _className_ '\${json['_className_']}' is not supported by the Person.fromJson constructor.");
+    }
+  }""";
+
+      expectS(result, expected);
+    });
+
+    test("3s class with 3 generics", () {
+      var result = generateFromJsonBody(
+        "B",
+        [
+          NameType("T", "\$\$C"),
+          NameType("T2", "MyBase"),
+          NameType("T3", null),
+        ],
+        [],
+      );
+
+      var expected = """
+  if (json['_className_'] == "B") {
+    var fn_fromJson = getFromJsonToGenericFn(
+      B_Generics_Sing().fns,
+      json,
+      ['_T_','_T2_','_T3_'],
+    );
+    return fn_fromJson(json);
+  } else {
+    throw UnsupportedError("The _className_ '\${json['_className_']}' is not supported by the B.fromJson constructor.");
+  }
+}""";
+
+      expectS(result, expected);
+    });
+
+    test("4s interface with three generics", () {
+      var result = generateFromJsonBody(
+        "A",
+        [],
+        [
+          Interface("\$B", ["", "", ""], ["T", "T2", "T3"], []),
+        ],
+      );
+
+      var expected = """
+  if (json['_className_'] == "B") {
+    var fn_fromJson = getFromJsonToGenericFn(
+      B_Generics_Sing().fns,
+      json,
+      ['_T_','_T2_','_T3_'],
+    );
+    return fn_fromJson(json);
+  } else if (json[\'_className_\'] == "A") {
+    return _\$AFromJson(json, ); 
+  } else {
+    throw UnsupportedError("The _className_ '\${json['_className_']}' is not supported by the A.fromJson constructor.");
+  }
+}""";
+
+      expectS(result, expected);
+    });
+  });
+
+  group("generateToJson", () {
+    //add this based on the generics
+    // Map<String, dynamic> toJson(Object Function(dynamic)? toJson_T) {
+    //   final Map<String, dynamic> data = _$CToJson(this, toJson_T!);
+
+    test("1u", () {
+      var result = generateToJson("\$Pet", []);
+
+      var expected = """  Map<Type, Object? Function(Never)> _fns = {};
+
+  Map<String, dynamic> toJson_2(Map<Type, Object? Function(Never)> fns){
+    this._fns = fns;
+    return toJson();
+  }
+
+  Map<String, dynamic> toJson() {
+
+    final Map<String, dynamic> data = _\$PetToJson(this,
+);
+    // Adding custom key-value pair
+    data['_className_'] = 'Pet';
+
+
+    return data;
+  }""";
+
+      expect(result, expected);
+    });
+
+    test("2u generic", () {
+      var result = generateToJson(
+        "\$Pet",
+        [
+          NameType("T", "\$\$C"),
+          NameType("T2", "MyBase"),
+          NameType("T3", null),
+        ],
+      );
+
+      var expected = """  Map<Type, Object? Function(Never)> _fns = {};
+
+  Map<String, dynamic> toJson_2(Map<Type, Object? Function(Never)> fns){
+    this._fns = fns;
+    return toJson();
+  }
+
+  Map<String, dynamic> toJson() {
+    var fn_T = getGenericToJsonFn(_fns, T);
+    var fn_T2 = getGenericToJsonFn(_fns, T2);
+    var fn_T3 = getGenericToJsonFn(_fns, T3);
+    final Map<String, dynamic> data = _\$PetToJson(this,
+      fn_T as Object? Function(T),
+      fn_T2 as Object? Function(T2),
+      fn_T3 as Object? Function(T3));
+    // Adding custom key-value pair
+    data['_className_'] = 'Pet';
+    data['_T_'] = T.toString();
+    data['_T2_'] = T2.toString();
+    data['_T3_'] = T3.toString();
+
+    return data;
+  }""";
+
+      expect(result.trim(), expected.trim());
+    });
+  });
+
+  group("createJsonSingleton", () {
+    test("1v has one generic", () {
+      var classNameTrim = "B";
+      var classGenerics = [
+        NameType("T", "\$\$C"),
+      ];
+
+      var result = createJsonSingleton(classNameTrim, classGenerics);
+
+      var expected = """
+class B_Generics_Sing {
+  Map<List<String>, B<Object> Function(Map<String, dynamic>)> fns = {};
+
+  factory B_Generics_Sing() => _singleton;
+  static final B_Generics_Sing _singleton = B_Generics_Sing._internal();
+
+  B_Generics_Sing._internal() {}
+}
+""";
+
+      expectS(result, expected);
+    });
+
+    test("2v has two generic", () {
+      var classNameTrim = "C";
+      var classGenerics = [
+        NameType("T", "\$\$C"),
+        NameType("T2", "MyBase"),
+        NameType("T3", null),
+      ];
+
+      var result = createJsonSingleton(classNameTrim, classGenerics);
+
+      var expected = """
+class C_Generics_Sing {
+  Map<List<String>, C<Object, Object, Object> Function(Map<String, dynamic>)> fns = {};
+
+  factory C_Generics_Sing() => _singleton;
+  static final C_Generics_Sing _singleton = C_Generics_Sing._internal();
+
+  C_Generics_Sing._internal() {}
+}
+""";
+
+      expectS(result, expected);
+    });
+
+    test("3v no generics", () {
+      var classNameTrim = "Pet";
+      var classGenerics = <NameType>[];
+
+      var result = createJsonSingleton(classNameTrim, classGenerics);
+
+      var expected = "";
+
+      expectS(result, expected);
     });
   });
 

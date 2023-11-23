@@ -11,12 +11,25 @@ String createValueT2(
   List<Interface> interfacesAllInclSubInterfaces,
   List<NameTypeClassComment> classGenerics,
   bool hasConstContructor,
+  bool generateJson,
+  List<Interface> explicitForJson,
 ) {
   //recursively go through otherClasses and get my fieldnames &
 
   var sb = StringBuffer();
+  var classNameTrim = className.replaceAll("\$", "");
 
   sb.write(getClassComment(interfacesFromImplements, classComment));
+
+  if (generateJson) {
+    sb.writeln(createJsonSingleton(classNameTrim, classGenerics));
+    // sb.writeln("Map<String, dynamic Function(Object? json)> jsonToGenericFunctions_$classNameTrim = {};");
+    if (classGenerics.length > 0) //
+      sb.writeln("@JsonSerializable(explicitToJson: true, genericArgumentFactories: true)");
+    else
+      sb.writeln("@JsonSerializable(explicitToJson: true)");
+  }
+
   sb.write(getClassDefinition(isAbstract, className));
 
   if (classGenerics.isNotEmpty) {
@@ -32,7 +45,6 @@ String createValueT2(
     sb.write(getImplements(interfacesFromImplements, className));
   }
   sb.writeln(" {");
-  var classNameTrim = className.replaceAll("\$", "");
   var constructorName = getConstructorName(classNameTrim);
   if (isAbstract) {
     sb.writeln(getPropertiesAbstract(allFields));
@@ -82,6 +94,17 @@ String createValueT2(
     );
   });
 
+  if (generateJson) {
+    // sb.writeln("// $classGenerics");
+    // sb.writeln("//interfacesX");
+    // sb.writeln("//explicitForJson");
+    sb.writeln(commentEveryLine(interfacesX.map((e) => e.toString()).join()));
+    sb.writeln(commentEveryLine(explicitForJson.join("\n").toString()));
+    sb.writeln(generateFromJsonHeader(className));
+    sb.writeln(generateFromJsonBody(className, classGenerics, explicitForJson));
+    sb.writeln(generateToJson(className, classGenerics));
+  }
+
   sb.writeln("}");
 
   sb.writeln();
@@ -104,5 +127,10 @@ String createValueT2(
 
   sb.writeln(getEnumPropertyList(allFields, className));
 
+  // return commentEveryLine(sb.toString());
   return sb.toString();
+}
+
+String commentEveryLine(String multilineString) {
+  return multilineString.split('\n').map((line) => '//' + line).join('\n');
 }

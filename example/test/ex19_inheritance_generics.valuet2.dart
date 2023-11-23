@@ -6,7 +6,6 @@ part of 'ex19_inheritance_generics.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///
 abstract class A extends $$A {
   A copyWith_A();
@@ -14,7 +13,6 @@ abstract class A extends $$A {
 
 extension $$A_changeTo_E on $$A {}
 
-//x()
 ///
 ///implements [$$A]
 ///
@@ -27,7 +25,6 @@ abstract class B extends $$B implements A {
 
 extension $$B_changeTo_E on $$B {}
 
-//x()
 ///
 abstract class C<TBatchItem extends $$A> extends $$C<TBatchItem> {
   List<TBatchItem> get items;
@@ -40,7 +37,6 @@ extension $$C_changeTo_E on $$C {}
 
 enum C$ { items }
 
-//x()
 ///
 abstract class D extends $$D {
   List<B> get items;
@@ -53,7 +49,6 @@ extension $$D_changeTo_E on $$D {}
 
 enum D$ { items }
 
-//x()
 ///
 ///implements [$$C]
 ///

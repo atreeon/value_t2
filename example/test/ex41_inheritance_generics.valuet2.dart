@@ -6,7 +6,6 @@ part of 'ex41_inheritance_generics.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///
 abstract class A<T> extends $$A<T> {
   A copyWith_A<T>();
@@ -14,7 +13,6 @@ abstract class A<T> extends $$A<T> {
 
 extension $$A_changeTo_E on $$A {}
 
-//x()
 ///
 ///implements [$$A]
 ///
@@ -55,7 +53,6 @@ extension $B_changeTo_E on $B {}
 
 enum B$ { data }
 
-//x()
 ///
 ///implements [$$A]
 ///

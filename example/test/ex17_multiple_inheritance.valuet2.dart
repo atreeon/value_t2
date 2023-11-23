@@ -6,7 +6,6 @@ part of 'ex17_multiple_inheritance.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///BatchLesson does xyz
 ///
 abstract class Batch_Lesson extends $$Batch_Lesson {
@@ -15,7 +14,6 @@ abstract class Batch_Lesson extends $$Batch_Lesson {
 
 extension $$Batch_Lesson_changeTo_E on $$Batch_Lesson {}
 
-//x()
 ///Lesson Lectures does blah
 ///something else
 ///
@@ -32,7 +30,6 @@ abstract class Lesson_Lectures extends $$Lesson_Lectures
 
 extension $$Lesson_Lectures_changeTo_E on $$Lesson_Lectures {}
 
-//x()
 ///StagedLesson does h
 ///
 ///implements [$$Batch_Lesson]
@@ -48,7 +45,6 @@ abstract class Batch_Staged_Lesson extends $$Batch_Staged_Lesson
 
 extension $$Batch_Staged_Lesson_changeTo_E on $$Batch_Staged_Lesson {}
 
-//x()
 ///This is my actual class
 ///
 ///implements [$$Batch_Staged_Lesson]

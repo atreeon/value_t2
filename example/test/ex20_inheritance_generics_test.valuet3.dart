@@ -6,7 +6,6 @@ part of 'ex20_inheritance_generics_test.dart';
 // Generator: ValueT2Generator<ValueT3>
 // **************************************************************************
 
-//x()
 ///
 class BI extends $BI {
   final int orderId;

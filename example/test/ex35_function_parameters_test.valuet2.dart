@@ -6,7 +6,6 @@ part of 'ex35_function_parameters_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///We can specify a valuet2 class as a function parameter
 ///but we must specify the dollar for the classname.
 ///
@@ -29,7 +28,6 @@ extension $$A_changeTo_E on $$A {}
 
 enum A$ { id, t2TypeAsParameter1, t2TypeAsParameter2, t2TypeAsReturn, stuff }
 
-//x()
 ///
 ///implements [$$A]
 ///
@@ -125,7 +123,6 @@ extension $B_changeTo_E on $B {}
 
 enum B$ { id, t2TypeAsParameter1, t2TypeAsParameter2, t2TypeAsReturn, stuff }
 
-//x()
 ///
 class X extends $X {
   final int id;

@@ -6,7 +6,6 @@ part of 'ex40_bug_fixed_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///
 abstract class MonitorI extends $$MonitorI {
   String get monitorId;
@@ -33,7 +32,6 @@ enum MonitorI$ {
   isExcluded
 }
 
-//x()
 ///
 ///implements [$$MonitorI]
 ///

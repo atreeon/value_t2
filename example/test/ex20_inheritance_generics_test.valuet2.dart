@@ -6,7 +6,6 @@ part of 'ex20_inheritance_generics_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///
 class BQR extends $BQR {
   final BS<BI> batch;
@@ -33,7 +32,6 @@ extension $BQR_changeTo_E on $BQR {}
 
 enum BQR$ { batch }
 
-//x()
 ///
 class BS<Tbi extends BI> extends $BS<Tbi> {
   final List<Tbi> batchItems;
@@ -64,7 +62,6 @@ extension $BS_changeTo_E on $BS {}
 
 enum BS$ { batchItems }
 
-//x()
 ///
 ///implements [$BS]
 ///

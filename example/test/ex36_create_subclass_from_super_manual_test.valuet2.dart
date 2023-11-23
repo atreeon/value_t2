@@ -6,7 +6,6 @@ part of 'ex36_create_subclass_from_super_manual_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///
 class A extends $A {
   final String x;
@@ -33,7 +32,6 @@ extension $A_changeTo_E on $A {}
 
 enum A$ { x }
 
-//x()
 ///
 ///implements [$A]
 ///
@@ -91,7 +89,6 @@ extension $B_changeTo_E on $B {}
 
 enum B$ { x, y, z }
 
-//x()
 ///
 class C extends $C {
   final String v;

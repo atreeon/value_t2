@@ -6,7 +6,6 @@ part of 'ex34_list_equality_with_nulls_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///
 class A extends $A {
   final String a;
@@ -33,7 +32,6 @@ extension $A_changeTo_E on $A {}
 
 enum A$ { a }
 
-//x()
 ///
 class B extends $B {
   final List<int>? b;

@@ -6,7 +6,6 @@ part of 'ex14_inheritance_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///
 class A extends $A {
   final String a;
@@ -33,7 +32,6 @@ extension $A_changeTo_E on $A {}
 
 enum A$ { a }
 
-//x()
 ///
 ///implements [$A]
 ///
@@ -84,7 +82,6 @@ extension $B_changeTo_E on $B {}
 
 enum B$ { a, b }
 
-//x()
 ///
 ///implements [$B]
 ///

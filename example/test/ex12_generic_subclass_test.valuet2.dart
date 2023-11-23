@@ -6,7 +6,6 @@ part of 'ex12_generic_subclass_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///
 abstract class A<Ta, Tb> extends $$A<Ta, Tb> {
   Ta get x;
@@ -21,7 +20,6 @@ extension $$A_changeTo_E on $$A {}
 
 enum A$ { x, y }
 
-//x()
 ///
 ///implements [$$A]
 ///

@@ -6,7 +6,6 @@ part of 'ex27_bug.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///HASHCODE ERROR AGAIN
 ///
 class UserLectureInfoPopupVM extends $UserLectureInfoPopupVM {
@@ -47,7 +46,6 @@ extension $UserLectureInfoPopupVM_changeTo_E on $UserLectureInfoPopupVM {}
 
 enum UserLectureInfoPopupVM$ { lectureId, isExcluded }
 
-//x()
 ///
 ///implements [$UserLectureInfoPopupVM]
 ///

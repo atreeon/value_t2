@@ -6,7 +6,6 @@ part of 'ex30_override_subclassproperty_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///
 class A extends $A {
   final Person a;
@@ -33,7 +32,6 @@ extension $A_changeTo_E on $A {}
 
 enum A$ { a }
 
-//x()
 ///
 ///implements [$A]
 ///

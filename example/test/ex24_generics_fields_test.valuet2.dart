@@ -6,7 +6,6 @@ part of 'ex24_generics_fields_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///A LIST THAT IS OF A GENERATED GENERIC TYPE
 ///
 class A extends $A {
@@ -37,7 +36,6 @@ extension $A_changeTo_E on $A {}
 
 enum A$ { xItems }
 
-//x()
 ///
 class X extends $X {
   final String value;

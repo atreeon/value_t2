@@ -14,7 +14,7 @@ builders:
     build_extensions: {".dart": [".valuet2.part"]}
     auto_apply: dependents
     build_to: source
-    runs_before: ["typedef_for_fn_generator:typedef_for_fn","mock_creator_generator:mock_creator","copy_with_e_generator:copy_with_e", "copy_with_e_generator:copy_with_e","memoizer_generator:memoizer_generator"]
+    runs_before: ["json_serializable:json_serializable", "typedef_for_fn_generator:typedef_for_fn","mock_creator_generator:mock_creator","copy_with_e_generator:copy_with_e", "copy_with_e_generator:copy_with_e","memoizer_generator:memoizer_generator"]
   value_t3:
     target: ":value_t3_generator"
     import: "package:value_t2_generator/valueT3Builder.dart"
@@ -22,6 +22,4 @@ builders:
     build_extensions: {".dart": [".valuet3.part"]}
     auto_apply: dependents
     build_to: source
-    runs_before: ["value_t2_generator:value_t2", "typedef_for_fn_generator:typedef_for_fn","mock_creator_generator:mock_creator","copy_with_e_generator:copy_with_e", "copy_with_e_generator:copy_with_e","memoizer_generator:memoizer_generator"]
-
-#    runs_before: ["|"]
+    runs_before: ["json_serializable|json_serializable", "value_t2_generator:value_t2", "typedef_for_fn_generator:typedef_for_fn","mock_creator_generator:mock_creator","copy_with_e_generator:copy_with_e", "copy_with_e_generator:copy_with_e","memoizer_generator:memoizer_generator"]

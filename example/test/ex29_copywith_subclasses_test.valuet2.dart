@@ -6,7 +6,6 @@ part of 'ex29_copywith_subclasses_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///Copywith from subclass to superclass & superclass to subclass
 ///
 abstract class A extends $$A {
@@ -20,7 +19,6 @@ extension $$A_changeTo_E on $$A {}
 
 enum A$ { a }
 
-//x()
 ///
 ///implements [$$A]
 ///
@@ -73,7 +71,6 @@ extension $B_changeTo_E on $B {}
 
 enum B$ { a, b }
 
-//x()
 ///
 ///implements [$B]
 ///
@@ -142,7 +139,6 @@ extension $C_changeTo_E on $C {}
 
 enum C$ { a, b, c }
 
-//x()
 ///
 ///implements [$B]
 ///
@@ -203,7 +199,6 @@ extension $D_changeTo_E on $D {}
 
 enum D$ { a, b }
 
-//x()
 ///
 abstract class X extends $$X {
   X copyWith_X();
@@ -211,7 +206,6 @@ abstract class X extends $$X {
 
 extension $$X_changeTo_E on $$X {}
 
-//x()
 ///
 ///implements [$$X]
 ///

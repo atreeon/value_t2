@@ -6,7 +6,6 @@ part of 'ex36_create_subclass_from_super_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x($B)
 /// Use .copyToX to create a subclass from a superclass
 /// todo: whats the difference between copyToX & cwX
 ///
@@ -47,7 +46,6 @@ extension $A_changeTo_E on $A {
 
 enum A$ { x }
 
-//x()
 ///
 ///implements [$A]
 ///

@@ -6,7 +6,6 @@ part of 'ex31_constant_constructor_test.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///To create a constant constructor, create the definition in our class definition.
 ///That then creates an alternative constructor that is a constant named .constant
 ///

@@ -6,7 +6,6 @@ part of 'ex16_nofields_should_work.dart';
 // Generator: ValueT2Generator<ValueT2>
 // **************************************************************************
 
-//x()
 ///
 class A extends $A {
   ///
